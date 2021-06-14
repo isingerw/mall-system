@@ -101,7 +101,11 @@ public class LoginFrame extends JFrame {
     }
 
 
-
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-15 0:01
+     * @Description: //TODO 用户登录页面UI
+     */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown

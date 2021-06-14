@@ -6,11 +6,9 @@ package com.singerw.ui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.time.LocalDateTime;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
-import com.singerw.dao.UserDao;
-import com.singerw.entity.UserEntity;
+
 
 /**
  * @author unknown
@@ -20,6 +18,12 @@ public class RegisteredFrame extends JFrame {
         initComponents();
     }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:59
+     * @Description: //TODO 用户注册按钮监听事件
+     * @param e
+     */
     private void RegisteredButtonActionPerformed(ActionEvent e) {
         // 按钮点击事件
         String cname = txtcname.getText();
@@ -59,6 +63,12 @@ public class RegisteredFrame extends JFrame {
 ////        }
     }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-15 0:00
+     * @Description: //TODO 返回登录按钮监听事件
+     * @param e
+     */
     private void backHomeButtonActionPerformed(ActionEvent e) {
         // TODO add your code here
         // 跳转到下一个窗口 (创建新窗口对象，并显示)
@@ -68,6 +78,11 @@ public class RegisteredFrame extends JFrame {
         setVisible(false);
     }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-15 0:00
+     * @Description: //TODO 注册页面UI
+     */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown

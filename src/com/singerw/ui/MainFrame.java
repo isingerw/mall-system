@@ -97,7 +97,7 @@ public class MainFrame extends JFrame {
     /**
      * @Author CodeSleep
      * @Date: 2021-06-14 23:40
-     * @Description: //TODO UI界面
+     * @Description: //TODO 搜索界面UI界面
      */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
