@@ -102,12 +102,19 @@ public class MainFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
-        menuBar1 = new JMenuBar();
-        menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
+        systemMenuBar = new JMenuBar();
+        menuMenu = new JMenu();
+        menuItemNew = new JMenuItem();
         menuItemExit = new JMenuItem();
+        menuNavigation = new JMenu();
+        menuItemIndex = new JMenuItem();
+        menuItemGoBack = new JMenuItem();
+        menuHelp = new JMenu();
+        menuItemHelp = new JMenuItem();
+        menuItemXinShou = new JMenuItem();
+        menuItemAbout = new JMenuItem();
         fssSouSuo = new JButton();
-        label1 = new JLabel();
+        labelHint = new JLabel();
         tabbedPane = new JTabbedPane();
         scrollPaneUser = new JScrollPane();
         tableUser = new JTable();
@@ -118,7 +125,6 @@ public class MainFrame extends JFrame {
         scrollPaneMessages = new JScrollPane();
         tableMessages = new JTable();
         txtKeywords = new JTextField();
-        table5 = new JTable();
 
         //======== this ========
         setTitle("\u8d85\u5e02\u7ba1\u7406\u7cfb\u7edf");
@@ -127,42 +133,74 @@ public class MainFrame extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //======== menuBar1 ========
+        //======== systemMenuBar ========
         {
 
-            //======== menu1 ========
+            //======== menuMenu ========
             {
-                menu1.setText("\u83dc\u5355");
-                menu1.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuMenu.setText("\u83dc\u5355");
+                menuMenu.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u8fd4\u56de\u4e0a\u4e00\u7ea7");
-                menuItem1.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
-                menuItem1.addActionListener(e -> menuItemGoBack(e));
-                menu1.add(menuItem1);
+                //---- menuItemNew ----
+                menuItemNew.setText("\u65b0\u5efa\u4fe1\u606f");
+                menuMenu.add(menuItemNew);
 
                 //---- menuItemExit ----
                 menuItemExit.setText("\u9000\u51fa\u7cfb\u7edf");
                 menuItemExit.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
                 menuItemExit.addActionListener(e -> menuItemExit(e));
-                menu1.add(menuItemExit);
+                menuMenu.add(menuItemExit);
             }
-            menuBar1.add(menu1);
+            systemMenuBar.add(menuMenu);
+
+            //======== menuNavigation ========
+            {
+                menuNavigation.setText("\u5bfc\u822a");
+
+                //---- menuItemIndex ----
+                menuItemIndex.setText("\u8fd4\u56de\u4e3b\u9875");
+                menuNavigation.add(menuItemIndex);
+
+                //---- menuItemGoBack ----
+                menuItemGoBack.setText("\u8fd4\u56de\u4e0a\u4e00\u7ea7");
+                menuItemGoBack.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuItemGoBack.addActionListener(e -> menuItemGoBack(e));
+                menuNavigation.add(menuItemGoBack);
+            }
+            systemMenuBar.add(menuNavigation);
+
+            //======== menuHelp ========
+            {
+                menuHelp.setText("\u5e2e\u52a9");
+
+                //---- menuItemHelp ----
+                menuItemHelp.setText("?\u5e2e\u52a9");
+                menuHelp.add(menuItemHelp);
+
+                //---- menuItemXinShou ----
+                menuItemXinShou.setText("\u5165\u95e8\u6307\u5357");
+                menuHelp.add(menuItemXinShou);
+
+                //---- menuItemAbout ----
+                menuItemAbout.setText("\u5173\u4e8e");
+                menuHelp.add(menuItemAbout);
+            }
+            systemMenuBar.add(menuHelp);
         }
-        setJMenuBar(menuBar1);
+        setJMenuBar(systemMenuBar);
 
         //---- fssSouSuo ----
         fssSouSuo.setText("\u641c \u7d22");
         fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
         fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
         contentPane.add(fssSouSuo);
-        fssSouSuo.setBounds(685, 34, 85, 30);
+        fssSouSuo.setBounds(685, 25, 85, 30);
 
-        //---- label1 ----
-        label1.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
-        label1.setFont(new Font("\u9ed1\u4f53", label1.getFont().getStyle(), 16));
-        contentPane.add(label1);
-        label1.setBounds(410, 38, label1.getPreferredSize().width, 25);
+        //---- labelHint ----
+        labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
+        labelHint.setFont(new Font("\u9ed1\u4f53", labelHint.getFont().getStyle(), 16));
+        contentPane.add(labelHint);
+        labelHint.setBounds(410, 29, labelHint.getPreferredSize().width, 25);
 
         //======== tabbedPane ========
         {
@@ -267,7 +305,7 @@ public class MainFrame extends JFrame {
                         {null, null, null, null, null},
                     },
                     new String[] {
-                        "\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                        "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
                     }
                 ));
                 tableMessages.setFont(new Font("Microsoft YaHei UI", tableMessages.getFont().getStyle(), 14));
@@ -277,14 +315,14 @@ public class MainFrame extends JFrame {
             tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
         }
         contentPane.add(tabbedPane);
-        tabbedPane.setBounds(10, 60, 765, 340);
+        tabbedPane.setBounds(10, 60, 765, 310);
 
         //---- txtKeywords ----
         txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
         contentPane.add(txtKeywords);
-        txtKeywords.setBounds(515, 33, 160, 34);
+        txtKeywords.setBounds(515, 24, 160, 34);
 
-        contentPane.setPreferredSize(new Dimension(785, 455));
+        contentPane.setPreferredSize(new Dimension(785, 440));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -292,12 +330,19 @@ public class MainFrame extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
-    private JMenuBar menuBar1;
-    private JMenu menu1;
-    private JMenuItem menuItem1;
+    private JMenuBar systemMenuBar;
+    private JMenu menuMenu;
+    private JMenuItem menuItemNew;
     private JMenuItem menuItemExit;
+    private JMenu menuNavigation;
+    private JMenuItem menuItemIndex;
+    private JMenuItem menuItemGoBack;
+    private JMenu menuHelp;
+    private JMenuItem menuItemHelp;
+    private JMenuItem menuItemXinShou;
+    private JMenuItem menuItemAbout;
     private JButton fssSouSuo;
-    private JLabel label1;
+    private JLabel labelHint;
     private JTabbedPane tabbedPane;
     private JScrollPane scrollPaneUser;
     private JTable tableUser;
@@ -308,6 +353,5 @@ public class MainFrame extends JFrame {
     private JScrollPane scrollPaneMessages;
     private JTable tableMessages;
     private JTextField txtKeywords;
-    private JTable table5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
