@@ -12,8 +12,10 @@ new FormModel {
 			"resizable": false
 			"title": "用户登录"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
+			"defaultCloseOperation": 3
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "txtcpassword"
+				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 95
 				"y": 145
@@ -22,6 +24,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "txtcname"
+				"font": new java.awt.Font( "黑体", 0, 14 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 95
 				"y": 95
@@ -31,7 +34,7 @@ new FormModel {
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlepassword"
 				"textWithMnemonic": "密码："
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 65536, 3, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 45
 				"y": 150
@@ -41,7 +44,7 @@ new FormModel {
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "title"
 				"textWithMnemonic": "账号："
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 65536, 3, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 50
 				"height": 20
@@ -49,8 +52,10 @@ new FormModel {
 				"y": 105
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "flogin"
+				name: "floginButton"
 				"text": "登 录"
+				"font": new java.awt.Font( "黑体", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "floginButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
 				"y": 240
@@ -58,8 +63,10 @@ new FormModel {
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "fzhuce"
+				name: "fzhuceButton"
 				"text": "注 册"
+				"font": new java.awt.Font( "黑体", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fzhuceButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 195
 				"height": 35
@@ -69,14 +76,16 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JCheckBox" ) {
 				name: "fcheck"
 				"text": "同意用户协议和隐私保护协议"
+				"font": new java.awt.Font( "黑体", 0, 14 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 75
+				"x": 80
 				"y": 200
+				"width": 230
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlelogin"
 				"textWithMnemonic": "用 户 登 录"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 8, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 125
 				"y": 35
@@ -84,8 +93,10 @@ new FormModel {
 				"height": 30
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "fexit"
+				name: "fexitBotton"
 				"text": "退 出"
+				"font": new java.awt.Font( "黑体", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fexitBottonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 195
 				"height": 35

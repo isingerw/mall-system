@@ -5,13 +5,12 @@
 package com.singerw.ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
-
 import com.jgoodies.forms.factories.*;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.UserEntity;
+
 
 /**
  * @author unknown
@@ -35,10 +34,72 @@ public class LoginFrame extends JFrame {
         });
     }
 
-
     public LoginFrame() {
         initComponents();
     }
+
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 21:38
+     * @Description: //TODO 登录按钮监听事件
+     * @param e
+     */
+    private void floginButtonActionPerformed(ActionEvent e) {
+        // 按钮点击事件
+        String cname = txtcname.getText();
+        System.out.println(cname);
+        String cpwd = txtcpassword.getText();
+        System.out.println(cpwd);
+        // 要对得到数据进行条件判断
+        if (cname.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "用户名不能为空!");
+            return;
+        }
+        if (cpwd.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "密码不能为空!");
+            return;
+        }
+        // 调用dao
+        UserDao udao = new UserDao();
+        // 调用getUserByNameAndPwd方法返回查询数据结果
+        UserEntity user = udao.getUserByNameAndPwd(cname, cpwd);
+        if (user == null) {
+            // 弹窗提示消息
+            JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
+        } else {
+            JOptionPane.showMessageDialog(null, "登录成功!");
+            // 跳转到下一个窗口 (创建新窗口对象，并显示)
+            MainFrame mainframe = new MainFrame();
+            mainframe.setVisible(true);
+            // 隐藏当前登录界面窗口
+            setVisible(false);
+        }
+    }
+
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 21:39
+     * @Description: //TODO 注册按钮监听事件
+     * @param e
+     */
+    private void fzhuceButtonActionPerformed(ActionEvent e) {
+        // 跳转到下一个窗口 (创建新窗口对象，并显示)
+        RegisteredFrame zhuce = new RegisteredFrame();
+        zhuce.setVisible(true);
+        // 隐藏当前登录界面窗口
+        setVisible(false);
+    }
+
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 21:39
+     * @Description: //TODO 退出按钮监听事件
+     * @param e
+     */
+    private void fexitBottonActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
+
 
 
     private void initComponents() {
@@ -49,17 +110,11 @@ public class LoginFrame extends JFrame {
         txtcname = new JFormattedTextField();
         titlepassword = compFactory.createTitle("\u5bc6\u7801\uff1a");
         title = compFactory.createTitle("\u8d26\u53f7\uff1a");
-        flogin = new JButton();
-        fzhuce = new JButton();
+        floginButton = new JButton();
+        fzhuceButton = new JButton();
         fcheck = new JCheckBox();
         titlelogin = compFactory.createTitle("\u7528 \u6237 \u767b \u5f55");
-        fexit = new JButton();
-        // 设置绝对布局
-        setLayout(null);
-        // 居中显示
-        setLocationRelativeTo(null);
-        // 窗口关闭 应用程序本身行为
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        fexitBotton = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(140, 370));
@@ -67,105 +122,67 @@ public class LoginFrame extends JFrame {
         setResizable(false);
         setTitle("\u7528\u6237\u767b\u5f55");
         setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
+
+        //---- txtcpassword ----
+        txtcpassword.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
         contentPane.add(txtcpassword);
         txtcpassword.setBounds(95, 145, 190, 35);
+
+        //---- txtcname ----
+        txtcname.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
         contentPane.add(txtcname);
         txtcname.setBounds(95, 95, 190, 35);
 
         //---- titlepassword ----
-        titlepassword.setFont(titlepassword.getFont().deriveFont(titlepassword.getFont().getSize() + 3f));
+        titlepassword.setFont(new Font("\u9ed1\u4f53", titlepassword.getFont().getStyle() & ~Font.BOLD, titlepassword.getFont().getSize() + 3));
         contentPane.add(titlepassword);
         titlepassword.setBounds(45, 150, 50, 20);
 
         //---- title ----
-        title.setFont(title.getFont().deriveFont(title.getFont().getSize() + 3f));
+        title.setFont(new Font("\u9ed1\u4f53", title.getFont().getStyle() & ~Font.BOLD, title.getFont().getSize() + 3));
         contentPane.add(title);
         title.setBounds(45, 105, 50, 20);
 
-        //---- flogin ----
-        flogin.setText("\u767b \u5f55");
-        contentPane.add(flogin);
-        flogin.setBounds(85, 240, 195, 35);
-        flogin.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed (ActionEvent e){
+        //---- floginButton ----
+        floginButton.setText("\u767b \u5f55");
+        floginButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+        floginButton.addActionListener(e -> floginButtonActionPerformed(e));
+        contentPane.add(floginButton);
+        floginButton.setBounds(85, 240, 195, 35);
 
-            //按钮点击事件
-            String cname = txtcname.getText();
-            System.out.println(cname);
+        //---- fzhuceButton ----
+        fzhuceButton.setText("\u6ce8 \u518c");
+        fzhuceButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+        fzhuceButton.addActionListener(e -> fzhuceButtonActionPerformed(e));
+        contentPane.add(fzhuceButton);
+        fzhuceButton.setBounds(85, 285, 195, 35);
 
-            String cpwd = txtcpassword.getText();
-            System.out.println(cpwd);
-
-            //要对得到数据进行条件判断
-            if (cname.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "用户名不能为空!");
-                return;
-            }
-            if (cpwd.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "密码不能为空!");
-                return;
-            }
-
-            //调用dao
-            UserDao udao = new UserDao();
-
-            //调用getUserByNameAndPwd方法返回查询数据结果
-            UserEntity user = udao.getUserByNameAndPwd(cname, cpwd);
-
-            if (user == null) {
-                //弹窗提示消息
-                JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
-            } else {
-                JOptionPane.showMessageDialog(null, "登录成功!");
-                //跳转到下一个窗口 (创建新窗口对象，并显示)
-                MainFrame mainframe = new MainFrame();
-                mainframe.setVisible(true);
-                //隐藏当前窗口
-                setVisible(false);
-            }
-        }
-    });
-
-    //---- fzhuce ----
-        fzhuce.setText("\u6ce8 \u518c");
-        contentPane.add(fzhuce);
-        fzhuce.setBounds(85,285,195,35);
-
-    //---- fcheck ----
+        //---- fcheck ----
         fcheck.setText("\u540c\u610f\u7528\u6237\u534f\u8bae\u548c\u9690\u79c1\u4fdd\u62a4\u534f\u8bae");
+        fcheck.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
         contentPane.add(fcheck);
-        fcheck.setBounds(new
+        fcheck.setBounds(80, 200, 230, fcheck.getPreferredSize().height);
 
-    Rectangle(new Point(75, 200),fcheck.
-
-    getPreferredSize()));
-
-    //---- titlelogin ----
-        titlelogin.setFont(titlelogin.getFont().
-
-    deriveFont(titlelogin.getFont().
-
-    getSize() +6f));
+        //---- titlelogin ----
+        titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
         contentPane.add(titlelogin);
-        titlelogin.setBounds(125,35,120,30);
+        titlelogin.setBounds(125, 35, 120, 30);
 
-    //---- fexit ----
-        fexit.setText("\u9000 \u51fa");
-        contentPane.add(fexit);
-        fexit.setBounds(85,330,195,35);
+        //---- fexitBotton ----
+        fexitBotton.setText("\u9000 \u51fa");
+        fexitBotton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+        fexitBotton.addActionListener(e -> fexitBottonActionPerformed(e));
+        contentPane.add(fexitBotton);
+        fexitBotton.setBounds(85, 330, 195, 35);
 
-        contentPane.setPreferredSize(new
-
-    Dimension(350,485));
-
-    pack();
-
-    setLocationRelativeTo(getOwner());
-    // JFormDesigner - End of component initialization  //GEN-END:initComponents
-}
+        contentPane.setPreferredSize(new Dimension(350, 485));
+        pack();
+        setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -174,11 +191,10 @@ public class LoginFrame extends JFrame {
     private JFormattedTextField txtcname;
     private JLabel titlepassword;
     private JLabel title;
-    private JButton flogin;
-    private JButton fzhuce;
+    private JButton floginButton;
+    private JButton fzhuceButton;
     private JCheckBox fcheck;
     private JLabel titlelogin;
-    private JButton fexit;
+    private JButton fexitBotton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
 }

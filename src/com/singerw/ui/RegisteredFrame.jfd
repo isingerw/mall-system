@@ -1,0 +1,128 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"resizable": false
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "title1"
+				"textWithMnemonic": "text"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": -20
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "txtcname"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 81
+				"y": 79
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "title"
+				"textWithMnemonic": "账号："
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 50
+				"height": 20
+				"x": 31
+				"y": 89
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "titlepassword"
+				"textWithMnemonic": "密码："
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 50
+				"height": 20
+				"x": 31
+				"y": 134
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "txtcpassword"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 81
+				"y": 129
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "RegisteredButton"
+				"text": "注 册"
+				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisteredButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 70
+				"y": 300
+				"width": 175
+				"height": 35
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "backHomeButton"
+				"text": "返 回 登 录"
+				"font": new java.awt.Font( "黑体", 0, 16 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backHomeButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 175
+				"height": 35
+				"x": 70
+				"y": 350
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "titlelogin"
+				"textWithMnemonic": "用 户 注 册"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 8, false )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 115
+				"height": 30
+				"x": 115
+				"y": 30
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "txtcphone"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 81
+				"y": 180
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "titlepassword2"
+				"textWithMnemonic": "手机："
+				"font": #SwingDerivedFont0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 50
+				"height": 20
+				"x": 31
+				"y": 185
+			} )
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "titlepassword3"
+				"textWithMnemonic": "地址："
+				"font": #SwingDerivedFont0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 50
+				"height": 20
+				"x": 31
+				"y": 235
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "txtcadress"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 81
+				"y": 230
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 100, 45 )
+			"size": new java.awt.Dimension( 325, 475 )
+		} )
+	}
+}

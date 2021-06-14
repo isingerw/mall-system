@@ -5,14 +5,13 @@
 package com.singerw.ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.table.*;
-import com.jgoodies.forms.factories.*;
+import javax.swing.table.DefaultTableModel;
 import com.singerw.dao.GoodsDao;
 import com.singerw.entity.GoodsEntity;
-import java.awt.event.ActionListener;
 import java.util.List;
+import java.awt.event.ActionEvent;
+
 
 /**
  * @author unknown
@@ -41,24 +40,86 @@ public class MainFrame extends JFrame {
         initComponents();
     }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 22:29
+     * @Description: //TODO 搜索按钮监听事件
+     * @param e
+     */
+    private void fssSouSuoActionPerformed(ActionEvent e) {
+        // 获取用户输入的关键字
+        String keywords = txtKeywords.getText();
+        GoodsDao gdao = new GoodsDao();
+        // 先查
+        List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
+        // 记录条数
+        int size = list.size();
+        // 创建保存数据的二维数组
+        Object obj[][] = new Object[size][5];
+        // 循环
+        for (int i = 0; i < size; i++) {
+            GoodsEntity g = list.get(i);
+            obj[i][0] = g.getGid();
+            obj[i][1] = g.getGname();
+            obj[i][2] = g.getGprice();
+            obj[i][3] = g.getGstock();
+            obj[i][4] = g.getGstate() == 1 ? "上架" : "下架";
+        }
+        // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
+        tableGoods.setModel(new DefaultTableModel(
+                obj,
+                new String[] { "\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
+                        "\u5E93\u5B58", "\u72B6\u6001" }));
+        // setViewportView 设置table和scrollpane关联
+        scrollPaneGoods.setViewportView(tableGoods);
+    }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:52
+     * @Description: //TODO 菜单===》退出系统
+     * @param e
+     */
+    private void menuItemExit(ActionEvent e) {
+        System.exit(0);
+    }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:55
+     * @Description: //TODO 菜单===》返回上一级
+     * @param e
+     */
+    private void menuItemGoBack(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:40
+     * @Description: //TODO UI界面
+     */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
-        DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        scrollPane = new JScrollPane();
+        menuBar1 = new JMenuBar();
+        menu1 = new JMenu();
+        menuItem1 = new JMenuItem();
+        menuItemExit = new JMenuItem();
+        fssSouSuo = new JButton();
+        label1 = new JLabel();
+        tabbedPane = new JTabbedPane();
+        scrollPaneUser = new JScrollPane();
+        tableUser = new JTable();
+        scrollPaneGoods = new JScrollPane();
         tableGoods = new JTable();
-        fssButton = new JButton();
-        scrollPane1 = new JScrollPane();
-        txtKeywords = new JTextArea();
-        titleKeywords = compFactory.createTitle("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
-        // 设置绝对布局
-        setLayout(null);
-        // 居中显示
-        setLocationRelativeTo(null);
-        // 窗口关闭 应用程序本身行为
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        scrollPaneOrder = new JScrollPane();
+        tableOrder = new JTable();
+        scrollPaneMessages = new JScrollPane();
+        tableMessages = new JTable();
+        txtKeywords = new JTextField();
+        table5 = new JTable();
+
         //======== this ========
         setTitle("\u8d85\u5e02\u7ba1\u7406\u7cfb\u7edf");
         setResizable(false);
@@ -66,95 +127,164 @@ public class MainFrame extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //======== scrollPane ========
+        //======== menuBar1 ========
         {
 
-            //---- tableGoods ----
-            tableGoods.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {"", "", "", null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                    {null, null, null, null, null},
-                },
-                new String[] {
-                    "\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u4ef7\u683c", "\u5e93\u5b58"
-                }
-            ));
-            tableGoods.setFont(tableGoods.getFont().deriveFont(tableGoods.getFont().getSize() + 2f));
-            scrollPane.setViewportView(tableGoods);
-        }
-        contentPane.add(scrollPane);
-        scrollPane.setBounds(10, 65, 760, 315);
+            //======== menu1 ========
+            {
+                menu1.setText("\u83dc\u5355");
+                menu1.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
 
-        //---- fssButton ----
-        fssButton.setText("\u641c\u7d22");
-        fssButton.setFont(fssButton.getFont().deriveFont(fssButton.getFont().getSize() + 2f));
-        contentPane.add(fssButton);
-        fssButton.setBounds(695, 15, fssButton.getPreferredSize().width, 35);
+                //---- menuItem1 ----
+                menuItem1.setText("\u8fd4\u56de\u4e0a\u4e00\u7ea7");
+                menuItem1.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuItem1.addActionListener(e -> menuItemGoBack(e));
+                menu1.add(menuItem1);
 
-        fssButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 搜索按钮的单击事件
-
-                // 获取用户输入的关键字
-                String keywords = txtKeywords.getText();
-
-                GoodsDao gdao = new GoodsDao();
-
-                // 先查
-                List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-
-                // 记录条数
-                int size = list.size();
-                // 创建保存数据的二维数组
-                Object obj[][] = new Object[size][5];
-
-                // 循环
-                for (int i = 0; i < size; i++) {
-                    GoodsEntity g = list.get(i);
-                    obj[i][0] = g.getGid();
-                    obj[i][1] = g.getGname();
-                    obj[i][2] = g.getGprice();
-                    obj[i][3] = g.getGstock();
-                    obj[i][4] = g.getGstate() == 1 ? "上架" : "下架";
-                }
-
-                // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
-                tableGoods.setModel(new DefaultTableModel(
-                        obj,
-                        new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
-                                "\u5E93\u5B58", "\u72B6\u6001"}));
-                // setViewportView 设置table和scrollpane关联
-                scrollPane.setViewportView(tableGoods);
+                //---- menuItemExit ----
+                menuItemExit.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItemExit.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuItemExit.addActionListener(e -> menuItemExit(e));
+                menu1.add(menuItemExit);
             }
-        });
-
-
-        //======== scrollPane1 ========
-        {
-            scrollPane1.setViewportView(txtKeywords);
+            menuBar1.add(menu1);
         }
-        contentPane.add(scrollPane1);
-        scrollPane1.setBounds(530, 20, 160, 25);
+        setJMenuBar(menuBar1);
 
-        //---- titleKeywords ----
-        titleKeywords.setFont(titleKeywords.getFont().deriveFont(titleKeywords.getFont().getSize() + 2f));
-        contentPane.add(titleKeywords);
-        titleKeywords.setBounds(430, 20, titleKeywords.getPreferredSize().width, 25);
+        //---- fssSouSuo ----
+        fssSouSuo.setText("\u641c \u7d22");
+        fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
+        fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
+        contentPane.add(fssSouSuo);
+        fssSouSuo.setBounds(685, 34, 85, 30);
 
-        contentPane.setPreferredSize(new Dimension(785, 445));
+        //---- label1 ----
+        label1.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
+        label1.setFont(new Font("\u9ed1\u4f53", label1.getFont().getStyle(), 16));
+        contentPane.add(label1);
+        label1.setBounds(410, 38, label1.getPreferredSize().width, 25);
+
+        //======== tabbedPane ========
+        {
+            tabbedPane.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+
+            //======== scrollPaneUser ========
+            {
+
+                //---- tableUser ----
+                tableUser.setModel(new DefaultTableModel(
+                    new Object[][] {
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null},
+                    },
+                    new String[] {
+                        "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
+                    }
+                ));
+                tableUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                tableUser.setRowHeight(25);
+                scrollPaneUser.setViewportView(tableUser);
+            }
+            tabbedPane.addTab("\u7528\u6237\u4fe1\u606f", scrollPaneUser);
+
+            //======== scrollPaneGoods ========
+            {
+
+                //---- tableGoods ----
+                tableGoods.setModel(new DefaultTableModel(
+                    new Object[][] {
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                        {null, null, null, null, null, null},
+                    },
+                    new String[] {
+                        "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u5e93\u5b58", "\u8be6\u60c5", "\u72b6\u6001"
+                    }
+                ));
+                tableGoods.setRowHeight(25);
+                tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                scrollPaneGoods.setViewportView(tableGoods);
+            }
+            tabbedPane.addTab("\u5546\u54c1\u4fe1\u606f", scrollPaneGoods);
+
+            //======== scrollPaneOrder ========
+            {
+
+                //---- tableOrder ----
+                tableOrder.setModel(new DefaultTableModel(
+                    new Object[][] {
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                    },
+                    new String[] {
+                        "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                    }
+                ));
+                tableOrder.setRowHeight(25);
+                tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                scrollPaneOrder.setViewportView(tableOrder);
+            }
+            tabbedPane.addTab("\u8ba2\u5355\u4fe1\u606f", scrollPaneOrder);
+
+            //======== scrollPaneMessages ========
+            {
+
+                //---- tableMessages ----
+                tableMessages.setModel(new DefaultTableModel(
+                    new Object[][] {
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                    },
+                    new String[] {
+                        "\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                    }
+                ));
+                tableMessages.setFont(new Font("Microsoft YaHei UI", tableMessages.getFont().getStyle(), 14));
+                tableMessages.setRowHeight(25);
+                scrollPaneMessages.setViewportView(tableMessages);
+            }
+            tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
+        }
+        contentPane.add(tabbedPane);
+        tabbedPane.setBounds(10, 60, 765, 340);
+
+        //---- txtKeywords ----
+        txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+        contentPane.add(txtKeywords);
+        txtKeywords.setBounds(515, 33, 160, 34);
+
+        contentPane.setPreferredSize(new Dimension(785, 455));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -162,52 +292,22 @@ public class MainFrame extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
-    private JScrollPane scrollPane;
+    private JMenuBar menuBar1;
+    private JMenu menu1;
+    private JMenuItem menuItem1;
+    private JMenuItem menuItemExit;
+    private JButton fssSouSuo;
+    private JLabel label1;
+    private JTabbedPane tabbedPane;
+    private JScrollPane scrollPaneUser;
+    private JTable tableUser;
+    private JScrollPane scrollPaneGoods;
     private JTable tableGoods;
-    private JButton fssButton;
-    private JScrollPane scrollPane1;
-    private JTextArea txtKeywords;
-    private JLabel titleKeywords;
+    private JScrollPane scrollPaneOrder;
+    private JTable tableOrder;
+    private JScrollPane scrollPaneMessages;
+    private JTable tableMessages;
+    private JTextField txtKeywords;
+    private JTable table5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
-
-
-
-
-//fssButton.addActionListener(new ActionListener() {
-//@Override
-//public void actionPerformed(ActionEvent e) {
-//        // 搜索按钮的单击事件
-//
-//        // 获取用户输入的关键字
-//        String keywords = txtKeywords.getText();
-//
-//        GoodsDao gdao = new GoodsDao();
-//
-//        // 先查
-//        List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-//
-//        // 记录条数
-//        int size = list.size();
-//        // 创建保存数据的二维数组
-//        Object obj[][] = new Object[size][5];
-//
-//        // 循环
-//        for (int i = 0; i < size; i++) {
-//        GoodsEntity g = list.get(i);
-//        obj[i][0] = g.getGid();
-//        obj[i][1] = g.getGname();
-//        obj[i][2] = g.getGprice();
-//        obj[i][3] = g.getGstock();
-//        obj[i][4] = g.getGstate() == 1 ? "上架" : "下架";
-//        }
-//
-//        // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
-//        tableGoods.setModel(new DefaultTableModel(
-//        obj,
-//        new String[] { "\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
-//        "\u5E93\u5B58", "\u72B6\u6001" }));
-//        // setViewportView 设置table和scrollpane关联
-//        scrollPane.setViewportView(tableGoods);
-//        }
-//        });
