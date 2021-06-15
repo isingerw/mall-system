@@ -10,7 +10,7 @@ new FormModel {
 			"resizable": false
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
 			"$locationPolicy": 1
-			"title": "添加用户"
+			"title": "添加商品"
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "title1"
 				"textWithMnemonic": "text"
@@ -19,49 +19,41 @@ new FormModel {
 				"y": -20
 			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "txtcname"
+				name: "txtGname"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
+				"width": 310
 				"height": 35
-				"x": 106
-				"y": 79
+				"x": 140
+				"y": 80
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titleID"
-				"textWithMnemonic": "账号："
+				"textWithMnemonic": "商品名称："
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 50
+				"width": 94
 				"height": 20
 				"x": 56
 				"y": 89
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlepAssword"
-				"textWithMnemonic": "密码："
+				"textWithMnemonic": "商品价格："
 				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 50
+				"width": 89
 				"height": 20
 				"x": 56
 				"y": 134
 			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "txtcpassword"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
-				"height": 35
-				"x": 106
-				"y": 129
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "AddUserButton"
+				name: "AddGoodsButton"
 				"text": "新 增"
 				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "AddUserButtonActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "AddGoodsButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 95
-				"y": 325
+				"x": 90
+				"y": 385
 				"width": 175
 				"height": 35
 			} )
@@ -73,81 +65,104 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 175
 				"height": 35
-				"x": 95
-				"y": 370
+				"x": 290
+				"y": 385
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlelogin"
-				"textWithMnemonic": "增加用户"
+				"textWithMnemonic": "增 加 商 品"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 8, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 115
 				"height": 30
-				"x": 135
-				"y": 30
+				"x": 245
+				"y": 25
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlePhone"
-				"textWithMnemonic": "手机："
+				"textWithMnemonic": "商品库存："
 				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 50
+				"width": 84
 				"height": 20
 				"x": 56
 				"y": 185
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titleAdress"
-				"textWithMnemonic": "地址："
+				"textWithMnemonic": "商品状态："
 				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 50
+				"width": 84
 				"height": 20
 				"x": 56
 				"y": 235
 			} )
-			add( new FormComponent( "javax.swing.JRadioButton" ) {
-				name: "radioButtonUser"
-				"text": "普通用户"
-				"$buttonGroup": new FormReference( "UserAndAdminButtonGroup" )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 95
-				"y": 280
-			} )
-			add( new FormComponent( "javax.swing.JRadioButton" ) {
-				name: "radioButtonAdmin"
-				"text": "管理员"
-				"$buttonGroup": new FormReference( "UserAndAdminButtonGroup" )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 74
-				"height": 22
-				"x": 195
-				"y": 280
-			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "txtcphone"
+				name: "txtGstock"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
+				"width": 310
 				"height": 35
-				"x": 105
+				"x": 140
 				"y": 180
 			} )
-			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
-				name: "txtcadress"
+			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
+				name: "titleAdress2"
+				"textWithMnemonic": "商品简介："
+				"font": #SwingDerivedFont0
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
+				"width": 84
+				"height": 20
+				"x": 55
+				"y": 280
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textAreaGinfo"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 145
+				"y": 280
+				"width": 300
+				"height": 85
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBoxShangJia"
+				"text": "上架"
+				"$buttonGroup": new FormReference( "buttonGroupGstate" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 215
+				"y": 235
+				"width": 60
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBoxXiaJia"
+				"text": "下架"
+				"$buttonGroup": new FormReference( "buttonGroupGstate" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 60
+				"height": 30
+				"x": 305
+				"y": 235
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "txtGprice"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 310
 				"height": 35
-				"x": 105
-				"y": 230
+				"x": 140
+				"y": 130
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 350, 485 )
-			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 550, 485 )
+			"location": new java.awt.Point( 280, 30 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
-			name: "UserAndAdminButtonGroup"
+			name: "buttonGroupGstate"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 501 )
+			"location": new java.awt.Point( 0, 531 )
 		} )
 	}
 }

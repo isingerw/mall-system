@@ -4,7 +4,6 @@ import com.singerw.entity.GoodsEntity;
 import com.singerw.entity.UserEntity;
 import com.singerw.tools.DBUtil;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,23 +30,6 @@ public class UserDao {
         return n > 0;
     }
 
-    /**
-     * @Author CodeSleep
-     * @Date: 2021-06-14 22:23
-     * @Description: //TODO 用户注册
-     * @param users
-     * @return
-     */
-    public boolean zhuceUser(UserEntity users) {
-
-        if (users == null) {
-            return false;
-        }
-        String sql = "insert into tbl_user values(null,?,?,?,?,?)";
-        // 增加调用DBUtil.exupdate方法
-        int n = DBUtil.exUpdate(sql, users.getCname(), users.getCpwd(), users.getCphone(), users.getCaddress(), users.getLastlogin());
-        return n > 0;
-    }
 
     /**
      * @param cid
@@ -142,6 +124,4 @@ public class UserDao {
         }
         return null;
     }
-
-
 }

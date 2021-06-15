@@ -7,6 +7,7 @@ package com.singerw.ui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import com.jgoodies.forms.factories.*;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.UserEntity;
@@ -39,10 +40,10 @@ public class LoginFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 21:38
      * @Description: //TODO 登录按钮监听事件
-     * @param e
      */
     private void floginButtonActionPerformed(ActionEvent e) {
         // 按钮点击事件
@@ -59,6 +60,13 @@ public class LoginFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "密码不能为空!");
             return;
         }
+        // 用户协议同意与否判断
+        boolean flag = fcheck.isSelected();
+        if (flag == false){
+            JOptionPane.showMessageDialog(null, "请同意用户协议和隐私保护协议");
+            return;
+        }
+
         // 调用dao
         UserDao udao = new UserDao();
         // 调用getUserByNameAndPwd方法返回查询数据结果
@@ -77,10 +85,10 @@ public class LoginFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 21:39
      * @Description: //TODO 注册按钮监听事件
-     * @param e
      */
     private void fzhuceButtonActionPerformed(ActionEvent e) {
         // 跳转到下一个窗口 (创建新窗口对象，并显示)
@@ -91,13 +99,19 @@ public class LoginFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 21:39
      * @Description: //TODO 退出按钮监听事件
-     * @param e
      */
     private void fexitBottonActionPerformed(ActionEvent e) {
-        System.exit(0);
+        // 提示用户是否退出
+        int n = JOptionPane.showConfirmDialog(null, "是否退出", "提示信息", JOptionPane.YES_OPTION);
+        if (n == 0) {
+            // 如果用户选择退出并确定
+            dispose();
+            System.exit(0);
+        }
     }
 
 

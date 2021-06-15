@@ -56,6 +56,7 @@ public class GoodsDao {
         int n = DBUtil.exUpdate(sql, gid);
         return n > 0;
     }
+
     public boolean updataGoodsByStateShangjia(int gid) { //上架
         String sql = "update tbl_goods set gstate = 1 where gid = ?";
         // 调用DButil.exUpdate方法
@@ -112,6 +113,24 @@ public class GoodsDao {
         String sql = "SELECT * from tbl_goods where gname like ? or ginfo like ?";
         Object obj = DBUtil.exQuery(sql, GoodsEntity.class, keywords, keywords);
 
+        if (obj instanceof List) {
+            List<GoodsEntity> list = (List) obj;
+            return list;
+        }
+        return null;
+    }
+
+
+    /**
+     * @param keywords
+     * @return
+     * @Author CodeSleep
+     * @Date: 2021-06-15 22:16
+     * @Description: //TODO 要查询的是已经上架的商品，且库存大于0
+     */
+    public List<GoodsEntity> getGoodsByLikeAndState(String keywords) {
+        String sql = "select * from tbl_goods where gstate=1 and gstock>0 and  (gname like ? or ginfo like ?)";
+        Object obj = DBUtil.exQuery(sql, GoodsEntity.class, keywords, keywords);
         if (obj instanceof List) {
             List<GoodsEntity> list = (List) obj;
             return list;

@@ -9,6 +9,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import com.jgoodies.forms.factories.*;
+import com.singerw.dao.UserDao;
+import com.singerw.entity.UserEntity;
 
 
 /**
@@ -30,39 +32,36 @@ public class RegisteredFrame extends JFrame {
         // 按钮点击事件
         String cname = txtcname.getText();
         System.out.println(cname);
-        String cpwd = txtcpassword.getText();
+        String cpwd = new String(txtcpassword.getPassword());
         System.out.println(cpwd);
         String cphone = txtcphone.getText();
         System.out.println(cphone);
-        String cadress = txtcadress.getText();
-        System.out.println(cadress);
-//        // 要对得到数据进行条件判断
-//        if (cname.trim().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "用户名不能为空!");
-//            return;
-//        }
-//        if (cpwd.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "密码不能为空!");
-//            return;
-//        }
-//        if (cphone.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "手机号不能为空!");
-//            return;
-//        }
-//        if (cadress.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "地址不能为空!");
-//            return;
-//        }
-////        // 调用dao
-////        UserDao udao = new UserDao();
-////        // 调用getUserByNameAndPwd方法返回查询数据结果
-////        UserEntity user = udao.zhuceUser(cname,cpwd,cphone,cadress);
-////        if (user == null) {
-////            // 弹窗提示消息
-////            JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
-////        } else {
-////            JOptionPane.showMessageDialog(null, "登录成功!");
-////        }
+        String caddress = txtcadress.getText();
+        System.out.println(caddress);
+        // 要对得到数据进行条件判断
+        if (cname.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "用户名不能为空!");
+            return;
+        }
+        if (cpwd.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "密码不能为空!");
+            return;
+        }
+        if (cphone.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "手机号不能为空!");
+            return;
+        }
+        // 调用dao
+        UserDao udao = new UserDao();
+        // 调用getUserByNameAndPwd方法返回查询数据结果
+        UserEntity userEntity = new UserEntity(cname, cpwd, cphone, caddress);
+        boolean flag = udao.addUser(userEntity);
+        if (flag) {
+            // 弹窗提示消息
+            JOptionPane.showMessageDialog(null, "恭喜你，注册成功");
+        } else {
+            JOptionPane.showMessageDialog(null, "注册失败");
+        }
     }
 
     /**
@@ -96,14 +95,15 @@ public class RegisteredFrame extends JFrame {
         RegisteredButton = new JButton();
         backHomeButton = new JButton();
         titlelogin = compFactory.createTitle("\u7528 \u6237 \u6ce8 \u518c");
-        txtcphone = new JPasswordField();
         titlePhone = compFactory.createTitle("\u624b\u673a\uff1a");
         titleAdress = compFactory.createTitle("\u5730\u5740\uff1a");
-        txtcadress = new JPasswordField();
+        txtcphone = new JFormattedTextField();
+        txtcadress = new JFormattedTextField();
 
         //======== this ========
         setResizable(false);
         setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
+        setTitle("\u7528\u6237\u6ce8\u518c");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         contentPane.add(title1);
@@ -141,8 +141,6 @@ public class RegisteredFrame extends JFrame {
         titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
         contentPane.add(titlelogin);
         titlelogin.setBounds(127, 30, 115, 30);
-        contentPane.add(txtcphone);
-        txtcphone.setBounds(106, 180, 180, 35);
 
         //---- titlePhone ----
         titlePhone.setFont(titlePhone.getFont().deriveFont(titlePhone.getFont().getSize() + 3f));
@@ -153,8 +151,10 @@ public class RegisteredFrame extends JFrame {
         titleAdress.setFont(titleAdress.getFont().deriveFont(titleAdress.getFont().getSize() + 3f));
         contentPane.add(titleAdress);
         titleAdress.setBounds(56, 235, 50, 20);
+        contentPane.add(txtcphone);
+        txtcphone.setBounds(105, 180, 180, 35);
         contentPane.add(txtcadress);
-        txtcadress.setBounds(106, 230, 180, 35);
+        txtcadress.setBounds(105, 230, 180, 35);
 
         contentPane.setPreferredSize(new Dimension(350, 485));
         pack();
@@ -172,9 +172,9 @@ public class RegisteredFrame extends JFrame {
     private JButton RegisteredButton;
     private JButton backHomeButton;
     private JLabel titlelogin;
-    private JPasswordField txtcphone;
     private JLabel titlePhone;
     private JLabel titleAdress;
-    private JPasswordField txtcadress;
+    private JFormattedTextField txtcphone;
+    private JFormattedTextField txtcadress;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -1,6 +1,5 @@
 package com.singerw.entity;
 
-import java.time.LocalDateTime;
 
 /**
  * @Author: CodeSleep
@@ -15,6 +14,13 @@ public class UserEntity {
     private String caddress;
     private int level;
     private String lastlogin;
+
+    public UserEntity(String cname, String cpwd, String cphone, String caddress) {
+        this.cname = cname;
+        this.cpwd = cpwd;
+        this.cphone = cphone;
+        this.caddress = caddress;
+    }
 
     public int getCid() {
         return cid;

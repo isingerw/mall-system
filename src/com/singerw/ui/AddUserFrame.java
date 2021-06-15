@@ -11,7 +11,6 @@ import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.UserEntity;
-import net.miginfocom.swing.*;
 
 /**
  * @author unknown
@@ -33,13 +32,29 @@ public class AddUserFrame extends JFrame {
         String cpassword = new String(txtcpassword.getPassword());
         String cphone = txtcphone.getText();
         String cadress = txtcadress.getText();
+        // 前端校验
+        if (cname.isEmpty()){
+            JOptionPane.showMessageDialog(null,"账号不能为空");
+            return;
+        }
+        if (cpassword.isEmpty()){
+            JOptionPane.showMessageDialog(null,"密码不能为空");
+            return;
+        }
+        if (cphone.isEmpty()){
+            JOptionPane.showMessageDialog(null,"手机号不能为空");
+            return;
+        }
+        if (cadress.isEmpty()){
+            JOptionPane.showMessageDialog(null,"地址不能为空");
+            return;
+        }
         // 普通用户 1
         int level = 1;
         if (radioButtonAdmin.isSelected()){
             // 管理员 0
             level = 0;
         }
-        // 前端校验
         UserDao userDao = new UserDao();
         UserEntity userEntity = new UserEntity(0,cname,cpassword,cphone,cadress,level,null);
         boolean flag = userDao.addUser(userEntity);
@@ -88,6 +103,7 @@ public class AddUserFrame extends JFrame {
         //======== this ========
         setResizable(false);
         setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
+        setTitle("\u6dfb\u52a0\u7528\u6237");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
         contentPane.add(title1);

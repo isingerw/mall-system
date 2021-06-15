@@ -7,8 +7,12 @@ package com.singerw.ui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import com.singerw.dao.GoodsDao;
+import com.singerw.dao.UserDao;
 import com.singerw.entity.GoodsEntity;
+import com.singerw.entity.UserEntity;
+
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -41,10 +45,10 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 22:29
      * @Description: //TODO 搜索按钮监听事件
-     * @param e
      */
     private void fssSouSuoActionPerformed(ActionEvent e) {
         // 获取用户输入的关键字
@@ -68,28 +72,39 @@ public class MainFrame extends JFrame {
         // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
         tableGoods.setModel(new DefaultTableModel(
                 obj,
-                new String[] { "\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
-                        "\u5E93\u5B58", "\u72B6\u6001" }));
+                new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
+                        "\u5E93\u5B58", "\u72B6\u6001"}));
         // setViewportView 设置table和scrollpane关联
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:55
      * @Description: //TODO 菜单===》返回上一级
-     * @param e
      */
     private void menuItemGoBack(ActionEvent e) {
         // TODO add your code here
     }
 
     /**
-     * @Author CodeSleep 
-     * @Date: 2021-06-15 9:42
-     * @Description: //TODO 菜单栏商品管理查询商品按钮监听事件
      * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-15 9:45
+     * @Description: //TODO 菜单栏商品管理==>新增商品按钮监听事件
+     */
+    private void menuItemNewGoodsActionPerformed(ActionEvent e) {
+        AddGoodsFrame addGoodsFrame = new AddGoodsFrame();
+        addGoodsFrame.setVisible(true);
+    }
+
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-15 9:42
+     * @Description: //TODO 菜单栏商品管理==>查询商品按钮监听事件
      */
     private void menuItemChaXunGoodsActionPerformed(ActionEvent e) {
         // 切换选项卡的页  1 为选项卡页的顺序 从0算起
@@ -100,6 +115,7 @@ public class MainFrame extends JFrame {
 
     /**
      * 自动查询并展示商品信息方法
+     *
      * @param scrollPaneGoods
      */
     private void fillGoodsTable(JScrollPane scrollPaneGoods) {
@@ -124,38 +140,66 @@ public class MainFrame extends JFrame {
         // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
         tableGoods.setModel(new DefaultTableModel(
                 obj,
-                new String[] { "\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
-                        "\u5E93\u5B58", "\u72B6\u6001" }));
+                new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
+                        "\u5E93\u5B58", "\u72B6\u6001"}));
         // setViewportView 设置table和scrollpane关联
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
+
     /**
-     * @Author CodeSleep 
-     * @Date: 2021-06-15 9:45
-     * @Description: //TODO 菜单栏商品管理==>新增商品按钮监听事件
      * @param e
-     */
-    private void menuItemNewGoodsActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-    
-    /**
      * @Author CodeSleep
      * @Date: 2021-06-15 9:42
-     * @Description: //TODO 菜单栏用户管理查询用户按钮监听事件
-     * @param e
+     * @Description: //TODO 菜单栏用户管理==>查询用户按钮监听事件
      */
     private void menuItemChaXunUserActionPerformed(ActionEvent e) {
         // 切换选项卡的页  1 为选项卡页的顺序 从0算起
         tabbedPane.setSelectedIndex(0);
+        fillUsersTable(scrollPaneUser);
     }
 
     /**
-     * @Author CodeSleep 
+     * 自动查询并展示用户信息方法
+     *
+     * @param scrollPaneUser
+     */
+    private void fillUsersTable(JScrollPane scrollPaneUser) {
+        // 获取用户输入的关键字
+        String keywords = txtKeywords.getText();
+        UserDao userDao = new UserDao();
+        // 先查
+        List<UserEntity> list = userDao.getUserByLike("%" + keywords + "%");
+        // 记录条数
+        int size = list.size();
+        // 创建保存数据的二维数组
+        Object obj[][] = new Object[size][7];
+        // 循环
+        for (int i = 0; i < size; i++) {
+            UserEntity ue = list.get(i);
+            obj[i][0] = ue.getCid();
+            obj[i][1] = ue.getCname();
+            obj[i][2] = ue.getCpwd();
+            obj[i][3] = ue.getCphone();
+            obj[i][4] = ue.getCaddress();
+            obj[i][5] = ue.getLevel() == 1 ? "普通用户" : "管理员";
+            obj[i][6] = ue.getLastlogin();
+        }
+        // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
+        tableUser.setModel(new DefaultTableModel(
+                obj,
+                new String[]{"\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
+                }));
+        // setViewportView 设置table和scrollpane关联
+        scrollPaneUser.setViewportView(tableUser);
+    }
+
+
+    /**
+     * @param e
+     * @Author CodeSleep
      * @Date: 2021-06-15 9:44
      * @Description: //TODO 菜单栏用户管理===>新增用户按钮监听事件
-     * @param e
      */
     private void menuItemNewUserActionPerformed(ActionEvent e) {
         AddUserFrame addUserFrame = new AddUserFrame();
@@ -163,15 +207,15 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:52
      * @Description: //TODO 菜单===》导航===》退出系统
-     * @param e
      */
     private void menuItemExit(ActionEvent e) {
         System.exit(0);
     }
-    
+
 
     /**
      * @Author CodeSleep
@@ -188,6 +232,11 @@ public class MainFrame extends JFrame {
         menuUserMenu = new JMenu();
         menuItemNewUser = new JMenuItem();
         menuItemChaXunUser = new JMenuItem();
+        menu1 = new JMenu();
+        menuItem1 = new JMenuItem();
+        menu2 = new JMenu();
+        menuItem2 = new JMenuItem();
+        menuItem3 = new JMenuItem();
         menuNavigation = new JMenu();
         menuItemIndex = new JMenuItem();
         menuItemGoBack = new JMenuItem();
@@ -226,7 +275,7 @@ public class MainFrame extends JFrame {
                 menuGooodsMenu.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
 
                 //---- menuItemNewGoods ----
-                menuItemNewGoods.setText("\u65b0\u5efa\u5546\u54c1");
+                menuItemNewGoods.setText("\u65b0\u589e\u5546\u54c1");
                 menuItemNewGoods.addActionListener(e -> menuItemNewGoodsActionPerformed(e));
                 menuGooodsMenu.add(menuItemNewGoods);
 
@@ -252,6 +301,30 @@ public class MainFrame extends JFrame {
                 menuUserMenu.add(menuItemChaXunUser);
             }
             systemMenuBar.add(menuUserMenu);
+
+            //======== menu1 ========
+            {
+                menu1.setText("\u8ba2\u5355\u7ba1\u7406");
+
+                //---- menuItem1 ----
+                menuItem1.setText("\u8ba2\u5355\u67e5\u8be2");
+                menu1.add(menuItem1);
+            }
+            systemMenuBar.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText("\u7559\u8a00\u7ba1\u7406");
+
+                //---- menuItem2 ----
+                menuItem2.setText("\u67e5\u8be2\u7559\u8a00");
+                menu2.add(menuItem2);
+
+                //---- menuItem3 ----
+                menuItem3.setText("\u5220\u9664\u7559\u8a00");
+                menu2.add(menuItem3);
+            }
+            systemMenuBar.add(menu2);
 
             //======== menuNavigation ========
             {
@@ -297,12 +370,13 @@ public class MainFrame extends JFrame {
 
         //======== panelChaXun ========
         {
-            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
             panelChaXun.setLayout(null);
 
             //======== tabbedPane ========
@@ -418,7 +492,7 @@ public class MainFrame extends JFrame {
                 tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
             }
             panelChaXun.add(tabbedPane);
-            tabbedPane.setBounds(10, 36, 765, 339);
+            tabbedPane.setBounds(10, 36, 765, 329);
 
             //---- labelHint ----
             labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
@@ -471,6 +545,11 @@ public class MainFrame extends JFrame {
     private JMenu menuUserMenu;
     private JMenuItem menuItemNewUser;
     private JMenuItem menuItemChaXunUser;
+    private JMenu menu1;
+    private JMenuItem menuItem1;
+    private JMenu menu2;
+    private JMenuItem menuItem2;
+    private JMenuItem menuItem3;
     private JMenu menuNavigation;
     private JMenuItem menuItemIndex;
     private JMenuItem menuItemGoBack;

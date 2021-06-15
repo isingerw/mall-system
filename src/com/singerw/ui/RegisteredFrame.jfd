@@ -10,6 +10,7 @@ new FormModel {
 			"resizable": false
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
 			"$locationPolicy": 1
+			"title": "用户注册"
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "title1"
 				"textWithMnemonic": "text"
@@ -85,14 +86,6 @@ new FormModel {
 				"x": 127
 				"y": 30
 			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "txtcphone"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
-				"height": 35
-				"x": 106
-				"y": 180
-			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlePhone"
 				"textWithMnemonic": "手机："
@@ -113,12 +106,20 @@ new FormModel {
 				"x": 56
 				"y": 235
 			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "txtcphone"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 105
+				"y": 180
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "txtcadress"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 180
 				"height": 35
-				"x": 106
+				"x": 105
 				"y": 230
 			} )
 		}, new FormLayoutConstraints( null ) {
