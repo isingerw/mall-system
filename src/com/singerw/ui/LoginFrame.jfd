@@ -13,6 +13,7 @@ new FormModel {
 			"title": "用户登录"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
 			"defaultCloseOperation": 3
+			"$locationPolicy": 1
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "txtcpassword"
 				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
@@ -109,4 +110,3 @@ new FormModel {
 		} )
 	}
 }
-

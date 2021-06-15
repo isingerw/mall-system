@@ -7,6 +7,7 @@ package com.singerw.ui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import com.jgoodies.forms.factories.*;
 
 
@@ -14,15 +15,16 @@ import com.jgoodies.forms.factories.*;
  * @author unknown
  */
 public class RegisteredFrame extends JFrame {
+
     public RegisteredFrame() {
         initComponents();
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:59
      * @Description: //TODO 用户注册按钮监听事件
-     * @param e
      */
     private void RegisteredButtonActionPerformed(ActionEvent e) {
         // 按钮点击事件
@@ -64,13 +66,12 @@ public class RegisteredFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 0:00
      * @Description: //TODO 返回登录按钮监听事件
-     * @param e
      */
     private void backHomeButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
         // 跳转到下一个窗口 (创建新窗口对象，并显示)
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setVisible(true);
@@ -89,15 +90,15 @@ public class RegisteredFrame extends JFrame {
         DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         title1 = compFactory.createTitle("text");
         txtcname = new JFormattedTextField();
-        title = compFactory.createTitle("\u8d26\u53f7\uff1a");
-        titlepassword = compFactory.createTitle("\u5bc6\u7801\uff1a");
+        titleID = compFactory.createTitle("\u8d26\u53f7\uff1a");
+        titlepAssword = compFactory.createTitle("\u5bc6\u7801\uff1a");
         txtcpassword = new JPasswordField();
         RegisteredButton = new JButton();
         backHomeButton = new JButton();
         titlelogin = compFactory.createTitle("\u7528 \u6237 \u6ce8 \u518c");
         txtcphone = new JPasswordField();
-        titlepassword2 = compFactory.createTitle("\u624b\u673a\uff1a");
-        titlepassword3 = compFactory.createTitle("\u5730\u5740\uff1a");
+        titlePhone = compFactory.createTitle("\u624b\u673a\uff1a");
+        titleAdress = compFactory.createTitle("\u5730\u5740\uff1a");
         txtcadress = new JPasswordField();
 
         //======== this ========
@@ -108,56 +109,56 @@ public class RegisteredFrame extends JFrame {
         contentPane.add(title1);
         title1.setBounds(new Rectangle(new Point(30, -20), title1.getPreferredSize()));
         contentPane.add(txtcname);
-        txtcname.setBounds(81, 79, 180, 35);
+        txtcname.setBounds(106, 79, 180, 35);
 
-        //---- title ----
-        title.setFont(title.getFont().deriveFont(title.getFont().getSize() + 3f));
-        contentPane.add(title);
-        title.setBounds(31, 89, 50, 20);
+        //---- titleID ----
+        titleID.setFont(titleID.getFont().deriveFont(titleID.getFont().getSize() + 3f));
+        contentPane.add(titleID);
+        titleID.setBounds(56, 89, 50, 20);
 
-        //---- titlepassword ----
-        titlepassword.setFont(titlepassword.getFont().deriveFont(titlepassword.getFont().getSize() + 3f));
-        contentPane.add(titlepassword);
-        titlepassword.setBounds(31, 134, 50, 20);
+        //---- titlepAssword ----
+        titlepAssword.setFont(titlepAssword.getFont().deriveFont(titlepAssword.getFont().getSize() + 3f));
+        contentPane.add(titlepAssword);
+        titlepAssword.setBounds(56, 134, 50, 20);
         contentPane.add(txtcpassword);
-        txtcpassword.setBounds(81, 129, 180, 35);
+        txtcpassword.setBounds(106, 129, 180, 35);
 
         //---- RegisteredButton ----
         RegisteredButton.setText("\u6ce8 \u518c");
         RegisteredButton.setFont(new Font("\u9ed1\u4f53", RegisteredButton.getFont().getStyle(), 16));
         RegisteredButton.addActionListener(e -> RegisteredButtonActionPerformed(e));
         contentPane.add(RegisteredButton);
-        RegisteredButton.setBounds(70, 300, 175, 35);
+        RegisteredButton.setBounds(95, 300, 175, 35);
 
         //---- backHomeButton ----
         backHomeButton.setText("\u8fd4 \u56de \u767b \u5f55");
         backHomeButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
         backHomeButton.addActionListener(e -> backHomeButtonActionPerformed(e));
         contentPane.add(backHomeButton);
-        backHomeButton.setBounds(70, 350, 175, 35);
+        backHomeButton.setBounds(95, 350, 175, 35);
 
         //---- titlelogin ----
         titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
         contentPane.add(titlelogin);
-        titlelogin.setBounds(115, 30, 115, 30);
+        titlelogin.setBounds(127, 30, 115, 30);
         contentPane.add(txtcphone);
-        txtcphone.setBounds(81, 180, 180, 35);
+        txtcphone.setBounds(106, 180, 180, 35);
 
-        //---- titlepassword2 ----
-        titlepassword2.setFont(titlepassword2.getFont().deriveFont(titlepassword2.getFont().getSize() + 3f));
-        contentPane.add(titlepassword2);
-        titlepassword2.setBounds(31, 185, 50, 20);
+        //---- titlePhone ----
+        titlePhone.setFont(titlePhone.getFont().deriveFont(titlePhone.getFont().getSize() + 3f));
+        contentPane.add(titlePhone);
+        titlePhone.setBounds(56, 185, 50, 20);
 
-        //---- titlepassword3 ----
-        titlepassword3.setFont(titlepassword3.getFont().deriveFont(titlepassword3.getFont().getSize() + 3f));
-        contentPane.add(titlepassword3);
-        titlepassword3.setBounds(31, 235, 50, 20);
+        //---- titleAdress ----
+        titleAdress.setFont(titleAdress.getFont().deriveFont(titleAdress.getFont().getSize() + 3f));
+        contentPane.add(titleAdress);
+        titleAdress.setBounds(56, 235, 50, 20);
         contentPane.add(txtcadress);
-        txtcadress.setBounds(81, 230, 180, 35);
+        txtcadress.setBounds(106, 230, 180, 35);
 
-        contentPane.setPreferredSize(new Dimension(325, 475));
+        contentPane.setPreferredSize(new Dimension(350, 485));
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -165,15 +166,15 @@ public class RegisteredFrame extends JFrame {
     // Generated using JFormDesigner Evaluation license - unknown
     private JLabel title1;
     private JFormattedTextField txtcname;
-    private JLabel title;
-    private JLabel titlepassword;
+    private JLabel titleID;
+    private JLabel titlepAssword;
     private JPasswordField txtcpassword;
     private JButton RegisteredButton;
     private JButton backHomeButton;
     private JLabel titlelogin;
     private JPasswordField txtcphone;
-    private JLabel titlepassword2;
-    private JLabel titlepassword3;
+    private JLabel titlePhone;
+    private JLabel titleAdress;
     private JPasswordField txtcadress;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

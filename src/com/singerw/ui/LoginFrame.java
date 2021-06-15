@@ -184,7 +184,7 @@ public class LoginFrame extends JFrame {
 
         contentPane.setPreferredSize(new Dimension(350, 485));
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

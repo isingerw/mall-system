@@ -54,44 +54,36 @@ new FormModel {
 				"y": 129
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "RegisteredButton"
-				"text": "注 册"
+				name: "AddUserButton"
+				"text": "新 增"
 				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisteredButtonActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "AddUserButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 95
-				"y": 300
+				"y": 325
 				"width": 175
 				"height": 35
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "backHomeButton"
-				"text": "返 回 登 录"
+				name: "ExitButton"
+				"text": "退 出"
 				"font": new java.awt.Font( "黑体", 0, 16 )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backHomeButtonActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ExitButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 175
 				"height": 35
 				"x": 95
-				"y": 350
+				"y": 370
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlelogin"
-				"textWithMnemonic": "用 户 注 册"
+				"textWithMnemonic": "增加用户"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 8, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 115
 				"height": 30
-				"x": 127
+				"x": 135
 				"y": 30
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "txtcphone"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 180
-				"height": 35
-				"x": 106
-				"y": 180
 			} )
 			add( new FormComponent( "com.jformdesigner.designer.wrapper.JGoodiesFormsTitle" ) {
 				name: "titlePhone"
@@ -113,17 +105,48 @@ new FormModel {
 				"x": 56
 				"y": 235
 			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonUser"
+				"text": "普通用户"
+				"$buttonGroup": new FormReference( "UserAndAdminButtonGroup" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 95
+				"y": 280
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonAdmin"
+				"text": "管理员"
+				"$buttonGroup": new FormReference( "UserAndAdminButtonGroup" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 74
+				"height": 22
+				"x": 195
+				"y": 280
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "txtcphone"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 180
+				"height": 35
+				"x": 105
+				"y": 180
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "txtcadress"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 180
 				"height": 35
-				"x": 106
+				"x": 105
 				"y": 230
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 100, 45 )
 			"size": new java.awt.Dimension( 350, 485 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "UserAndAdminButtonGroup"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 501 )
 		} )
 	}
 }

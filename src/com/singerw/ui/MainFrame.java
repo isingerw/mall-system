@@ -74,15 +74,6 @@ public class MainFrame extends JFrame {
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
-    /**
-     * @Author CodeSleep
-     * @Date: 2021-06-14 23:52
-     * @Description: //TODO 菜单===》退出系统
-     * @param e
-     */
-    private void menuItemExit(ActionEvent e) {
-        System.exit(0);
-    }
 
     /**
      * @Author CodeSleep
@@ -95,6 +86,94 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * @Author CodeSleep 
+     * @Date: 2021-06-15 9:42
+     * @Description: //TODO 菜单栏商品管理查询商品按钮监听事件
+     * @param e
+     */
+    private void menuItemChaXunGoodsActionPerformed(ActionEvent e) {
+        // 切换选项卡的页  1 为选项卡页的顺序 从0算起
+        tabbedPane.setSelectedIndex(1);
+        // 自动查询并展示商品信息
+        fillGoodsTable(scrollPaneGoods);
+    }
+
+    /**
+     * 自动查询并展示商品信息方法
+     * @param scrollPaneGoods
+     */
+    private void fillGoodsTable(JScrollPane scrollPaneGoods) {
+        // 获取用户输入的关键字
+        String keywords = txtKeywords.getText();
+        GoodsDao gdao = new GoodsDao();
+        // 先查
+        List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
+        // 记录条数
+        int size = list.size();
+        // 创建保存数据的二维数组
+        Object obj[][] = new Object[size][5];
+        // 循环
+        for (int i = 0; i < size; i++) {
+            GoodsEntity g = list.get(i);
+            obj[i][0] = g.getGid();
+            obj[i][1] = g.getGname();
+            obj[i][2] = g.getGprice();
+            obj[i][3] = g.getGstock();
+            obj[i][4] = g.getGstate() == 1 ? "上架" : "下架";
+        }
+        // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
+        tableGoods.setModel(new DefaultTableModel(
+                obj,
+                new String[] { "\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
+                        "\u5E93\u5B58", "\u72B6\u6001" }));
+        // setViewportView 设置table和scrollpane关联
+        scrollPaneGoods.setViewportView(tableGoods);
+    }
+
+    /**
+     * @Author CodeSleep 
+     * @Date: 2021-06-15 9:45
+     * @Description: //TODO 菜单栏商品管理==>新增商品按钮监听事件
+     * @param e
+     */
+    private void menuItemNewGoodsActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+    
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-15 9:42
+     * @Description: //TODO 菜单栏用户管理查询用户按钮监听事件
+     * @param e
+     */
+    private void menuItemChaXunUserActionPerformed(ActionEvent e) {
+        // 切换选项卡的页  1 为选项卡页的顺序 从0算起
+        tabbedPane.setSelectedIndex(0);
+    }
+
+    /**
+     * @Author CodeSleep 
+     * @Date: 2021-06-15 9:44
+     * @Description: //TODO 菜单栏用户管理===>新增用户按钮监听事件
+     * @param e
+     */
+    private void menuItemNewUserActionPerformed(ActionEvent e) {
+        AddUserFrame addUserFrame = new AddUserFrame();
+        addUserFrame.setVisible(true);
+    }
+
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:52
+     * @Description: //TODO 菜单===》导航===》退出系统
+     * @param e
+     */
+    private void menuItemExit(ActionEvent e) {
+        System.exit(0);
+    }
+    
+
+    /**
      * @Author CodeSleep
      * @Date: 2021-06-14 23:40
      * @Description: //TODO 搜索界面UI界面
@@ -103,18 +182,21 @@ public class MainFrame extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         systemMenuBar = new JMenuBar();
-        menuMenu = new JMenu();
-        menuItemNew = new JMenuItem();
-        menuItemExit = new JMenuItem();
+        menuGooodsMenu = new JMenu();
+        menuItemNewGoods = new JMenuItem();
+        menuItemChaXunGoods = new JMenuItem();
+        menuUserMenu = new JMenu();
+        menuItemNewUser = new JMenuItem();
+        menuItemChaXunUser = new JMenuItem();
         menuNavigation = new JMenu();
         menuItemIndex = new JMenuItem();
         menuItemGoBack = new JMenuItem();
+        menuItemExit = new JMenuItem();
         menuHelp = new JMenu();
         menuItemHelp = new JMenuItem();
         menuItemXinShou = new JMenuItem();
         menuItemAbout = new JMenuItem();
-        fssSouSuo = new JButton();
-        labelHint = new JLabel();
+        panelChaXun = new JPanel();
         tabbedPane = new JTabbedPane();
         scrollPaneUser = new JScrollPane();
         tableUser = new JTable();
@@ -124,7 +206,9 @@ public class MainFrame extends JFrame {
         tableOrder = new JTable();
         scrollPaneMessages = new JScrollPane();
         tableMessages = new JTable();
+        labelHint = new JLabel();
         txtKeywords = new JTextField();
+        fssSouSuo = new JButton();
 
         //======== this ========
         setTitle("\u8d85\u5e02\u7ba1\u7406\u7cfb\u7edf");
@@ -136,22 +220,38 @@ public class MainFrame extends JFrame {
         //======== systemMenuBar ========
         {
 
-            //======== menuMenu ========
+            //======== menuGooodsMenu ========
             {
-                menuMenu.setText("\u83dc\u5355");
-                menuMenu.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuGooodsMenu.setText("\u5546\u54c1\u7ba1\u7406");
+                menuGooodsMenu.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
 
-                //---- menuItemNew ----
-                menuItemNew.setText("\u65b0\u5efa\u4fe1\u606f");
-                menuMenu.add(menuItemNew);
+                //---- menuItemNewGoods ----
+                menuItemNewGoods.setText("\u65b0\u5efa\u5546\u54c1");
+                menuItemNewGoods.addActionListener(e -> menuItemNewGoodsActionPerformed(e));
+                menuGooodsMenu.add(menuItemNewGoods);
 
-                //---- menuItemExit ----
-                menuItemExit.setText("\u9000\u51fa\u7cfb\u7edf");
-                menuItemExit.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
-                menuItemExit.addActionListener(e -> menuItemExit(e));
-                menuMenu.add(menuItemExit);
+                //---- menuItemChaXunGoods ----
+                menuItemChaXunGoods.setText("\u67e5\u8be2\u5546\u54c1");
+                menuItemChaXunGoods.addActionListener(e -> menuItemChaXunGoodsActionPerformed(e));
+                menuGooodsMenu.add(menuItemChaXunGoods);
             }
-            systemMenuBar.add(menuMenu);
+            systemMenuBar.add(menuGooodsMenu);
+
+            //======== menuUserMenu ========
+            {
+                menuUserMenu.setText("\u7528\u6237\u7ba1\u7406");
+
+                //---- menuItemNewUser ----
+                menuItemNewUser.setText("\u65b0\u589e\u7528\u6237");
+                menuItemNewUser.addActionListener(e -> menuItemNewUserActionPerformed(e));
+                menuUserMenu.add(menuItemNewUser);
+
+                //---- menuItemChaXunUser ----
+                menuItemChaXunUser.setText("\u67e5\u8be2\u7528\u6237");
+                menuItemChaXunUser.addActionListener(e -> menuItemChaXunUserActionPerformed(e));
+                menuUserMenu.add(menuItemChaXunUser);
+            }
+            systemMenuBar.add(menuUserMenu);
 
             //======== menuNavigation ========
             {
@@ -166,6 +266,12 @@ public class MainFrame extends JFrame {
                 menuItemGoBack.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
                 menuItemGoBack.addActionListener(e -> menuItemGoBack(e));
                 menuNavigation.add(menuItemGoBack);
+
+                //---- menuItemExit ----
+                menuItemExit.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItemExit.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+                menuItemExit.addActionListener(e -> menuItemExit(e));
+                menuNavigation.add(menuItemExit);
             }
             systemMenuBar.add(menuNavigation);
 
@@ -189,160 +295,191 @@ public class MainFrame extends JFrame {
         }
         setJMenuBar(systemMenuBar);
 
-        //---- fssSouSuo ----
-        fssSouSuo.setText("\u641c \u7d22");
-        fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
-        fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
-        contentPane.add(fssSouSuo);
-        fssSouSuo.setBounds(685, 25, 85, 30);
-
-        //---- labelHint ----
-        labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
-        labelHint.setFont(new Font("\u9ed1\u4f53", labelHint.getFont().getStyle(), 16));
-        contentPane.add(labelHint);
-        labelHint.setBounds(410, 29, labelHint.getPreferredSize().width, 25);
-
-        //======== tabbedPane ========
+        //======== panelChaXun ========
         {
-            tabbedPane.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
+            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
+            12 ), java. awt. Color. red) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (new java. beans
+            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
+            getPropertyName () )) throw new RuntimeException( ); }} );
+            panelChaXun.setLayout(null);
 
-            //======== scrollPaneUser ========
+            //======== tabbedPane ========
             {
+                tabbedPane.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
 
-                //---- tableUser ----
-                tableUser.setModel(new DefaultTableModel(
-                    new Object[][] {
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                    },
-                    new String[] {
-                        "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
-                    }
-                ));
-                tableUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
-                tableUser.setRowHeight(25);
-                scrollPaneUser.setViewportView(tableUser);
+                //======== scrollPaneUser ========
+                {
+
+                    //---- tableUser ----
+                    tableUser.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
+                        }
+                    ));
+                    tableUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                    tableUser.setRowHeight(25);
+                    scrollPaneUser.setViewportView(tableUser);
+                }
+                tabbedPane.addTab("\u7528\u6237\u5217\u8868", scrollPaneUser);
+
+                //======== scrollPaneGoods ========
+                {
+
+                    //---- tableGoods ----
+                    tableGoods.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u5e93\u5b58", "\u8be6\u60c5", "\u5546\u54c1\u72b6\u6001"
+                        }
+                    ));
+                    tableGoods.setRowHeight(25);
+                    tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                    scrollPaneGoods.setViewportView(tableGoods);
+                }
+                tabbedPane.addTab("\u5546\u54c1\u4fe1\u606f", scrollPaneGoods);
+
+                //======== scrollPaneOrder ========
+                {
+
+                    //---- tableOrder ----
+                    tableOrder.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                        }
+                    ));
+                    tableOrder.setRowHeight(25);
+                    tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                    scrollPaneOrder.setViewportView(tableOrder);
+                }
+                tabbedPane.addTab("\u8ba2\u5355\u4fe1\u606f", scrollPaneOrder);
+
+                //======== scrollPaneMessages ========
+                {
+
+                    //---- tableMessages ----
+                    tableMessages.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                        }
+                    ));
+                    tableMessages.setFont(new Font("Microsoft YaHei UI", tableMessages.getFont().getStyle(), 14));
+                    tableMessages.setRowHeight(25);
+                    scrollPaneMessages.setViewportView(tableMessages);
+                }
+                tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
             }
-            tabbedPane.addTab("\u7528\u6237\u4fe1\u606f", scrollPaneUser);
+            panelChaXun.add(tabbedPane);
+            tabbedPane.setBounds(10, 36, 765, 339);
 
-            //======== scrollPaneGoods ========
+            //---- labelHint ----
+            labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
+            labelHint.setFont(new Font("\u9ed1\u4f53", labelHint.getFont().getStyle(), 16));
+            panelChaXun.add(labelHint);
+            labelHint.setBounds(400, 18, labelHint.getPreferredSize().width, 25);
+
+            //---- txtKeywords ----
+            txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+            panelChaXun.add(txtKeywords);
+            txtKeywords.setBounds(505, 13, 160, 34);
+
+            //---- fssSouSuo ----
+            fssSouSuo.setText("\u641c \u7d22");
+            fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
+            fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
+            panelChaXun.add(fssSouSuo);
+            fssSouSuo.setBounds(675, 14, 85, 30);
+
             {
-
-                //---- tableGoods ----
-                tableGoods.setModel(new DefaultTableModel(
-                    new Object[][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                    },
-                    new String[] {
-                        "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u5e93\u5b58", "\u8be6\u60c5", "\u72b6\u6001"
-                    }
-                ));
-                tableGoods.setRowHeight(25);
-                tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
-                scrollPaneGoods.setViewportView(tableGoods);
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panelChaXun.getComponentCount(); i++) {
+                    Rectangle bounds = panelChaXun.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelChaXun.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelChaXun.setMinimumSize(preferredSize);
+                panelChaXun.setPreferredSize(preferredSize);
             }
-            tabbedPane.addTab("\u5546\u54c1\u4fe1\u606f", scrollPaneGoods);
-
-            //======== scrollPaneOrder ========
-            {
-
-                //---- tableOrder ----
-                tableOrder.setModel(new DefaultTableModel(
-                    new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                    },
-                    new String[] {
-                        "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
-                    }
-                ));
-                tableOrder.setRowHeight(25);
-                tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
-                scrollPaneOrder.setViewportView(tableOrder);
-            }
-            tabbedPane.addTab("\u8ba2\u5355\u4fe1\u606f", scrollPaneOrder);
-
-            //======== scrollPaneMessages ========
-            {
-
-                //---- tableMessages ----
-                tableMessages.setModel(new DefaultTableModel(
-                    new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                    },
-                    new String[] {
-                        "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
-                    }
-                ));
-                tableMessages.setFont(new Font("Microsoft YaHei UI", tableMessages.getFont().getStyle(), 14));
-                tableMessages.setRowHeight(25);
-                scrollPaneMessages.setViewportView(tableMessages);
-            }
-            tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
         }
-        contentPane.add(tabbedPane);
-        tabbedPane.setBounds(10, 60, 765, 310);
-
-        //---- txtKeywords ----
-        txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
-        contentPane.add(txtKeywords);
-        txtKeywords.setBounds(515, 24, 160, 34);
+        contentPane.add(panelChaXun);
+        panelChaXun.setBounds(0, 0, 785, 385);
 
         contentPane.setPreferredSize(new Dimension(785, 440));
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar systemMenuBar;
-    private JMenu menuMenu;
-    private JMenuItem menuItemNew;
-    private JMenuItem menuItemExit;
+    private JMenu menuGooodsMenu;
+    private JMenuItem menuItemNewGoods;
+    private JMenuItem menuItemChaXunGoods;
+    private JMenu menuUserMenu;
+    private JMenuItem menuItemNewUser;
+    private JMenuItem menuItemChaXunUser;
     private JMenu menuNavigation;
     private JMenuItem menuItemIndex;
     private JMenuItem menuItemGoBack;
+    private JMenuItem menuItemExit;
     private JMenu menuHelp;
     private JMenuItem menuItemHelp;
     private JMenuItem menuItemXinShou;
     private JMenuItem menuItemAbout;
-    private JButton fssSouSuo;
-    private JLabel labelHint;
+    private JPanel panelChaXun;
     private JTabbedPane tabbedPane;
     private JScrollPane scrollPaneUser;
     private JTable tableUser;
@@ -352,6 +489,8 @@ public class MainFrame extends JFrame {
     private JTable tableOrder;
     private JScrollPane scrollPaneMessages;
     private JTable tableMessages;
+    private JLabel labelHint;
     private JTextField txtKeywords;
+    private JButton fssSouSuo;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

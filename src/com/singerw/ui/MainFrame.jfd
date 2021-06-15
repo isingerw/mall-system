@@ -10,35 +10,132 @@ new FormModel {
 			"title": "超市管理系统"
 			"resizable": false
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "fssSouSuo"
-				"text": "搜 索"
-				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fssSouSuoActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 685
-				"y": 25
-				"height": 30
-				"width": 85
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "labelHint"
-				"text": "请输入关键字"
-				"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 410
-				"y": 29
-				"height": 25
-			} )
-			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
-				name: "tabbedPane"
-				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPaneUser"
-					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "tableUser"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
+			"$locationPolicy": 1
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panelChaXun"
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "tabbedPane"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPaneUser"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tableUser"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "用户编号" )
+								add( "用户名" )
+								add( "密码" )
+								add( "手机号" )
+								add( "地址" )
+								add( "权限状态" )
+								add( "登录时间" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 								add( null )
@@ -47,132 +144,119 @@ new FormModel {
 								add( null )
 								add( null )
 							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-						}, new java.util.Vector {
-							add( "用户编号" )
-							add( "用户名" )
-							add( "密码" )
-							add( "手机号" )
-							add( "地址" )
-							add( "权限状态" )
-							add( "登录时间" )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+							"rowHeight": 25
 						} )
-						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
-						"rowHeight": 25
+					}, new FormLayoutConstraints( null ) {
+						"title": "用户列表"
 					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "用户信息"
-				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPaneGoods"
-					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "tableGoods"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPaneGoods"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tableGoods"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "商品编号" )
+								add( "商品名称" )
+								add( "价格" )
+								add( "库存" )
+								add( "详情" )
+								add( "商品状态" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 								add( null )
@@ -180,355 +264,294 @@ new FormModel {
 								add( null )
 								add( null )
 							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-						}, new java.util.Vector {
-							add( "商品编号" )
-							add( "商品名称" )
-							add( "价格" )
-							add( "库存" )
-							add( "详情" )
-							add( "状态" )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
+							"rowHeight": 25
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						} )
-						"rowHeight": 25
-						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+					}, new FormLayoutConstraints( null ) {
+						"title": "商品信息"
 					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "商品信息"
-				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPaneOrder"
-					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "tableOrder"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPaneOrder"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tableOrder"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "订单编号" )
+								add( "用户编号" )
+								add( "下单时间" )
+								add( "收货地址" )
+								add( "总金额" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 								add( null )
 								add( null )
 								add( null )
 							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-						}, new java.util.Vector {
-							add( "订单编号" )
-							add( "用户编号" )
-							add( "下单时间" )
-							add( "收货地址" )
-							add( "总金额" )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
+							"rowHeight": 25
+							"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						} )
-						"rowHeight": 25
-						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+					}, new FormLayoutConstraints( null ) {
+						"title": "订单信息"
 					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "订单信息"
-				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPaneMessages"
-					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "tableMessages"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPaneMessages"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "tableMessages"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "留言编号" )
+								add( "商品编号" )
+								add( "留言信息" )
+								add( "用户编号" )
+								add( "发布时间" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 								add( null )
 								add( null )
 								add( null )
 							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-						}, new java.util.Vector {
-							add( "留言编号" )
-							add( "商品编号" )
-							add( "留言信息" )
-							add( "用户编号" )
-							add( "发布时间" )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
+							"font": new com.jformdesigner.model.SwingDerivedFont( "Microsoft YaHei UI", 0, 14, true )
+							"rowHeight": 25
 						} )
-						"font": new com.jformdesigner.model.SwingDerivedFont( "Microsoft YaHei UI", 0, 14, true )
-						"rowHeight": 25
+					}, new FormLayoutConstraints( null ) {
+						"title": "留言信息"
 					} )
-				}, new FormLayoutConstraints( null ) {
-					"title": "留言信息"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 10
+					"y": 36
+					"width": 765
+					"height": 339
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelHint"
+					"text": "请输入关键字"
+					"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 400
+					"y": 18
+					"height": 25
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "txtKeywords"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 505
+					"y": 13
+					"width": 160
+					"height": 34
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "fssSouSuo"
+					"text": "搜 索"
+					"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fssSouSuoActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 675
+					"y": 14
+					"height": 30
+					"width": 85
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 10
-				"y": 60
-				"width": 765
-				"height": 310
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "txtKeywords"
-				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 515
-				"y": 24
-				"width": 160
-				"height": 34
+				"x": 0
+				"y": 0
+				"width": 785
+				"height": 385
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "systemMenuBar"
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-					name: "menuMenu"
-					"text": "菜单"
+					name: "menuGooodsMenu"
+					"text": "商品管理"
 					"font": new java.awt.Font( "黑体", 0, 14 )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItemNew"
-						"text": "新建信息"
+						name: "menuItemNewGoods"
+						"text": "新建商品"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemNewGoodsActionPerformed", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItemExit"
-						"text": "退出系统"
-						"font": &Font0 new java.awt.Font( "黑体", 0, 14 )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemExit", true ) )
+						name: "menuItemChaXunGoods"
+						"text": "查询商品"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemChaXunGoodsActionPerformed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menuUserMenu"
+					"text": "用户管理"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItemNewUser"
+						"text": "新增用户"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemNewUserActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItemChaXunUser"
+						"text": "查询用户"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemChaXunUserActionPerformed", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
@@ -541,8 +564,14 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "menuItemGoBack"
 						"text": "返回上一级"
-						"font": #Font0
+						"font": &Font0 new java.awt.Font( "黑体", 0, 14 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemGoBack", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItemExit"
+						"text": "退出系统"
+						"font": #Font0
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemExit", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
