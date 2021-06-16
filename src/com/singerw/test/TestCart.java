@@ -6,4 +6,6 @@ package com.singerw.test;
  * @Description: //TODO 类描述
  */
 public class TestCart {
+    public static void main(String[] args) {
+    }
 }

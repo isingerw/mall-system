@@ -9,9 +9,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import com.singerw.dao.GoodsDao;
+import com.singerw.dao.MessageDao;
 import com.singerw.dao.OrderDao;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.GoodsEntity;
+import com.singerw.entity.MessageEntity;
 import com.singerw.entity.OrderAndUserEntity;
 import com.singerw.entity.UserEntity;
 import com.singerw.tools.CommonInfo;
@@ -46,7 +48,6 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         initComponents();
     }
-
 
 
     /**
@@ -216,6 +217,46 @@ public class MainFrame extends JFrame {
         scrollPaneOrder.setViewportView(tableOrder);
     }
 
+    /**
+     * @Author CodeSleep
+     * @Date: 2021-06-17 1:46
+     * @Description: //TODO  菜单栏==》留言管理==》留言查询按钮监听事件
+     * @param e
+     */
+    private void menuItemMessagesActionPerformed(ActionEvent e) {
+        // 切换选项卡的页  1 为选项卡页的顺序 从0算起
+        tabbedPane.setSelectedIndex(3);
+        fillMessagesTable(scrollPaneMessages);
+    }
+
+    private void fillMessagesTable(JScrollPane scrollPaneOrder) {
+        // 获取用户输入的关键字
+        String keywords = txtKeywords.getText();
+        MessageDao messageDao = new MessageDao();
+        // 先查
+        List<MessageEntity> list = messageDao.getMessageByLike("%" + keywords + "%");
+        // 记录条数
+        int size = list.size();
+        // 创建保存数据的二维数组
+        Object obj[][] = new Object[size][5];
+        // 循环
+        for (int i = 0; i < size; i++) {
+            MessageEntity g = list.get(i);
+            obj[i][0] = g.getMid();
+            obj[i][1] = g.getGid();
+            obj[i][2] = g.getMessage();
+            obj[i][3] = g.getCid();
+            obj[i][4] = g.getPdate();
+        }
+        // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
+        tableMessages.setModel(new DefaultTableModel(
+                obj,
+                new String[]{
+                        "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                }));
+        // setViewportView 设置table和scrollpane关联
+        scrollPaneMessages.setViewportView(tableMessages);
+    }
 
     /**
      * @param e
@@ -274,7 +315,6 @@ public class MainFrame extends JFrame {
     }
 
 
-
     /**
      * @Author CodeSleep
      * @Date: 2021-06-14 23:40
@@ -294,7 +334,7 @@ public class MainFrame extends JFrame {
         menuItem4 = new JMenuItem();
         menuItemOrderChaXun = new JMenuItem();
         menu2 = new JMenu();
-        menuItem2 = new JMenuItem();
+        menuItemMessages = new JMenuItem();
         menuItem3 = new JMenuItem();
         menuNavigation = new JMenu();
         menuItemIndex = new JMenuItem();
@@ -380,9 +420,10 @@ public class MainFrame extends JFrame {
             {
                 menu2.setText("\u7559\u8a00\u7ba1\u7406");
 
-                //---- menuItem2 ----
-                menuItem2.setText("\u67e5\u8be2\u7559\u8a00");
-                menu2.add(menuItem2);
+                //---- menuItemMessages ----
+                menuItemMessages.setText("\u67e5\u8be2\u7559\u8a00");
+                menuItemMessages.addActionListener(e -> menuItemMessagesActionPerformed(e));
+                menu2.add(menuItemMessages);
 
                 //---- menuItem3 ----
                 menuItem3.setText("\u5220\u9664\u7559\u8a00");
@@ -434,12 +475,19 @@ public class MainFrame extends JFrame {
 
         //======== panelChaXun ========
         {
-            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER
-            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font
-            .BOLD ,12 ), java. awt. Color. red) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (
-            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er"
-            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panelChaXun.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
+                    swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax.swing.border
+                    .TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialo\u0067"
+                    , java.awt.Font.BOLD, 12), java.awt.Color.red), panelChaXun.getBorder
+                    ()));
+            panelChaXun.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                @Override
+                public void propertyChange(java
+                                                   .beans.PropertyChangeEvent e) {
+                    if ("borde\u0072".equals(e.getPropertyName())) throw new RuntimeException
+                            ();
+                }
+            });
             panelChaXun.setLayout(null);
 
             //======== tabbedPane ========
@@ -452,21 +500,21 @@ public class MainFrame extends JFrame {
 
                     //---- tableUser ----
                     tableUser.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
+                            }
                     ));
                     tableUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                     tableUser.setRowHeight(25);
@@ -479,21 +527,21 @@ public class MainFrame extends JFrame {
 
                     //---- tableGoods ----
                     tableGoods.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u5e93\u5b58", "\u8be6\u60c5", "\u5546\u54c1\u72b6\u6001"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u4ef7\u683c", "\u5e93\u5b58", "\u8be6\u60c5", "\u5546\u54c1\u72b6\u6001"
+                            }
                     ));
                     tableGoods.setRowHeight(25);
                     tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
@@ -506,21 +554,21 @@ public class MainFrame extends JFrame {
 
                     //---- tableOrder ----
                     tableOrder.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                            }
                     ));
                     tableOrder.setRowHeight(25);
                     tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
@@ -533,21 +581,21 @@ public class MainFrame extends JFrame {
 
                     //---- tableMessages ----
                     tableMessages.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                            }
                     ));
                     tableMessages.setFont(new Font("Microsoft YaHei UI", tableMessages.getFont().getStyle(), 14));
                     tableMessages.setRowHeight(25);
@@ -556,30 +604,30 @@ public class MainFrame extends JFrame {
                 tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
             }
             panelChaXun.add(tabbedPane);
-            tabbedPane.setBounds(0, 36, 795, 329);
+            tabbedPane.setBounds(0, 50, 795, 315);
 
             //---- labelHint ----
             labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
             labelHint.setFont(new Font("\u9ed1\u4f53", labelHint.getFont().getStyle(), 16));
             panelChaXun.add(labelHint);
-            labelHint.setBounds(385, 5, labelHint.getPreferredSize().width, 25);
+            labelHint.setBounds(385, 15, labelHint.getPreferredSize().width, 25);
 
             //---- txtKeywords ----
             txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
             panelChaXun.add(txtKeywords);
-            txtKeywords.setBounds(490, 0, 160, 34);
+            txtKeywords.setBounds(490, 10, 160, 34);
 
             //---- fssSouSuo ----
             fssSouSuo.setText("\u641c \u7d22");
             fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
             fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
             panelChaXun.add(fssSouSuo);
-            fssSouSuo.setBounds(655, 0, 85, 30);
+            fssSouSuo.setBounds(655, 10, 85, 30);
 
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panelChaXun.getComponentCount(); i++) {
+                for (int i = 0; i < panelChaXun.getComponentCount(); i++) {
                     Rectangle bounds = panelChaXun.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -613,7 +661,7 @@ public class MainFrame extends JFrame {
     private JMenuItem menuItem4;
     private JMenuItem menuItemOrderChaXun;
     private JMenu menu2;
-    private JMenuItem menuItem2;
+    private JMenuItem menuItemMessages;
     private JMenuItem menuItem3;
     private JMenu menuNavigation;
     private JMenuItem menuItemIndex;

@@ -73,7 +73,7 @@ public class MessageDao {
      * @Date: 2021-06-10 23:06
      * @Description: //TODO 根据条件进行模糊查询
      */
-    public List<MessageEntity> getMessageByLike(int keywords) {
+    public List<MessageEntity> getMessageByLike(String keywords) {
         String sql = "SELECT * from tbl_msg where cid like ? or gid like ?";
         Object obj = DBUtil.exQuery(sql, MessageEntity.class, keywords, keywords);
         if (obj instanceof List) {

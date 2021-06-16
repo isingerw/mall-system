@@ -499,9 +499,9 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 0
-					"y": 36
+					"y": 50
 					"width": 795
-					"height": 329
+					"height": 315
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelHint"
@@ -509,7 +509,7 @@ new FormModel {
 					"font": new com.jformdesigner.model.SwingDerivedFont( "黑体", 0, 16, true )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 385
-					"y": 5
+					"y": 15
 					"height": 25
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
@@ -517,7 +517,7 @@ new FormModel {
 					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 490
-					"y": 0
+					"y": 10
 					"width": 160
 					"height": 34
 				} )
@@ -528,7 +528,7 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fssSouSuoActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 655
-					"y": 0
+					"y": 10
 					"height": 30
 					"width": 85
 				} )
@@ -586,8 +586,9 @@ new FormModel {
 					name: "menu2"
 					"text": "留言管理"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem2"
+						name: "menuItemMessages"
 						"text": "查询留言"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemMessagesActionPerformed", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "menuItem3"
