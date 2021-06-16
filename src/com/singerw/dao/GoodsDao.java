@@ -107,12 +107,11 @@ public class GoodsDao {
      * @return List集合
      * @Author CodeSleep
      * @Date: 2021-06-10 23:06
-     * @Description: //TODO 根据条件进行模糊查询
+     * @Description: //TODO 根据条件进行模糊查询 用于管理员后台商品查询
      */
     public List<GoodsEntity> getGoodsByLike(String keywords) {
         String sql = "SELECT * from tbl_goods where gname like ? or ginfo like ?";
         Object obj = DBUtil.exQuery(sql, GoodsEntity.class, keywords, keywords);
-
         if (obj instanceof List) {
             List<GoodsEntity> list = (List) obj;
             return list;
@@ -126,11 +125,12 @@ public class GoodsDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-15 22:16
-     * @Description: //TODO 要查询的是已经上架的商品，且库存大于0
+     * @Description: //TODO 要查询的是已经上架的商品，且库存大于0 用于用户的商品查询
      */
     public List<GoodsEntity> getGoodsByLikeAndState(String keywords) {
         String sql = "select * from tbl_goods where gstate=1 and gstock>0 and  (gname like ? or ginfo like ?)";
         Object obj = DBUtil.exQuery(sql, GoodsEntity.class, keywords, keywords);
+        // 返回值是List类型
         if (obj instanceof List) {
             List<GoodsEntity> list = (List) obj;
             return list;

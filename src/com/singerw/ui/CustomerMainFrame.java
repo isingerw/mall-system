@@ -13,7 +13,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+import info.clearthought.layout.*;
 import net.miginfocom.swing.*;
+import sun.util.resources.LocaleData;
 
 /**
  * @author unknown
@@ -39,7 +41,7 @@ public class CustomerMainFrame extends JFrame {
     /**
      * @Author CodeSleep
      * @Date: 2021-06-15 15:30
-     * @Description: //TODO ËèúÂçïÊ†èExitÈÄÄÂá∫Á≥ªÁªüÊåâÈîÆÁõëÂê¨‰∫ã‰ª∂
+     * @Description: //TODO ≤Àµ•¿∏ExitÕÀ≥ˆœµÕ≥∞¥º¸º‡Ã˝ ¬º˛
      * @param e
      */
     private void menuItemExit(ActionEvent e) {
@@ -53,7 +55,6 @@ public class CustomerMainFrame extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
-        popupMenu1 = new JPopupMenu();
         systemMenuBar = new JMenuBar();
         menuGooodsMenu = new JMenu();
         menuItem1 = new JMenuItem();
@@ -76,11 +77,13 @@ public class CustomerMainFrame extends JFrame {
         tableShopping = new JTable();
         scrollPaneOrders = new JScrollPane();
         tableOrders = new JTable();
+        popupMenu1 = new JPopupMenu();
 
         //======== this ========
         setTitle("\u8d85\u5e02\u7ba1\u7406\u7cfb\u7edf");
         setResizable(false);
         setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -160,6 +163,7 @@ public class CustomerMainFrame extends JFrame {
         //======== tabbedPane ========
         {
             tabbedPane.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+            tabbedPane.setTabPlacement(SwingConstants.LEFT);
 
             //======== scrollPaneGoods ========
             {
@@ -184,6 +188,7 @@ public class CustomerMainFrame extends JFrame {
                 ));
                 tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                 tableGoods.setRowHeight(25);
+                tableGoods.setAutoCreateColumnsFromModel(false);
                 scrollPaneGoods.setViewportView(tableGoods);
             }
             tabbedPane.addTab("\u5546\u54c1", scrollPaneGoods);
@@ -244,17 +249,21 @@ public class CustomerMainFrame extends JFrame {
             tabbedPane.addTab("\u6211\u7684\u8ba2\u5355", scrollPaneOrders);
         }
         contentPane.add(tabbedPane);
-        tabbedPane.setBounds(13, 20, 772, 355);
+        tabbedPane.setBounds(0, 10, 800, 365);
 
-        contentPane.setPreferredSize(new Dimension(795, 440));
+        contentPane.setPreferredSize(new Dimension(800, 440));
         pack();
         setLocationRelativeTo(null);
+
+        //======== popupMenu1 ========
+        {
+            popupMenu1.setBorderPainted(false);
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
-    private JPopupMenu popupMenu1;
     private JMenuBar systemMenuBar;
     private JMenu menuGooodsMenu;
     private JMenuItem menuItem1;
@@ -277,5 +286,6 @@ public class CustomerMainFrame extends JFrame {
     private JTable tableShopping;
     private JScrollPane scrollPaneOrders;
     private JTable tableOrders;
+    private JPopupMenu popupMenu1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -24,14 +24,14 @@ public class AddGoodsFrame extends JFrame {
     /**
      * @Author CodeSleep
      * @Date: 2021-06-15 19:52
-     * @Description: //TODO é€€å‡ºæŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ÍË³ö°´Å¥¼àÌıÊÂ¼ş
      * @param e
      */
     private void ExitButtonActionPerformed(ActionEvent e) {
-        // æç¤ºç”¨æˆ·æ˜¯å¦é€€å‡º
-        int n = JOptionPane.showConfirmDialog(null, "æ˜¯å¦é€€å‡º", "æç¤ºä¿¡æ¯", JOptionPane.YES_OPTION);
+        // ÌáÊ¾ÓÃ»§ÊÇ·ñÍË³ö
+        int n = JOptionPane.showConfirmDialog(null, "ÊÇ·ñÍË³ö", "ÌáÊ¾ĞÅÏ¢", JOptionPane.YES_OPTION);
         if (n == 0) {
-            // å¦‚æœç”¨æˆ·é€‰æ‹©é€€å‡ºå¹¶ç¡®å®š
+            // Èç¹ûÓÃ»§Ñ¡ÔñÍË³ö²¢È·¶¨
             dispose();
         }
     }
@@ -39,30 +39,30 @@ public class AddGoodsFrame extends JFrame {
     /**
      * @Author CodeSleep
      * @Date: 2021-06-15 20:17
-     * @Description: //TODO æ–°å¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ĞÂÔöÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
      * @param e
      */
     private void AddGoodsButtonActionPerformed(ActionEvent e) {
-        // è·å–å•†å“åç§°ã€ä»·æ ¼ã€åº“å­˜ç­‰ä¿¡æ¯
+        // »ñÈ¡ÉÌÆ·Ãû³Æ¡¢¼Û¸ñ¡¢¿â´æµÈĞÅÏ¢
         String gname = txtGname.getText();
         double gprice = Double.parseDouble(txtGprice.getText());
         int gstock = Integer.parseInt(txtGstock.getText());
         String ginfo = textAreaGinfo.getText();
-        // å‰ç«¯æ ¡éªŒ
+        // Ç°¶ËĞ£Ñé
 
-        // ä¸Šæ¶ 1
+        // ÉÏ¼Ü 1
         int gstate = 1;
         if (checkBoxXiaJia.isSelected()){
-            // ä¸‹æ¶ 0
+            // ÏÂ¼Ü 0
             gstate = 0;
         }
         GoodsDao goodsDao = new GoodsDao();
         GoodsEntity goodsEntity = new GoodsEntity(gname,gprice,gstock,ginfo,gstate);
         boolean flag = goodsDao.addGoods(goodsEntity);
         if (flag){
-            JOptionPane.showMessageDialog(null,"æ·»åŠ æˆåŠŸ");
+            JOptionPane.showMessageDialog(null,"Ìí¼Ó³É¹¦");
         }else {
-            JOptionPane.showMessageDialog(null,"æ·»åŠ å¤±è´¥");
+            JOptionPane.showMessageDialog(null,"Ìí¼ÓÊ§°Ü");
         }
     }
 

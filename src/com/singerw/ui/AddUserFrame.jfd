@@ -147,7 +147,7 @@ new FormModel {
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "UserAndAdminButtonGroup"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 501 )
+			"location": new java.awt.Point( 15, 521 )
 		} )
 	}
 }

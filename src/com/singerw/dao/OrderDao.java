@@ -1,6 +1,7 @@
 package com.singerw.dao;
 
 import com.singerw.entity.GoodsEntity;
+import com.singerw.entity.OrderAndUserEntity;
 import com.singerw.entity.OrderEntity;
 import com.singerw.tools.DBUtil;
 
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * @Author: CodeSleep
  * @Date: 2021-06-12 21:43
- * @Description: //TODO è®¢å•è¡¨(æ€»è¡¨) (tbl_order)çš„åŸºæœ¬æ·»åŠ  åˆ é™¤ ä¿®æ”¹ å’ŒæŸ¥è¯¢
+ * @Description: //TODO ¶©µ¥±í(×Ü±í) (tbl_order)µÄ»ù±¾Ìí¼Ó É¾³ı ĞŞ¸Ä ºÍ²éÑ¯
  */
 public class OrderDao {
 
@@ -18,44 +19,44 @@ public class OrderDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-12 22:47
-     * @Description: //TODO æ·»åŠ è®¢å•ä¿¡æ¯
+     * @Description: //TODO Ìí¼Ó¶©µ¥ĞÅÏ¢
      */
     public boolean addOrder(OrderEntity orders) {
         if (orders == null) {
             return false;
         }
         String sql = "insert into tbl_order values(?,?,?,?,?)";
-        // å¢åŠ è°ƒç”¨DBUtil.exupdateæ–¹æ³•
+        // Ôö¼Óµ÷ÓÃDBUtil.exupdate·½·¨
         int n = DBUtil.exUpdate(sql, orders.getOid(), orders.getCid(), orders.getOdate(), orders.getAddress(), orders.getTotal());
         return n > 0;
     }
 
 
     /**
-     * @param orders è®¢å•å¯¹è±¡
-     * @return true æ“ä½œæˆåŠŸ false æ“ä½œå¤±è´¥
+     * @param orders ¶©µ¥¶ÔÏó
+     * @return true ²Ù×÷³É¹¦ false ²Ù×÷Ê§°Ü
      * @Author CodeSleep
      * @Date: 2021-06-10 22:59
-     * @Description: //TODO ä¿®æ”¹è®¢å•ä¿¡æ¯
+     * @Description: //TODO ĞŞ¸Ä¶©µ¥ĞÅÏ¢
      */
     public boolean updateOrder(OrderEntity orders) {
         String sql = "update tbl_order set address = ? where oid = ?";
-        // è°ƒç”¨DButil.exUpdateæ–¹æ³•
+        // µ÷ÓÃDButil.exUpdate·½·¨
         int n = DBUtil.exUpdate(sql, orders.getAddress(), orders.getOid());
         return n > 0;
     }
 
     /**
-     * @param oid å•†å“ç¼–å·
-     * @return Goods å•†å“å¯¹è±¡
+     * @param oid ÉÌÆ·±àºÅ
+     * @return Goods ÉÌÆ·¶ÔÏó
      * @Author CodeSleep
      * @Date: 2021-06-10 23:05
-     * @Description: //TODO æ ¹æ®idæŸ¥è¯¢å•ä¸ªè®°å½•
+     * @Description: //TODO ¸ù¾İid²éÑ¯µ¥¸ö¼ÇÂ¼
      */
     public OrderEntity getOrderById(String oid) {
         String sql = "SELECT * from tbl_order WHERE oid = ?";
         Object obj = DBUtil.exQuery(sql, OrderEntity.class, oid);
-        // è¿”å›å€¼æ˜¯Listç±»å‹
+        // ·µ»ØÖµÊÇListÀàĞÍ
         if (obj instanceof List) {
             List<OrderEntity> list = (List) obj;
             if (list.size() > 0) {
@@ -66,18 +67,40 @@ public class OrderDao {
         return null;
     }
 
+/**
+ * @param oid
+ * @param cid
+ * @param cname
+ * @return
+ * @Author CodeSleep
+ * @Date: 2021-06-17 0:15
+ * @Description: //TODO ¸ù¾İÌõ¼ş½øĞĞÄ£ºı²éÑ¯
+ */
+//    public List<OrderEntity> getOrderByLike(String keywords) {
+//        String sql = "SELECT * from tbl_order where cid like ? or address like ? or cname like ?";
+//        Object obj = DBUtil.exQuery(sql, OrderEntity.class, keywords, keywords,keywords);
+//        if (obj instanceof List) {
+//            List<OrderEntity> list = (List) obj;
+//            return list;
+//        }
+//        return null;
+//    }
+
     /**
-     * @param keywords æŸ¥è¯¢å…³é”®å­—
-     * @return Listé›†åˆ
      * @Author CodeSleep
-     * @Date: 2021-06-10 23:06
-     * @Description: //TODO æ ¹æ®æ¡ä»¶è¿›è¡Œæ¨¡ç³ŠæŸ¥è¯¢
+     * @Date: 2021-06-17 0:35
+     * @Description: //TODO ¸ù¾İÌõ¼ş½øĞĞÄ£ºı²éÑ¯
+     * @param keywords
+     * @return
      */
-    public List<OrderEntity> getOrderByLike(String keywords) {
-        String sql = "SELECT * from tbl_order where cid like ? or address like ?";
-        Object obj = DBUtil.exQuery(sql, OrderEntity.class, keywords, keywords);
+    public List<OrderAndUserEntity> getOrderByLike(String keywords) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT tbl_order.oid,tbl_user.cid,tbl_user.cname,tbl_order.odate,tbl_order.address,tbl_order.total FROM tbl_order INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
+        sql.append(" " + "WHERE tbl_order.oid like ?");
+        Object obj = DBUtil.exQuery(sql.toString(), OrderAndUserEntity.class, keywords);
+        // ·µ»ØÖµÊÇListÀàĞÍ
         if (obj instanceof List) {
-            List<OrderEntity> list = (List) obj;
+            List<OrderAndUserEntity> list = (List) obj;
             return list;
         }
         return null;

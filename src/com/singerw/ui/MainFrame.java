@@ -9,9 +9,12 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import com.singerw.dao.GoodsDao;
+import com.singerw.dao.OrderDao;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.GoodsEntity;
+import com.singerw.entity.OrderAndUserEntity;
 import com.singerw.entity.UserEntity;
+import com.singerw.tools.CommonInfo;
 
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -44,56 +47,13 @@ public class MainFrame extends JFrame {
         initComponents();
     }
 
-    /**
-     * @param e
-     * @Author CodeSleep
-     * @Date: 2021-06-14 22:29
-     * @Description: //TODO æœç´¢æŒ‰é’®ç›‘å¬äº‹ä»¶
-     */
-    private void fssSouSuoActionPerformed(ActionEvent e) {
-        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
-        String keywords = txtKeywords.getText();
-        GoodsDao gdao = new GoodsDao();
-        // å…ˆæŸ¥
-        List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-        // è®°å½•æ¡æ•°
-        int size = list.size();
-        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
-        Object obj[][] = new Object[size][5];
-        // å¾ªç¯
-        for (int i = 0; i < size; i++) {
-            GoodsEntity g = list.get(i);
-            obj[i][0] = g.getGid();
-            obj[i][1] = g.getGname();
-            obj[i][2] = g.getGprice();
-            obj[i][3] = g.getGstock();
-            obj[i][4] = g.getGstate() == 1 ? "ä¸Šæ¶" : "ä¸‹æ¶";
-        }
-        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
-        tableGoods.setModel(new DefaultTableModel(
-                obj,
-                new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
-                        "\u5E93\u5B58", "\u72B6\u6001"}));
-        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
-        scrollPaneGoods.setViewportView(tableGoods);
-    }
 
-
-    /**
-     * @param e
-     * @Author CodeSleep
-     * @Date: 2021-06-14 23:55
-     * @Description: //TODO èœå•===ã€‹è¿”å›ä¸Šä¸€çº§
-     */
-    private void menuItemGoBack(ActionEvent e) {
-        // TODO add your code here
-    }
 
     /**
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:45
-     * @Description: //TODO èœå•æ å•†å“ç®¡ç†==>æ–°å¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ²Ëµ¥À¸ÉÌÆ·¹ÜÀí==>ĞÂÔöÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
      */
     private void menuItemNewGoodsActionPerformed(ActionEvent e) {
         AddGoodsFrame addGoodsFrame = new AddGoodsFrame();
@@ -104,45 +64,45 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:42
-     * @Description: //TODO èœå•æ å•†å“ç®¡ç†==>æŸ¥è¯¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ²Ëµ¥À¸ÉÌÆ·¹ÜÀí==>²éÑ¯ÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
      */
     private void menuItemChaXunGoodsActionPerformed(ActionEvent e) {
-        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
+        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
         tabbedPane.setSelectedIndex(1);
-        // è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºå•†å“ä¿¡æ¯
+        // ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÉÌÆ·ĞÅÏ¢
         fillGoodsTable(scrollPaneGoods);
     }
 
     /**
-     * è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºå•†å“ä¿¡æ¯æ–¹æ³•
+     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÉÌÆ·ĞÅÏ¢·½·¨
      *
      * @param scrollPaneGoods
      */
     private void fillGoodsTable(JScrollPane scrollPaneGoods) {
-        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
+        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
         String keywords = txtKeywords.getText();
         GoodsDao gdao = new GoodsDao();
-        // å…ˆæŸ¥
+        // ÏÈ²é
         List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-        // è®°å½•æ¡æ•°
+        // ¼ÇÂ¼ÌõÊı
         int size = list.size();
-        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
+        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
         Object obj[][] = new Object[size][5];
-        // å¾ªç¯
+        // Ñ­»·
         for (int i = 0; i < size; i++) {
             GoodsEntity g = list.get(i);
             obj[i][0] = g.getGid();
             obj[i][1] = g.getGname();
             obj[i][2] = g.getGprice();
             obj[i][3] = g.getGstock();
-            obj[i][4] = g.getGstate() == 1 ? "ä¸Šæ¶" : "ä¸‹æ¶";
+            obj[i][4] = g.getGstate() == 1 ? "ÉÏ¼Ü" : "ÏÂ¼Ü";
         }
-        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
+        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
         tableGoods.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
                         "\u5E93\u5B58", "\u72B6\u6001"}));
-        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
+        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
@@ -150,31 +110,43 @@ public class MainFrame extends JFrame {
     /**
      * @param e
      * @Author CodeSleep
+     * @Date: 2021-06-15 9:44
+     * @Description: //TODO ²Ëµ¥À¸ÓÃ»§¹ÜÀí===>ĞÂÔöÓÃ»§°´Å¥¼àÌıÊÂ¼ş
+     */
+    private void menuItemNewUserActionPerformed(ActionEvent e) {
+        AddUserFrame addUserFrame = new AddUserFrame();
+        addUserFrame.setVisible(true);
+    }
+
+
+    /**
+     * @param e
+     * @Author CodeSleep
      * @Date: 2021-06-15 9:42
-     * @Description: //TODO èœå•æ ç”¨æˆ·ç®¡ç†==>æŸ¥è¯¢ç”¨æˆ·æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ²Ëµ¥À¸ÓÃ»§¹ÜÀí==>²éÑ¯ÓÃ»§°´Å¥¼àÌıÊÂ¼ş
      */
     private void menuItemChaXunUserActionPerformed(ActionEvent e) {
-        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
+        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
         tabbedPane.setSelectedIndex(0);
         fillUsersTable(scrollPaneUser);
     }
 
     /**
-     * è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºç”¨æˆ·ä¿¡æ¯æ–¹æ³•
+     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÓÃ»§ĞÅÏ¢·½·¨
      *
      * @param scrollPaneUser
      */
     private void fillUsersTable(JScrollPane scrollPaneUser) {
-        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
+        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
         String keywords = txtKeywords.getText();
         UserDao userDao = new UserDao();
-        // å…ˆæŸ¥
+        // ÏÈ²é
         List<UserEntity> list = userDao.getUserByLike("%" + keywords + "%");
-        // è®°å½•æ¡æ•°
+        // ¼ÇÂ¼ÌõÊı
         int size = list.size();
-        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
+        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
         Object obj[][] = new Object[size][7];
-        // å¾ªç¯
+        // Ñ­»·
         for (int i = 0; i < size; i++) {
             UserEntity ue = list.get(i);
             obj[i][0] = ue.getCid();
@@ -182,15 +154,15 @@ public class MainFrame extends JFrame {
             obj[i][2] = ue.getCpwd();
             obj[i][3] = ue.getCphone();
             obj[i][4] = ue.getCaddress();
-            obj[i][5] = ue.getLevel() == 1 ? "æ™®é€šç”¨æˆ·" : "ç®¡ç†å‘˜";
+            obj[i][5] = ue.getLevel() == 0 ? "ÆÕÍ¨ÓÃ»§" : "¹ÜÀíÔ±";
             obj[i][6] = ue.getLastlogin();
         }
-        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
+        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
         tableUser.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
                 }));
-        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
+        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
         scrollPaneUser.setViewportView(tableUser);
     }
 
@@ -198,19 +170,58 @@ public class MainFrame extends JFrame {
     /**
      * @param e
      * @Author CodeSleep
-     * @Date: 2021-06-15 9:44
-     * @Description: //TODO èœå•æ ç”¨æˆ·ç®¡ç†===>æ–°å¢ç”¨æˆ·æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Date: 2021-06-16 10:32
+     * @Description: //TODO ²Ëµ¥À¸==¡·¶©µ¥¹ÜÀí==¡·¶©µ¥²éÑ¯°´Å¥¼àÌıÊÂ¼ş
      */
-    private void menuItemNewUserActionPerformed(ActionEvent e) {
-        AddUserFrame addUserFrame = new AddUserFrame();
-        addUserFrame.setVisible(true);
+    private void menuItemOrderChaXunActionPerformed(ActionEvent e) {
+        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
+        tabbedPane.setSelectedIndex(2);
+        fillOrderTable(scrollPaneOrder);
     }
+
+    /**
+     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾¶©µ¥ĞÅÏ¢·½·¨
+     *
+     * @param scrollPaneOrder
+     */
+    private void fillOrderTable(JScrollPane scrollPaneOrder) {
+        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        String keywords = txtKeywords.getText();
+        // ²éÑ¯Êı¾İÌî³äµ½jtableÖĞÀ´
+        OrderDao orderDao = new OrderDao();
+        // ÏÈ²é
+        List<OrderAndUserEntity> list = orderDao.getOrderByLike("%" + keywords + "%");
+        // ¼ÇÂ¼ÌõÊı
+        int size = list.size();
+        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        Object obj[][] = new Object[size][6];
+        // Ñ­»·
+        for (int i = 0; i < size; i++) {
+            OrderAndUserEntity oaue = list.get(i);
+            obj[i][0] = oaue.getOid();
+            obj[i][1] = oaue.getCid();
+            obj[i][2] = oaue.getCname();
+            obj[i][3] = oaue.getOdate();
+            obj[i][4] = oaue.getAddress();
+            obj[i][5] = oaue.getTotal();
+        }
+        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        tableOrder.setModel(new DefaultTableModel(
+                obj,
+                new String[]{
+                        "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                }
+        ));
+        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        scrollPaneOrder.setViewportView(tableOrder);
+    }
+
 
     /**
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:52
-     * @Description: //TODO èœå•===ã€‹å¯¼èˆª===ã€‹é€€å‡ºç³»ç»Ÿ
+     * @Description: //TODO ²Ëµ¥===¡·µ¼º½===¡·ÍË³öÏµÍ³
      */
     private void menuItemExit(ActionEvent e) {
         System.exit(0);
@@ -218,9 +229,56 @@ public class MainFrame extends JFrame {
 
 
     /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-14 23:55
+     * @Description: //TODO ²Ëµ¥===¡··µ»ØÉÏÒ»¼¶
+     */
+    private void menuItemGoBack(ActionEvent e) {
+        // TODO add your code here
+    }
+
+
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-14 22:29
+     * @Description: //TODO ËÑË÷°´Å¥¼àÌıÊÂ¼ş
+     */
+    private void fssSouSuoActionPerformed(ActionEvent e) {
+        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        String keywords = txtKeywords.getText();
+        GoodsDao gdao = new GoodsDao();
+        // ÏÈ²é
+        List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
+        // ¼ÇÂ¼ÌõÊı
+        int size = list.size();
+        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        Object obj[][] = new Object[size][5];
+        // Ñ­»·
+        for (int i = 0; i < size; i++) {
+            GoodsEntity g = list.get(i);
+            obj[i][0] = g.getGid();
+            obj[i][1] = g.getGname();
+            obj[i][2] = g.getGprice();
+            obj[i][3] = g.getGstock();
+            obj[i][4] = g.getGstate() == 1 ? "ÉÏ¼Ü" : "ÏÂ¼Ü";
+        }
+        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        tableGoods.setModel(new DefaultTableModel(
+                obj,
+                new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
+                        "\u5E93\u5B58", "\u72B6\u6001"}));
+        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        scrollPaneGoods.setViewportView(tableGoods);
+    }
+
+
+
+    /**
      * @Author CodeSleep
      * @Date: 2021-06-14 23:40
-     * @Description: //TODO æœç´¢ç•Œé¢UIç•Œé¢
+     * @Description: //TODO UI½çÃæ
      */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -233,7 +291,8 @@ public class MainFrame extends JFrame {
         menuItemNewUser = new JMenuItem();
         menuItemChaXunUser = new JMenuItem();
         menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
+        menuItem4 = new JMenuItem();
+        menuItemOrderChaXun = new JMenuItem();
         menu2 = new JMenu();
         menuItem2 = new JMenuItem();
         menuItem3 = new JMenuItem();
@@ -306,9 +365,14 @@ public class MainFrame extends JFrame {
             {
                 menu1.setText("\u8ba2\u5355\u7ba1\u7406");
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u8ba2\u5355\u67e5\u8be2");
-                menu1.add(menuItem1);
+                //---- menuItem4 ----
+                menuItem4.setText("\u8ba2\u5355\u4fee\u6539");
+                menu1.add(menuItem4);
+
+                //---- menuItemOrderChaXun ----
+                menuItemOrderChaXun.setText("\u8ba2\u5355\u67e5\u8be2");
+                menuItemOrderChaXun.addActionListener(e -> menuItemOrderChaXunActionPerformed(e));
+                menu1.add(menuItemOrderChaXun);
             }
             systemMenuBar.add(menu1);
 
@@ -370,18 +434,18 @@ public class MainFrame extends JFrame {
 
         //======== panelChaXun ========
         {
-            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            panelChaXun.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER
+            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font
+            .BOLD ,12 ), java. awt. Color. red) ,panelChaXun. getBorder( )) ); panelChaXun. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er"
+            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panelChaXun.setLayout(null);
 
             //======== tabbedPane ========
             {
                 tabbedPane.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+                tabbedPane.setTabPlacement(SwingConstants.LEFT);
 
                 //======== scrollPaneUser ========
                 {
@@ -443,19 +507,19 @@ public class MainFrame extends JFrame {
                     //---- tableOrder ----
                     tableOrder.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
                         },
                         new String[] {
-                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
                         }
                     ));
                     tableOrder.setRowHeight(25);
@@ -492,25 +556,25 @@ public class MainFrame extends JFrame {
                 tabbedPane.addTab("\u7559\u8a00\u4fe1\u606f", scrollPaneMessages);
             }
             panelChaXun.add(tabbedPane);
-            tabbedPane.setBounds(10, 36, 765, 329);
+            tabbedPane.setBounds(0, 36, 795, 329);
 
             //---- labelHint ----
             labelHint.setText("\u8bf7\u8f93\u5165\u5173\u952e\u5b57");
             labelHint.setFont(new Font("\u9ed1\u4f53", labelHint.getFont().getStyle(), 16));
             panelChaXun.add(labelHint);
-            labelHint.setBounds(400, 18, labelHint.getPreferredSize().width, 25);
+            labelHint.setBounds(385, 5, labelHint.getPreferredSize().width, 25);
 
             //---- txtKeywords ----
             txtKeywords.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
             panelChaXun.add(txtKeywords);
-            txtKeywords.setBounds(505, 13, 160, 34);
+            txtKeywords.setBounds(490, 0, 160, 34);
 
             //---- fssSouSuo ----
             fssSouSuo.setText("\u641c \u7d22");
             fssSouSuo.setFont(new Font("\u9ed1\u4f53", fssSouSuo.getFont().getStyle(), 16));
             fssSouSuo.addActionListener(e -> fssSouSuoActionPerformed(e));
             panelChaXun.add(fssSouSuo);
-            fssSouSuo.setBounds(675, 14, 85, 30);
+            fssSouSuo.setBounds(655, 0, 85, 30);
 
             {
                 // compute preferred size
@@ -530,7 +594,7 @@ public class MainFrame extends JFrame {
         contentPane.add(panelChaXun);
         panelChaXun.setBounds(0, 0, 785, 385);
 
-        contentPane.setPreferredSize(new Dimension(785, 440));
+        contentPane.setPreferredSize(new Dimension(795, 440));
         pack();
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -546,7 +610,8 @@ public class MainFrame extends JFrame {
     private JMenuItem menuItemNewUser;
     private JMenuItem menuItemChaXunUser;
     private JMenu menu1;
-    private JMenuItem menuItem1;
+    private JMenuItem menuItem4;
+    private JMenuItem menuItemOrderChaXun;
     private JMenu menu2;
     private JMenuItem menuItem2;
     private JMenuItem menuItem3;

@@ -3,11 +3,6 @@ JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.10" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
-			name: "popupMenu1"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 521 )
-		} )
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
 			"autoSize": false
 		} ) {
@@ -16,9 +11,11 @@ new FormModel {
 			"resizable": false
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/com/singerw/ui/img/icoimage.png" )
 			"$locationPolicy": 1
+			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane"
 				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
+				"tabPlacement": 2
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPaneGoods"
 					add( new FormComponent( "javax.swing.JTable" ) {
@@ -107,6 +104,7 @@ new FormModel {
 						} )
 						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						"rowHeight": 25
+						"autoCreateColumnsFromModel": false
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "商品"
@@ -311,10 +309,10 @@ new FormModel {
 					"title": "我的订单"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 13
-				"y": 20
-				"width": 772
-				"height": 355
+				"x": 0
+				"y": 10
+				"width": 800
+				"height": 365
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "systemMenuBar"
@@ -380,8 +378,14 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 795, 440 )
-			"location": new java.awt.Point( 90, 65 )
+			"size": new java.awt.Dimension( 800, 440 )
+			"location": new java.awt.Point( 50, 40 )
+		} )
+		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
+			name: "popupMenu1"
+			"borderPainted": false
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 160, 545 )
 		} )
 	}
 }

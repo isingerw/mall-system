@@ -24,44 +24,44 @@ public class AddUserFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:56
-     * @Description: //TODO ç”¨æˆ·æ–°å¢æŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ÓÃ»§ĞÂÔö°´Å¥¼àÌıÊÂ¼ş
      */
     private void AddUserButtonActionPerformed(ActionEvent e) {
-        // è·å–ç”¨æˆ·åã€å¯†ç ã€æ‰‹æœºå·ã€åœ°å€ç­‰ä¸ªäººä¿¡æ¯
+        // »ñÈ¡ÓÃ»§Ãû¡¢ÃÜÂë¡¢ÊÖ»úºÅ¡¢µØÖ·µÈ¸öÈËĞÅÏ¢
         String cname = txtcname.getText();
         String cpassword = new String(txtcpassword.getPassword());
         String cphone = txtcphone.getText();
         String cadress = txtcadress.getText();
-        // å‰ç«¯æ ¡éªŒ
+        // Ç°¶ËĞ£Ñé
         if (cname.isEmpty()){
-            JOptionPane.showMessageDialog(null,"è´¦å·ä¸èƒ½ä¸ºç©º");
+            JOptionPane.showMessageDialog(null,"ÕËºÅ²»ÄÜÎª¿Õ");
             return;
         }
         if (cpassword.isEmpty()){
-            JOptionPane.showMessageDialog(null,"å¯†ç ä¸èƒ½ä¸ºç©º");
+            JOptionPane.showMessageDialog(null,"ÃÜÂë²»ÄÜÎª¿Õ");
             return;
         }
         if (cphone.isEmpty()){
-            JOptionPane.showMessageDialog(null,"æ‰‹æœºå·ä¸èƒ½ä¸ºç©º");
+            JOptionPane.showMessageDialog(null,"ÊÖ»úºÅ²»ÄÜÎª¿Õ");
             return;
         }
         if (cadress.isEmpty()){
-            JOptionPane.showMessageDialog(null,"åœ°å€ä¸èƒ½ä¸ºç©º");
+            JOptionPane.showMessageDialog(null,"µØÖ·²»ÄÜÎª¿Õ");
             return;
         }
-        // æ™®é€šç”¨æˆ· 1
+        // ÆÕÍ¨ÓÃ»§ 1
         int level = 1;
         if (radioButtonAdmin.isSelected()){
-            // ç®¡ç†å‘˜ 0
+            // ¹ÜÀíÔ± 0
             level = 0;
         }
         UserDao userDao = new UserDao();
         UserEntity userEntity = new UserEntity(0,cname,cpassword,cphone,cadress,level,null);
         boolean flag = userDao.addUser(userEntity);
         if (flag){
-            JOptionPane.showMessageDialog(null,"æ·»åŠ æˆåŠŸ");
+            JOptionPane.showMessageDialog(null,"Ìí¼Ó³É¹¦");
         }else {
-            JOptionPane.showMessageDialog(null,"æ·»åŠ å¤±è´¥");
+            JOptionPane.showMessageDialog(null,"Ìí¼ÓÊ§°Ü");
         }
     }
 
@@ -69,13 +69,13 @@ public class AddUserFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 10:04
-     * @Description: //TODO é€€å‡ºæŒ‰é’®ç›‘å¬äº‹ä»¶
+     * @Description: //TODO ÍË³ö°´Å¥¼àÌıÊÂ¼ş
      */
     private void ExitButtonActionPerformed(ActionEvent e) {
-        // æç¤ºç”¨æˆ·æ˜¯å¦é€€å‡º
-        int n = JOptionPane.showConfirmDialog(null, "æ˜¯å¦é€€å‡º", "æç¤ºä¿¡æ¯", JOptionPane.YES_OPTION);
+        // ÌáÊ¾ÓÃ»§ÊÇ·ñÍË³ö
+        int n = JOptionPane.showConfirmDialog(null, "ÊÇ·ñÍË³ö", "ÌáÊ¾ĞÅÏ¢", JOptionPane.YES_OPTION);
         if (n == 0) {
-            // å¦‚æœç”¨æˆ·é€‰æ‹©é€€å‡ºå¹¶ç¡®å®š
+            // Èç¹ûÓÃ»§Ñ¡ÔñÍË³ö²¢È·¶¨
             dispose();
         }
     }
