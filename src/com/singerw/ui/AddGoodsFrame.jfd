@@ -127,26 +127,6 @@ new FormModel {
 				"width": 300
 				"height": 85
 			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBoxShangJia"
-				"text": "上架"
-				"$buttonGroup": new FormReference( "buttonGroupGstate" )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 215
-				"y": 235
-				"width": 60
-				"height": 30
-			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBoxXiaJia"
-				"text": "下架"
-				"$buttonGroup": new FormReference( "buttonGroupGstate" )
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 60
-				"height": 30
-				"x": 305
-				"y": 235
-			} )
 			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 				name: "txtGprice"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -154,6 +134,28 @@ new FormModel {
 				"height": 35
 				"x": 140
 				"y": 130
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonShangJia"
+				"text": "上架"
+				"$buttonGroup": new FormReference( "buttonGroupGstate" )
+				"font": &Font0 new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 310
+				"y": 230
+				"width": 75
+				"height": 35
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButtonXiaJia"
+				"text": "下架"
+				"$buttonGroup": new FormReference( "buttonGroupGstate" )
+				"font": #Font0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 85
+				"height": 33
+				"x": 195
+				"y": 230
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 550, 485 )

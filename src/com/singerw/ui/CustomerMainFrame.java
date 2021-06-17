@@ -77,7 +77,6 @@ public class CustomerMainFrame extends JFrame {
         tableShopping = new JTable();
         scrollPaneOrders = new JScrollPane();
         tableOrders = new JTable();
-        popupMenu1 = new JPopupMenu();
 
         //======== this ========
         setTitle("\u8d85\u5e02\u7ba1\u7406\u7cfb\u7edf");
@@ -254,11 +253,6 @@ public class CustomerMainFrame extends JFrame {
         contentPane.setPreferredSize(new Dimension(800, 440));
         pack();
         setLocationRelativeTo(null);
-
-        //======== popupMenu1 ========
-        {
-            popupMenu1.setBorderPainted(false);
-        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -286,6 +280,5 @@ public class CustomerMainFrame extends JFrame {
     private JTable tableShopping;
     private JScrollPane scrollPaneOrders;
     private JTable tableOrders;
-    private JPopupMenu popupMenu1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

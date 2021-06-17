@@ -62,7 +62,7 @@ public class LoginFrame extends JFrame {
         }
         // 用户协议同意与否判断
         boolean flag = fcheck.isSelected();
-        if (flag == false){
+        if (flag == false) {
             JOptionPane.showMessageDialog(null, "请同意用户协议和隐私保护协议");
             return;
         }
@@ -71,17 +71,28 @@ public class LoginFrame extends JFrame {
         UserDao udao = new UserDao();
         // 调用getUserByNameAndPwd方法返回查询数据结果
         UserEntity user = udao.getUserByNameAndPwd(cname, cpwd);
-        if (user == null) {
-            // 弹窗提示消息
-            JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
-        } else {
-            JOptionPane.showMessageDialog(null, "登录成功!");
+        // 判断用户权限 0 或 1 ==1时展示管理员后台
+        if (user.getLevel() == 1) {
+            if (user == null) {
+                // 弹窗提示消息
+                JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
+            } else {
+                JOptionPane.showMessageDialog(null, "登录成功!");
+                // 跳转到下一个窗口 (创建新窗口对象，并显示)
+                MainFrame mainframe = new MainFrame();
+                mainframe.setVisible(true);
+                // 隐藏当前登录界面窗口
+                setVisible(false);
+            }
+        }else {
+            // 判断用户权限 0 或 1 ==0或者其他时展示用户前台
             // 跳转到下一个窗口 (创建新窗口对象，并显示)
-            MainFrame mainframe = new MainFrame();
-            mainframe.setVisible(true);
+            CustomerMainFrame customerMainFrame = new CustomerMainFrame();
+            customerMainFrame.setVisible(true);
             // 隐藏当前登录界面窗口
             setVisible(false);
         }
+
     }
 
     /**

@@ -606,13 +606,12 @@ public class MainFrame extends JFrame {
             {
                 Goods.setMaximumSize(new Dimension(320, 320));
                 Goods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
-                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-                .border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing.border.TitledBorder
-                .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069al\u006fg",java.
-                awt.Font.BOLD,12),java.awt.Color.red),Goods. getBorder()))
-                ;Goods. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-                ){if("\u0062or\u0064er".equals(e.getPropertyName()))throw new RuntimeException();}})
-                ;
+                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
+                ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
+                .BOLD,12),java.awt.Color.red),Goods. getBorder()));Goods. addPropertyChangeListener(
+                new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
+                .equals(e.getPropertyName()))throw new RuntimeException();}});
                 Goods.setLayout(null);
 
                 //---- label1 ----
@@ -640,22 +639,22 @@ public class MainFrame extends JFrame {
                     //---- tableGoods ----
                     tableGoods.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
+                            {"", null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
                         },
                         new String[] {
-                            null, null, null, null, null, null, null
+                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u5546\u54c1\u4ef7\u683c", "\u5546\u54c1\u5e93\u5b58", "\u5546\u54c1\u72b6\u6001"
                         }
                     ));
                     tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
@@ -728,7 +727,7 @@ public class MainFrame extends JFrame {
                             {null, null, null, null, null, null, null},
                         },
                         new String[] {
-                            null, null, null, null, null, null, null
+                            "\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u89d2\u8272", "\u767b\u5f55\u65f6\u95f4"
                         }
                     ));
                     tableUsers.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
@@ -786,22 +785,22 @@ public class MainFrame extends JFrame {
                     //---- tableOrder ----
                     tableOrder.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
                         },
                         new String[] {
-                            null, null, null, null, null, null, null
+                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
                         }
                     ));
                     tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
@@ -859,22 +858,22 @@ public class MainFrame extends JFrame {
                     //---- tableMessages ----
                     tableMessages.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
                         },
                         new String[] {
-                            null, null, null, null, null, null, null
+                            "\u8bc4\u8bba\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u8bc4\u8bba\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
                         }
                     ));
                     tableMessages.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));

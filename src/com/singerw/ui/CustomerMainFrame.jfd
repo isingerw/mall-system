@@ -381,11 +381,5 @@ new FormModel {
 			"size": new java.awt.Dimension( 800, 440 )
 			"location": new java.awt.Point( 50, 40 )
 		} )
-		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
-			name: "popupMenu1"
-			"borderPainted": false
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 160, 545 )
-		} )
 	}
 }

@@ -50,9 +50,11 @@ public class AddUserFrame extends JFrame {
             return;
         }
         // 普通用户 1
-        int level = 1;
+        int level;
         if (radioButtonAdmin.isSelected()){
-            // 管理员 0
+            // 管理员 1
+            level = 1;
+        }else {
             level = 0;
         }
         UserDao userDao = new UserDao();
@@ -112,12 +114,12 @@ public class AddUserFrame extends JFrame {
         txtcname.setBounds(106, 79, 180, 35);
 
         //---- titleID ----
-        titleID.setFont(titleID.getFont().deriveFont(titleID.getFont().getSize() + 3f));
+        titleID.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(titleID);
         titleID.setBounds(56, 89, 50, 20);
 
         //---- titlepAssword ----
-        titlepAssword.setFont(titlepAssword.getFont().deriveFont(titlepAssword.getFont().getSize() + 3f));
+        titlepAssword.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(titlepAssword);
         titlepAssword.setBounds(56, 134, 50, 20);
         contentPane.add(txtcpassword);
@@ -125,42 +127,44 @@ public class AddUserFrame extends JFrame {
 
         //---- AddUserButton ----
         AddUserButton.setText("\u65b0 \u589e");
-        AddUserButton.setFont(new Font("\u9ed1\u4f53", AddUserButton.getFont().getStyle(), 16));
+        AddUserButton.setFont(new Font("\u9ed1\u4f53", AddUserButton.getFont().getStyle(), AddUserButton.getFont().getSize() + 3));
         AddUserButton.addActionListener(e -> AddUserButtonActionPerformed(e));
         contentPane.add(AddUserButton);
         AddUserButton.setBounds(95, 325, 175, 35);
 
         //---- ExitButton ----
         ExitButton.setText("\u9000 \u51fa");
-        ExitButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+        ExitButton.setFont(new Font("\u9ed1\u4f53", ExitButton.getFont().getStyle(), ExitButton.getFont().getSize() + 3));
         ExitButton.addActionListener(e -> ExitButtonActionPerformed(e));
         contentPane.add(ExitButton);
         ExitButton.setBounds(95, 370, 175, 35);
 
         //---- titlelogin ----
-        titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
+        titlelogin.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 26));
         contentPane.add(titlelogin);
         titlelogin.setBounds(135, 30, 115, 30);
 
         //---- titlePhone ----
-        titlePhone.setFont(titlePhone.getFont().deriveFont(titlePhone.getFont().getSize() + 3f));
+        titlePhone.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(titlePhone);
         titlePhone.setBounds(56, 185, 50, 20);
 
         //---- titleAdress ----
-        titleAdress.setFont(titleAdress.getFont().deriveFont(titleAdress.getFont().getSize() + 3f));
+        titleAdress.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(titleAdress);
         titleAdress.setBounds(56, 235, 50, 20);
 
         //---- radioButtonUser ----
         radioButtonUser.setText("\u666e\u901a\u7528\u6237");
+        radioButtonUser.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(radioButtonUser);
-        radioButtonUser.setBounds(new Rectangle(new Point(95, 280), radioButtonUser.getPreferredSize()));
+        radioButtonUser.setBounds(90, 280, 105, 35);
 
         //---- radioButtonAdmin ----
         radioButtonAdmin.setText("\u7ba1\u7406\u5458");
+        radioButtonAdmin.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
         contentPane.add(radioButtonAdmin);
-        radioButtonAdmin.setBounds(195, 280, 74, 22);
+        radioButtonAdmin.setBounds(208, 281, 107, 34);
         contentPane.add(txtcphone);
         txtcphone.setBounds(105, 180, 180, 35);
         contentPane.add(txtcadress);

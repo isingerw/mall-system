@@ -7,6 +7,7 @@ package com.singerw.ui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import com.jgoodies.forms.factories.*;
 import com.singerw.dao.GoodsDao;
 import com.singerw.entity.GoodsEntity;
@@ -20,12 +21,11 @@ public class AddGoodsFrame extends JFrame {
     }
 
 
-
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 19:52
      * @Description: //TODO 退出按钮监听事件
-     * @param e
      */
     private void ExitButtonActionPerformed(ActionEvent e) {
         // 提示用户是否退出
@@ -37,10 +37,10 @@ public class AddGoodsFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 20:17
      * @Description: //TODO 新增商品按钮监听事件
-     * @param e
      */
     private void AddGoodsButtonActionPerformed(ActionEvent e) {
         // 获取商品名称、价格、库存等信息
@@ -49,20 +49,27 @@ public class AddGoodsFrame extends JFrame {
         int gstock = Integer.parseInt(txtGstock.getText());
         String ginfo = textAreaGinfo.getText();
         // 前端校验
+        if (gname.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "商品名不能为空");
+            return;
+        }
 
-        // 上架 1
-        int gstate = 1;
-        if (checkBoxXiaJia.isSelected()){
-            // 下架 0
+        // 设置上架下架状态 不选择默认为0，则为下架状态
+        int gstate;
+        if (radioButtonShangJia.isSelected()) {
+            // 上架 1
+            gstate = 1;
+        } else {
+            // 不选择则默认下架 0
             gstate = 0;
         }
         GoodsDao goodsDao = new GoodsDao();
-        GoodsEntity goodsEntity = new GoodsEntity(gname,gprice,gstock,ginfo,gstate);
+        GoodsEntity goodsEntity = new GoodsEntity(gname, gprice, gstock, ginfo, gstate);
         boolean flag = goodsDao.addGoods(goodsEntity);
-        if (flag){
-            JOptionPane.showMessageDialog(null,"添加成功");
-        }else {
-            JOptionPane.showMessageDialog(null,"添加失败");
+        if (flag) {
+            JOptionPane.showMessageDialog(null, "添加成功");
+        } else {
+            JOptionPane.showMessageDialog(null, "添加失败");
         }
     }
 
@@ -83,9 +90,9 @@ public class AddGoodsFrame extends JFrame {
         titleAdress2 = compFactory.createTitle("\u5546\u54c1\u7b80\u4ecb\uff1a");
         scrollPane1 = new JScrollPane();
         textAreaGinfo = new JTextArea();
-        checkBoxShangJia = new JCheckBox();
-        checkBoxXiaJia = new JCheckBox();
         txtGprice = new JFormattedTextField();
+        radioButtonShangJia = new JRadioButton();
+        radioButtonXiaJia = new JRadioButton();
 
         //======== this ========
         setResizable(false);
@@ -150,18 +157,20 @@ public class AddGoodsFrame extends JFrame {
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(145, 280, 300, 85);
-
-        //---- checkBoxShangJia ----
-        checkBoxShangJia.setText("\u4e0a\u67b6");
-        contentPane.add(checkBoxShangJia);
-        checkBoxShangJia.setBounds(215, 235, 60, 30);
-
-        //---- checkBoxXiaJia ----
-        checkBoxXiaJia.setText("\u4e0b\u67b6");
-        contentPane.add(checkBoxXiaJia);
-        checkBoxXiaJia.setBounds(305, 235, 60, 30);
         contentPane.add(txtGprice);
         txtGprice.setBounds(140, 130, 310, 35);
+
+        //---- radioButtonShangJia ----
+        radioButtonShangJia.setText("\u4e0a\u67b6");
+        radioButtonShangJia.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+        contentPane.add(radioButtonShangJia);
+        radioButtonShangJia.setBounds(310, 230, 75, 35);
+
+        //---- radioButtonXiaJia ----
+        radioButtonXiaJia.setText("\u4e0b\u67b6");
+        radioButtonXiaJia.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+        contentPane.add(radioButtonXiaJia);
+        radioButtonXiaJia.setBounds(195, 230, 85, 33);
 
         contentPane.setPreferredSize(new Dimension(550, 485));
         pack();
@@ -169,8 +178,8 @@ public class AddGoodsFrame extends JFrame {
 
         //---- buttonGroupGstate ----
         ButtonGroup buttonGroupGstate = new ButtonGroup();
-        buttonGroupGstate.add(checkBoxShangJia);
-        buttonGroupGstate.add(checkBoxXiaJia);
+        buttonGroupGstate.add(radioButtonShangJia);
+        buttonGroupGstate.add(radioButtonXiaJia);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -189,8 +198,8 @@ public class AddGoodsFrame extends JFrame {
     private JLabel titleAdress2;
     private JScrollPane scrollPane1;
     private JTextArea textAreaGinfo;
-    private JCheckBox checkBoxShangJia;
-    private JCheckBox checkBoxXiaJia;
     private JFormattedTextField txtGprice;
+    private JRadioButton radioButtonShangJia;
+    private JRadioButton radioButtonXiaJia;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
