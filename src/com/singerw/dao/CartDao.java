@@ -25,13 +25,12 @@ public class CartDao {
         if (cart == null) {
             return false;
         }
-
-        // 查询看购物车是否存在改商品
+        // 查询看购物车是否存在该商品
         CartBeanEntity c = getCartByGidAndCid(cart.getGid(), cart.getCid());
-        String sql = "INSERT INTO `mall_db`.`tbl_cart`(`sid`, `gcount`,`gid`, `cid`) VALUES (null, ?, ?, ?)";
+        String sql = "INSERT INTO `mall_db`.`tbl_cart`(`sid`,`gid`,`gcount`,`cid`) VALUES (null, ?, ?, ?)";
 
         if (c != null) {
-            sql = "update tbl_cart set gcount=gcount+? where gid=? and cid=? ";
+            sql = "update tbl_cart set gcount = gcount+? where gid = ? and cid = ? ";
 
         }
         // 增加调用DBUtil.exUpdate方法

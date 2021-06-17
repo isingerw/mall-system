@@ -47,6 +47,7 @@ public class CartEntity {
     }
 
     public CartEntity(int sid, int gid, int gcount, int cid) {
+        super();
         this.sid = sid;
         this.gid = gid;
         this.gcount = gcount;
