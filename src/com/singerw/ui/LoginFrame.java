@@ -11,6 +11,7 @@ import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.singerw.dao.UserDao;
 import com.singerw.entity.UserEntity;
+import com.singerw.tools.CommonInfo;
 
 
 /**
@@ -70,22 +71,30 @@ public class LoginFrame extends JFrame {
         // 调用dao
         UserDao udao = new UserDao();
         // 调用getUserByNameAndPwd方法返回查询数据结果
-        UserEntity user = udao.getUserByNameAndPwd(cname, cpwd);
+        UserEntity userEntity = udao.getUserByNameAndPwd(cname, cpwd);
         // 判断用户权限 0 或 1 ==1时展示管理员后台
-        if (user.getLevel() == 1) {
-            if (user == null) {
+        if (userEntity.getLevel() == 1) {
+            if (userEntity == null) {
                 // 弹窗提示消息
                 JOptionPane.showMessageDialog(null, "用户名或者密码错误，登录失败!");
             } else {
                 JOptionPane.showMessageDialog(null, "登录成功!");
+                // 购物车获取用户ID，用户登录成功后将用户存储在一个独立的类中
+                CommonInfo.cid = userEntity.getCid();
+                System.out.println("CommonInfo.cid:" + CommonInfo.cid);
                 // 跳转到下一个窗口 (创建新窗口对象，并显示)
                 MainFrame mainframe = new MainFrame();
                 mainframe.setVisible(true);
                 // 隐藏当前登录界面窗口
                 setVisible(false);
             }
-        }else {
+        } else {
             // 判断用户权限 0 或 1 ==0或者其他时展示用户前台
+
+            // 购物车获取用户ID，用户登录成功后将用户存储在一个独立的类中
+            CommonInfo.cid = userEntity.getCid();
+            System.out.println("CommonInfo.cid:" + CommonInfo.cid);
+
             // 跳转到下一个窗口 (创建新窗口对象，并显示)
             CustomerMainFrame customerMainFrame = new CustomerMainFrame();
             customerMainFrame.setVisible(true);

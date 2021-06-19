@@ -128,7 +128,7 @@ public class GoodsDao {
      * @Description: //TODO 要查询的是已经上架的商品，且库存大于0 用于用户的商品查询
      */
     public List<GoodsEntity> getGoodsByLikeAndState(String keywords) {
-        String sql = "select * from tbl_goods where gstate=1 and gstock>0 and  (gname like ? or ginfo like ?)";
+        String sql = "select * from tbl_goods where gstate = 1 and gstock > 0 and  (gname like ? or ginfo like ?)";
         Object obj = DBUtil.exQuery(sql, GoodsEntity.class, keywords, keywords);
         // 返回值是List类型
         if (obj instanceof List) {

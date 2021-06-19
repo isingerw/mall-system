@@ -33,19 +33,19 @@ public class CustomerMainFrame extends JFrame {
     private static int gid;
 
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    CustomerMainFrame customerMainFrame = new CustomerMainFrame();
-                    customerMainFrame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    CustomerMainFrame customerMainFrame = new CustomerMainFrame();
+//                    customerMainFrame.setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     public CustomerMainFrame() {
         initComponents();
@@ -72,7 +72,8 @@ public class CustomerMainFrame extends JFrame {
         if (e.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             //通过点击位置找到点击为表格中的行
             int focusedRowIndex = tableGoods.rowAtPoint(e.getPoint());
-            System.out.println("focusedRowIndex：" + focusedRowIndex);
+            gid =Integer.valueOf(tableGoods.getValueAt(tableGoods.rowAtPoint(e.getPoint()), 0) + "");
+            System.out.println("gid：" + gid);
             if (focusedRowIndex == -1) {
                 return;
             }
@@ -81,14 +82,15 @@ public class CustomerMainFrame extends JFrame {
             //弹出菜单
             popupMenuCart.show(tableGoods, e.getX(), e.getY());
 
-            // 添加到购物车
+
+            // 将商品添加到购物车
             int gcount = 1;
             // 登录的用户信息 ==> 通用类中读取的静态属性，登录时候存储
             int cid = CommonInfo.cid;
-            // 构造一个Cart对象
+            // 构造一个CartEntity对象
             CartEntity cartEntity = new CartEntity(0, gid, gcount, cid);
             CartDao cartDao = new CartDao();
-            // 调用dao中添加到购物车的方法
+            // 调用cartDao中添加到购物车的addCart方法
             boolean flag = cartDao.addCart(cartEntity);
             if (flag) {
                 JOptionPane.showMessageDialog(null, "添加成功");
@@ -355,8 +357,10 @@ public class CustomerMainFrame extends JFrame {
                             @Override
                             public void propertyChange(java.beans.PropertyChangeEvent e
                             ) {
-                                if ("\u0062or\u0064er".equals(e.getPropertyName())) throw new RuntimeException()
-                                        ;
+                                if ("\u0062or\u0064er".equals(e.getPropertyName())) {
+                                    throw new RuntimeException()
+                                            ;
+                                }
                             }
                         });
                 Goods.setLayout(null);

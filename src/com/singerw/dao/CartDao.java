@@ -26,17 +26,16 @@ public class CartDao {
             return false;
         }
         // 查询看购物车是否存在该商品
-        CartBeanEntity c = getCartByGidAndCid(cart.getGid(), cart.getCid());
-        String sql = "INSERT INTO `mall_db`.`tbl_cart`(`sid`,`gid`,`gcount`,`cid`) VALUES (null, ?, ?, ?)";
+        CartEntity cartEntity = getCartByGidAndCid(cart.getGid(), cart.getCid());
+        String sql = "INSERT INTO `mall_db`.`tbl_cart`(`sid`,`gcount`,`gid`,`cid`) VALUES (null, ?, ?, ?)";
 
-        if (c != null) {
+        if (cartEntity != null) {
             sql = "update tbl_cart set gcount = gcount+? where gid = ? and cid = ? ";
 
         }
         // 增加调用DBUtil.exUpdate方法
         int n = DBUtil.exUpdate(sql, cart.getGcount(), cart.getGid(), cart.getCid());
         return n > 0;
-
     }
 
 
@@ -45,16 +44,16 @@ public class CartDao {
      *
      * @param gid
      * @param cid
-     * @return
+     * @return CartBeanEntity
      */
-    public CartBeanEntity getCartByGidAndCid(int gid, int cid) {
+    public CartEntity getCartByGidAndCid(int gid, int cid) {
 
         String sql = "select * from tbl_cart where gid = ? and cid=?";
-        Object obj = DBUtil.exQuery(sql, CartBeanEntity.class, gid, cid);
+        Object obj = DBUtil.exQuery(sql, CartEntity.class, gid, cid);
 
         // 返回值是List类型
         if (obj instanceof List) {
-            List<CartBeanEntity> list = (List) obj;
+            List<CartEntity> list = (List) obj;
             if (list.size() > 0) {
                 return list.get(0);
             }
