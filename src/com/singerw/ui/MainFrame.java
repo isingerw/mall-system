@@ -28,23 +28,6 @@ import java.awt.event.ActionEvent;
  */
 public class MainFrame extends JFrame {
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    MainFrame mainFrame = new MainFrame();
-                    mainFrame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
 
     public MainFrame() {
         initComponents();
@@ -108,7 +91,6 @@ public class MainFrame extends JFrame {
         // setViewportView 设置table和scrollpane关联
         scrollPaneGoods.setViewportView(tableGoods);
     }
-
 
 
     /**
@@ -221,10 +203,10 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * @param e
      * @Author CodeSleep
      * @Date: 2021-06-17 1:46
      * @Description: //TODO  菜单栏==》留言管理==》留言查询按钮监听事件
-     * @param e
      */
     private void menuItemMessagesActionPerformed(ActionEvent e) {
         // 切换选项卡的页  1 为选项卡页的顺序 从0算起
@@ -283,11 +265,11 @@ public class MainFrame extends JFrame {
     }
 
 
-
-
     /**
-     *
-     * 列表搜索按键监听事件
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-20 4:53
+     * @Description: //TODO 列表搜索按键监听事件
      */
     private void goodsSouSuoActionPerformed(ActionEvent e) {
         // 获取用户输入的关键字
@@ -407,7 +389,6 @@ public class MainFrame extends JFrame {
         // setViewportView 设置table和scrollpane关联
         scrollPaneMessages.setViewportView(tableMessages);
     }
-
 
 
     /**
@@ -607,12 +588,17 @@ public class MainFrame extends JFrame {
                 Goods.setMaximumSize(new Dimension(320, 320));
                 Goods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-                .swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing
-                .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
-                Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red
-                ),Goods. getBorder()));Goods. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
-                public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName(
-                )))throw new RuntimeException();}});
+                        .swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax.swing
+                        .border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.
+                        Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt.Color.red
+                ), Goods.getBorder()));
+                Goods.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                    @Override
+                    public void propertyChange(java.beans.PropertyChangeEvent e) {
+                        if ("\u0062ord\u0065r".equals(e.getPropertyName(
+                        ))) throw new RuntimeException();
+                    }
+                });
                 Goods.setLayout(null);
 
                 //---- label1 ----
@@ -639,24 +625,24 @@ public class MainFrame extends JFrame {
 
                     //---- tableGoods ----
                     tableGoods.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {"", null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u5546\u54c1\u4ef7\u683c", "\u5546\u54c1\u5e93\u5b58", "\u5546\u54c1\u72b6\u6001"
-                        }
+                            new Object[][]{
+                                    {"", null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u5546\u54c1\u4ef7\u683c", "\u5546\u54c1\u5e93\u5b58", "\u5546\u54c1\u72b6\u6001"
+                            }
                     ));
                     tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableGoods.setRowHeight(25);
@@ -668,7 +654,7 @@ public class MainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < Goods.getComponentCount(); i++) {
+                    for (int i = 0; i < Goods.getComponentCount(); i++) {
                         Rectangle bounds = Goods.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -712,24 +698,24 @@ public class MainFrame extends JFrame {
 
                     //---- tableUsers ----
                     tableUsers.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u89d2\u8272", "\u767b\u5f55\u65f6\u95f4"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u89d2\u8272", "\u767b\u5f55\u65f6\u95f4"
+                            }
                     ));
                     tableUsers.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableUsers.setRowHeight(25);
@@ -741,7 +727,7 @@ public class MainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < Users.getComponentCount(); i++) {
+                    for (int i = 0; i < Users.getComponentCount(); i++) {
                         Rectangle bounds = Users.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -785,24 +771,24 @@ public class MainFrame extends JFrame {
 
                     //---- tableOrder ----
                     tableOrder.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                            {null, null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                            }
                     ));
                     tableOrder.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableOrder.setRowHeight(25);
@@ -814,7 +800,7 @@ public class MainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < Orders.getComponentCount(); i++) {
+                    for (int i = 0; i < Orders.getComponentCount(); i++) {
                         Rectangle bounds = Orders.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -858,24 +844,24 @@ public class MainFrame extends JFrame {
 
                     //---- tableMessages ----
                     tableMessages.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "\u8bc4\u8bba\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u8bc4\u8bba\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "\u8bc4\u8bba\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u8bc4\u8bba\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
+                            }
                     ));
                     tableMessages.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableMessages.setRowHeight(25);
@@ -887,7 +873,7 @@ public class MainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for(int i = 0; i < Messages.getComponentCount(); i++) {
+                    for (int i = 0; i < Messages.getComponentCount(); i++) {
                         Rectangle bounds = Messages.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);

@@ -435,16 +435,10 @@ public class CustomerMainFrame extends JFrame {
             //======== Goods ========
             {
                 Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
-                        , 0, 0, 0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM
-                        , new java.awt.Font("Dialo\u0067", java.awt.Font.BOLD, 12), java.awt.Color.red),
-                        Goods.getBorder()));
-                Goods.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-                    @Override
-                    public void propertyChange(java.beans.PropertyChangeEvent e
-                    ) {
-                        if ("borde\u0072".equals(e.getPropertyName())) throw new RuntimeException();
-                    }
-                });
+                ,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
+                ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red),
+                Goods. getBorder()));Goods. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+                ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
                 Goods.setLayout(null);
 
                 //======== scrollPaneGoods ========
@@ -452,26 +446,26 @@ public class CustomerMainFrame extends JFrame {
 
                     //---- tableGoods ----
                     tableGoods.setModel(new DefaultTableModel(
-                            new Object[][]{
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                                    {null, null, null, null},
-                            },
-                            new String[]{
-                                    "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u5546\u54c1\u4ef7\u683c", "\u5e93\u5b58"
-                            }
+                        new Object[][] {
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                        },
+                        new String[] {
+                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u5546\u54c1\u4ef7\u683c", "\u5e93\u5b58"
+                        }
                     ));
                     tableGoods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableGoods.setRowHeight(25);
@@ -508,7 +502,7 @@ public class CustomerMainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < Goods.getComponentCount(); i++) {
+                    for(int i = 0; i < Goods.getComponentCount(); i++) {
                         Rectangle bounds = Goods.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -531,26 +525,26 @@ public class CustomerMainFrame extends JFrame {
 
                     //---- tableCart ----
                     tableCart.setModel(new DefaultTableModel(
-                            new Object[][]{
-                                    {null, null, null, null, ""},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                                    {null, null, null, null, null},
-                            },
-                            new String[]{
-                                    "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u6570\u91cf", "\u5546\u54c1\u5355\u4ef7", "\u603b\u8ba1"
-                            }
+                        new Object[][] {
+                            {null, null, null, null, ""},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u540d\u79f0", "\u6570\u91cf", "\u5546\u54c1\u5355\u4ef7", "\u603b\u8ba1"
+                        }
                     ));
                     tableCart.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                     tableCart.setRowHeight(25);
@@ -594,7 +588,7 @@ public class CustomerMainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < Carts.getComponentCount(); i++) {
+                    for(int i = 0; i < Carts.getComponentCount(); i++) {
                         Rectangle bounds = Carts.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -617,26 +611,26 @@ public class CustomerMainFrame extends JFrame {
 
                     //---- tableOrders ----
                     tableOrders.setModel(new DefaultTableModel(
-                            new Object[][]{
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                            },
-                            new String[]{
-                                    "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
-                            }
+                        new Object[][] {
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
+                        }
                     ));
                     tableOrders.setRowHeight(25);
                     tableOrders.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
@@ -666,7 +660,7 @@ public class CustomerMainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < Orders.getComponentCount(); i++) {
+                    for(int i = 0; i < Orders.getComponentCount(); i++) {
                         Rectangle bounds = Orders.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -689,26 +683,26 @@ public class CustomerMainFrame extends JFrame {
 
                     //---- tableOrdersXiangQing ----
                     tableOrdersXiangQing.setModel(new DefaultTableModel(
-                            new Object[][]{
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                            },
-                            new String[]{
-                                    "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u6570\u91cf", "\u5546\u54c1\u4ef7\u683c", "\u603b\u8ba1"
-                            }
+                        new Object[][] {
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                        },
+                        new String[] {
+                            "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u6570\u91cf", "\u5546\u54c1\u4ef7\u683c", "\u603b\u8ba1"
+                        }
                     ));
                     tableOrdersXiangQing.setRowHeight(25);
                     tableOrdersXiangQing.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
@@ -738,7 +732,7 @@ public class CustomerMainFrame extends JFrame {
                 {
                     // compute preferred size
                     Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < OrdersXiangQing.getComponentCount(); i++) {
+                    for(int i = 0; i < OrdersXiangQing.getComponentCount(); i++) {
                         Rectangle bounds = OrdersXiangQing.getComponent(i).getBounds();
                         preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                         preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
