@@ -1,51 +1,26 @@
-/*
- * Created by JFormDesigner on Tue Jun 15 11:20:57 CST 2021
- */
-
 package com.singerw.ui;
 
 import com.singerw.dao.CartDao;
 import com.singerw.dao.GoodsDao;
-import com.singerw.dao.OrderDao;
 import com.singerw.entity.CartBeanEntity;
 import com.singerw.entity.CartEntity;
 import com.singerw.entity.GoodsEntity;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.table.*;
 
 import com.singerw.tools.CommonInfo;
-import info.clearthought.layout.*;
-import net.miginfocom.swing.*;
-import sun.util.resources.LocaleData;
 
 /**
- * @author unknown
+ * @Author: CodeSleep
+ * @Date: 2021-06-20 0:49
+ * @Description: //TODO 用户UI
  */
 public class CustomerMainFrame extends JFrame {
     private static int gid;
-
-
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    CustomerMainFrame customerMainFrame = new CustomerMainFrame();
-//                    customerMainFrame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     public CustomerMainFrame() {
         initComponents();
@@ -72,7 +47,7 @@ public class CustomerMainFrame extends JFrame {
         if (e.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             //通过点击位置找到点击为表格中的行
             int focusedRowIndex = tableGoods.rowAtPoint(e.getPoint());
-            gid =Integer.valueOf(tableGoods.getValueAt(tableGoods.rowAtPoint(e.getPoint()), 0) + "");
+            gid = Integer.valueOf(tableGoods.getValueAt(tableGoods.rowAtPoint(e.getPoint()), 0) + "");
             System.out.println("gid：" + gid);
             if (focusedRowIndex == -1) {
                 return;
@@ -81,7 +56,6 @@ public class CustomerMainFrame extends JFrame {
             tableGoods.setRowSelectionInterval(focusedRowIndex, focusedRowIndex);
             //弹出菜单
             popupMenuCart.show(tableGoods, e.getX(), e.getY());
-
 
             // 将商品添加到购物车
             int gcount = 1;
@@ -187,10 +161,21 @@ public class CustomerMainFrame extends JFrame {
     /**
      * @param e
      * @Author CodeSleep
+     * @Date: 2021-06-20 0:47
+     * @Description: //TODO 我的购物车结算按钮监听事件
+     */
+    private void JieSuanButtonActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+
+    /**
+     * @param e
+     * @Author CodeSleep
      * @Date: 2021-06-17 22:02
      * @Description: //TODO 我的订单搜索按钮监听事件
      */
-    private void buttonSS2ActionPerformed(ActionEvent e) {
+    private void orderSouSuoActionPerformed(ActionEvent e) {
 
     }
 
@@ -237,7 +222,7 @@ public class CustomerMainFrame extends JFrame {
         label3 = new JLabel();
         txtKeywordsCart = new JTextArea();
         cartSouSouButton = new JButton();
-        button1 = new JButton();
+        JieSuanButton = new JButton();
         labelSum = new JLabel();
         Orders = new JPanel();
         scrollPaneOrders = new JScrollPane();
@@ -347,22 +332,19 @@ public class CustomerMainFrame extends JFrame {
 
             //======== Goods ========
             {
-                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-                        new javax.swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
-                        , javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM
-                        , new java.awt.Font("D\u0069al\u006fg", java.awt.Font.BOLD, 12)
-                        , java.awt.Color.red), Goods.getBorder()));
-                Goods.addPropertyChangeListener(
-                        new java.beans.PropertyChangeListener() {
-                            @Override
-                            public void propertyChange(java.beans.PropertyChangeEvent e
-                            ) {
-                                if ("\u0062or\u0064er".equals(e.getPropertyName())) {
-                                    throw new RuntimeException()
-                                            ;
-                                }
-                            }
-                        });
+                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+                        javax.swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+                        .swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java
+                        .awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
+                        .Color.red), Goods.getBorder()));
+                Goods.addPropertyChangeListener(new java.beans.
+                        PropertyChangeListener() {
+                    @Override
+                    public void propertyChange(java.beans.PropertyChangeEvent e) {
+                        if ("\u0062ord\u0065r".
+                                equals(e.getPropertyName())) throw new RuntimeException();
+                    }
+                });
                 Goods.setLayout(null);
 
                 //======== scrollPaneGoods ========
@@ -496,17 +478,21 @@ public class CustomerMainFrame extends JFrame {
                 Carts.add(cartSouSouButton);
                 cartSouSouButton.setBounds(615, 20, 78, 30);
 
-                //---- button1 ----
-                button1.setText("\u7ed3 \u7b97");
-                button1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
-                Carts.add(button1);
-                button1.setBounds(new Rectangle(new Point(600, 336), button1.getPreferredSize()));
+                //---- JieSuanButton ----
+                JieSuanButton.setText("\u7ed3 \u7b97");
+                JieSuanButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+                JieSuanButton.addActionListener(e -> {
+                    JieSuanButtonActionPerformed(e);
+                    JieSuanButtonActionPerformed(e);
+                });
+                Carts.add(JieSuanButton);
+                JieSuanButton.setBounds(new Rectangle(new Point(600, 330), JieSuanButton.getPreferredSize()));
 
                 //---- labelSum ----
                 labelSum.setText("\u5408 \u8ba1\uff1a");
                 labelSum.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Carts.add(labelSum);
-                labelSum.setBounds(410, 341, 185, labelSum.getPreferredSize().height);
+                labelSum.setBounds(490, 335, 100, labelSum.getPreferredSize().height);
 
                 {
                     // compute preferred size
@@ -576,7 +562,7 @@ public class CustomerMainFrame extends JFrame {
                 //---- orderSouSouButton ----
                 orderSouSouButton.setText("\u641c \u7d22");
                 orderSouSouButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
-                orderSouSouButton.addActionListener(e -> buttonSS2ActionPerformed(e));
+                orderSouSouButton.addActionListener(e -> orderSouSuoActionPerformed(e));
                 Orders.add(orderSouSouButton);
                 orderSouSouButton.setBounds(615, 20, 78, 30);
 
@@ -621,6 +607,8 @@ public class CustomerMainFrame extends JFrame {
     }
 
 
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar systemMenuBar;
     private JMenu menuGooodsMenu;
     private JMenuItem menuItem1;
@@ -649,7 +637,7 @@ public class CustomerMainFrame extends JFrame {
     private JLabel label3;
     private JTextArea txtKeywordsCart;
     private JButton cartSouSouButton;
-    private JButton button1;
+    private JButton JieSuanButton;
     private JLabel labelSum;
     private JPanel Orders;
     private JScrollPane scrollPaneOrders;

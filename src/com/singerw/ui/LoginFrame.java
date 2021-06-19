@@ -89,8 +89,7 @@ public class LoginFrame extends JFrame {
                 setVisible(false);
             }
         } else {
-            // 判断用户权限 0 或 1 ==0或者其他时展示用户前台
-
+            // 判断用户权限 0 或 1 ==0或者其他时都展示用户前台
             // 购物车获取用户ID，用户登录成功后将用户存储在一个独立的类中
             CommonInfo.cid = userEntity.getCid();
             System.out.println("CommonInfo.cid:" + CommonInfo.cid);
