@@ -10,6 +10,7 @@ public class CartEntity {
     private int gid;
     private int gcount;
     private int cid;
+    private int state;
 
     public int getSid() {
         return sid;
@@ -43,15 +44,23 @@ public class CartEntity {
         this.cid = cid;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public CartEntity() {
     }
 
-    public CartEntity(int sid, int gid, int gcount, int cid) {
-        super();
+    public CartEntity(int sid, int gid, int gcount, int cid, int state) {
         this.sid = sid;
         this.gid = gid;
         this.gcount = gcount;
         this.cid = cid;
+        this.state = state;
     }
 
     @Override
@@ -61,6 +70,7 @@ public class CartEntity {
                 ", gid=" + gid +
                 ", gcount=" + gcount +
                 ", cid=" + cid +
+                ", state=" + state +
                 '}';
     }
 }

@@ -63,6 +63,14 @@ public class OrderEntity {
         this.total = total;
     }
 
+    public OrderEntity(String oid, int cid, String odate, double total) {
+        this.oid = oid;
+        this.cid = cid;
+        this.odate = odate;
+        this.address = address;
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "OrderEntity{" +

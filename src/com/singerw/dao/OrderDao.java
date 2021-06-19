@@ -2,9 +2,14 @@ package com.singerw.dao;
 
 import com.singerw.entity.GoodsEntity;
 import com.singerw.entity.OrderAndUserEntity;
+import com.singerw.entity.OrderDetailEntity;
 import com.singerw.entity.OrderEntity;
+import com.singerw.tools.CommonInfo;
 import com.singerw.tools.DBUtil;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -21,14 +26,93 @@ public class OrderDao {
      * @Date: 2021-06-12 22:47
      * @Description: //TODO 添加订单信息
      */
-    public boolean addOrder(OrderEntity orders) {
+    public boolean addOrder(OrderEntity orders, List<OrderDetailEntity> orderDetailEntityList) {
         if (orders == null) {
             return false;
         }
-        String sql = "insert into tbl_order values(?,?,?,?,?)";
-        // 增加调用DBUtil.exupdate方法
-        int n = DBUtil.exUpdate(sql, orders.getOid(), orders.getCid(), orders.getOdate(), orders.getAddress(), orders.getTotal());
-        return n > 0;
+        String order_sql = "INSERT INTO `mall_db`.`tbl_order` (`oid`, `cid`, `odate`, `address`, `total`) VALUES (?, ?,now(), ?, ?)";
+        String orderdetail_sql = "INSERT INTO `mall_db`.`tbl_orderdetail` (`id`, `oid`, `gid`, `gcount`, `gprice`, `total`) VALUES (null,?, ?, ?, ?, ?)";
+        String updategstact_sql = "UPDATE `mall_db`.`tbl_goods` SET `gstock` = `gstock`- ? WHERE `gid` = ?";
+        String updatestate_sql = "UPDATE `mall_db`.`tbl_cart` SET `state` = 0 ,gcount = 0 WHERE `cid` = ? and state = 1";
+        // 执行增加操作
+        // 创建pstmt对象
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConn();
+            PreparedStatement pstmt = null;
+            // 设置事务不自动提交
+            conn.setAutoCommit(false);
+
+            // ************** 1订单表插入记录insert 开始 **************
+            pstmt = conn.prepareStatement(order_sql);
+            // 设置占位符对应参数值
+            pstmt.setString(1, orders.getOid());
+            pstmt.setInt(2, orders.getCid());
+            pstmt.setString(3, orders.getAddress());
+            pstmt.setDouble(4, orders.getTotal());
+            System.out.println("订单表插入pstmt:" + pstmt);
+            // 执行增删改方法
+            int n = pstmt.executeUpdate();
+            // ************** 1订单表插入记录insert 结束 **************
+
+
+            // ************** 2订单详情表插入记录insert 开始 **************
+            pstmt = conn.prepareStatement(orderdetail_sql);
+            for (OrderDetailEntity orderDetailEntity : orderDetailEntityList) {
+                // 设置占位符对应参数值
+                pstmt.setString(1, orderDetailEntity.getOid());
+                pstmt.setInt(2, orderDetailEntity.getGid());
+                pstmt.setInt(3, orderDetailEntity.getGcount());
+                pstmt.setDouble(4, orderDetailEntity.getGprice());
+                pstmt.setDouble(5, orderDetailEntity.getTotal());
+                System.out.println("订单详情表插入pstmt:" + pstmt);
+                // 执行增删改方法
+                pstmt.addBatch();
+            }
+            // 统一发送请求，执行一遍增加操作
+            int[] m = pstmt.executeBatch();
+            // ************** 2订单详情表插入记录insert 结束 **************
+
+
+            // ************** 3库存减少 tbl_goods gstock 开始 **************
+            pstmt = conn.prepareStatement(updategstact_sql);
+            for (OrderDetailEntity orderDetailEntity : orderDetailEntityList) {
+                // 设置占位符对应参数值
+                pstmt.setInt(1, orderDetailEntity.getGcount());
+                pstmt.setInt(2, orderDetailEntity.getGid());
+                System.out.println("库存减少pstmt:" + pstmt);
+                // 执行增删改方法
+                pstmt.addBatch();
+            }
+            // 统一发送请求，执行一遍增加操作
+            int[] o = pstmt.executeBatch();
+            // ************** 3库存减少 tbl_goods gstock 结束 **************
+
+
+            // ************** 4删除购物车记录 逻辑删除 tbl_cart 开始 **************
+            pstmt = conn.prepareStatement(updatestate_sql);
+            pstmt.setInt(1, CommonInfo.cid);
+
+            int p = pstmt.executeUpdate();
+            System.out.println("p" + p);
+            // ************** 4删除购物车记录 逻辑删除 tbl_cart 结束 **************
+
+            // 事务提交
+            conn.commit();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+            try {
+                conn.rollback();
+                return false;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
     }
 
 
@@ -87,11 +171,11 @@ public class OrderDao {
 //    }
 
     /**
+     * @param keywords
+     * @return
      * @Author CodeSleep
      * @Date: 2021-06-17 0:35
      * @Description: //TODO 根据条件进行模糊查询
-     * @param keywords
-     * @return
      */
     public List<OrderAndUserEntity> getOrderByLike(String keywords) {
         StringBuffer sql = new StringBuffer();
