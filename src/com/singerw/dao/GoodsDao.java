@@ -56,7 +56,6 @@ public class GoodsDao {
         int n = DBUtil.exUpdate(sql, gid);
         return n > 0;
     }
-
     public boolean updataGoodsByStateShangjia(int gid) { //上架
         String sql = "update tbl_goods set gstate = 1 where gid = ?";
         // 调用DButil.exUpdate方法

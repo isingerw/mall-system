@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class CartDao {
 
-
     /**
      * @param cart
      * @return
@@ -30,7 +29,7 @@ public class CartDao {
         String sql = "INSERT INTO `mall_db`.`tbl_cart`(`sid`,`gcount`,`gid`,`cid`,`state`) VALUES (null, ?, ?, ?, 1)";
 
         if (cartEntity != null) {
-            sql = "update tbl_cart set gcount = gcount+? , state = 1 where gid = ? and cid = ? ";
+            sql = "update tbl_cart set gcount = gcount + ? , state = 1 where gid = ? and cid = ? ";
 
         }
         // 增加调用DBUtil.exUpdate方法
@@ -40,11 +39,12 @@ public class CartDao {
 
 
     /**
-     * 判断购物车是否已经存在 该商品
-     *
      * @param gid
      * @param cid
      * @return CartBeanEntity
+     * @Author CodeSleep
+     * @Date: 2021-06-21 16:24
+     * @Description: //TODO 判断购物车是否已经存在该商品
      */
     public CartEntity getCartByGidAndCid(int gid, int cid) {
 

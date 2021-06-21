@@ -26,10 +26,10 @@ public class RegisteredFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:59
-     * @Description: //TODO ÓÃ»§×¢²á°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO ç”¨æˆ·æ³¨å†ŒæŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void RegisteredButtonActionPerformed(ActionEvent e) {
-        // °´Å¥µã»÷ÊÂ¼ş
+        // æŒ‰é’®ç‚¹å‡»äº‹ä»¶
         String cname = txtcname.getText();
         System.out.println(cname);
         String cpwd = new String(txtcpassword.getPassword());
@@ -38,29 +38,29 @@ public class RegisteredFrame extends JFrame {
         System.out.println(cphone);
         String caddress = txtcadress.getText();
         System.out.println(caddress);
-        // Òª¶ÔµÃµ½Êı¾İ½øĞĞÌõ¼şÅĞ¶Ï
+        // è¦å¯¹å¾—åˆ°æ•°æ®è¿›è¡Œæ¡ä»¶åˆ¤æ–­
         if (cname.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû²»ÄÜÎª¿Õ!");
+            JOptionPane.showMessageDialog(null, "ç”¨æˆ·åä¸èƒ½ä¸ºç©º!");
             return;
         }
         if (cpwd.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÃÜÂë²»ÄÜÎª¿Õ!");
+            JOptionPane.showMessageDialog(null, "å¯†ç ä¸èƒ½ä¸ºç©º!");
             return;
         }
         if (cphone.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÊÖ»úºÅ²»ÄÜÎª¿Õ!");
+            JOptionPane.showMessageDialog(null, "æ‰‹æœºå·ä¸èƒ½ä¸ºç©º!");
             return;
         }
-        // µ÷ÓÃdao
+        // è°ƒç”¨dao
         UserDao udao = new UserDao();
-        // µ÷ÓÃgetUserByNameAndPwd·½·¨·µ»Ø²éÑ¯Êı¾İ½á¹û
+        // è°ƒç”¨getUserByNameAndPwdæ–¹æ³•è¿”å›æŸ¥è¯¢æ•°æ®ç»“æœ
         UserEntity userEntity = new UserEntity(cname, cpwd, cphone, caddress);
         boolean flag = udao.addUser(userEntity);
         if (flag) {
-            // µ¯´°ÌáÊ¾ÏûÏ¢
-            JOptionPane.showMessageDialog(null, "¹§Ï²Äã£¬×¢²á³É¹¦");
+            // å¼¹çª—æç¤ºæ¶ˆæ¯
+            JOptionPane.showMessageDialog(null, "æ­å–œä½ ï¼Œæ³¨å†ŒæˆåŠŸ");
         } else {
-            JOptionPane.showMessageDialog(null, "×¢²áÊ§°Ü");
+            JOptionPane.showMessageDialog(null, "æ³¨å†Œå¤±è´¥");
         }
     }
 
@@ -68,20 +68,20 @@ public class RegisteredFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 0:00
-     * @Description: //TODO ·µ»ØµÇÂ¼°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO è¿”å›ç™»å½•æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void backHomeButtonActionPerformed(ActionEvent e) {
-        // Ìø×ªµ½ÏÂÒ»¸ö´°¿Ú (´´½¨ĞÂ´°¿Ú¶ÔÏó£¬²¢ÏÔÊ¾)
+        // è·³è½¬åˆ°ä¸‹ä¸€ä¸ªçª—å£ (åˆ›å»ºæ–°çª—å£å¯¹è±¡ï¼Œå¹¶æ˜¾ç¤º)
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setVisible(true);
-        // Òş²Øµ±Ç°µÇÂ¼½çÃæ´°¿Ú
+        // éšè—å½“å‰ç™»å½•ç•Œé¢çª—å£
         setVisible(false);
     }
 
     /**
      * @Author CodeSleep
      * @Date: 2021-06-15 0:00
-     * @Description: //TODO ×¢²áÒ³ÃæUI
+     * @Description: //TODO æ³¨å†Œé¡µé¢UI
      */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents

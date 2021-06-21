@@ -1,7 +1,6 @@
 package com.singerw.tools;
 
 
-import com.singerw.entity.UserEntity;
 
 /**
  * @Author: CodeSleep
@@ -10,6 +9,5 @@ import com.singerw.entity.UserEntity;
  */
 public class CommonInfo {
     public static int cid = 0;
-    public static UserEntity userEntity;
-    public static String oid;
+    public static String cadress;
 }

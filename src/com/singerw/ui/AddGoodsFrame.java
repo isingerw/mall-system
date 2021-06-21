@@ -25,13 +25,13 @@ public class AddGoodsFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 19:52
-     * @Description: //TODO ÍË³ö°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO é€€å‡ºæŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void ExitButtonActionPerformed(ActionEvent e) {
-        // ÌáÊ¾ÓÃ»§ÊÇ·ñÍË³ö
-        int n = JOptionPane.showConfirmDialog(null, "ÊÇ·ñÍË³ö", "ÌáÊ¾ĞÅÏ¢", JOptionPane.YES_OPTION);
+        // æç¤ºç”¨æˆ·æ˜¯å¦é€€å‡º
+        int n = JOptionPane.showConfirmDialog(null, "æ˜¯å¦é€€å‡º", "æç¤ºä¿¡æ¯", JOptionPane.YES_OPTION);
         if (n == 0) {
-            // Èç¹ûÓÃ»§Ñ¡ÔñÍË³ö²¢È·¶¨
+            // å¦‚æœç”¨æˆ·é€‰æ‹©é€€å‡ºå¹¶ç¡®å®š
             dispose();
         }
     }
@@ -40,36 +40,36 @@ public class AddGoodsFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 20:17
-     * @Description: //TODO ĞÂÔöÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO æ–°å¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void AddGoodsButtonActionPerformed(ActionEvent e) {
-        // »ñÈ¡ÉÌÆ·Ãû³Æ¡¢¼Û¸ñ¡¢¿â´æµÈĞÅÏ¢
+        // è·å–å•†å“åç§°ã€ä»·æ ¼ã€åº“å­˜ç­‰ä¿¡æ¯
         String gname = txtGname.getText();
         double gprice = Double.parseDouble(txtGprice.getText());
         int gstock = Integer.parseInt(txtGstock.getText());
         String ginfo = textAreaGinfo.getText();
-        // Ç°¶ËĞ£Ñé
+        // å‰ç«¯æ ¡éªŒ
         if (gname.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÉÌÆ·Ãû²»ÄÜÎª¿Õ");
+            JOptionPane.showMessageDialog(null, "å•†å“åä¸èƒ½ä¸ºç©º");
             return;
         }
 
-        // ÉèÖÃÉÏ¼ÜÏÂ¼Ü×´Ì¬ ²»Ñ¡ÔñÄ¬ÈÏÎª0£¬ÔòÎªÏÂ¼Ü×´Ì¬
+        // è®¾ç½®ä¸Šæ¶ä¸‹æ¶çŠ¶æ€ ä¸é€‰æ‹©é»˜è®¤ä¸º0ï¼Œåˆ™ä¸ºä¸‹æ¶çŠ¶æ€
         int gstate;
         if (radioButtonShangJia.isSelected()) {
-            // ÉÏ¼Ü 1
+            // ä¸Šæ¶ 1
             gstate = 1;
         } else {
-            // ²»Ñ¡ÔñÔòÄ¬ÈÏÏÂ¼Ü 0
+            // ä¸é€‰æ‹©åˆ™é»˜è®¤ä¸‹æ¶ 0
             gstate = 0;
         }
         GoodsDao goodsDao = new GoodsDao();
         GoodsEntity goodsEntity = new GoodsEntity(gname, gprice, gstock, ginfo, gstate);
         boolean flag = goodsDao.addGoods(goodsEntity);
         if (flag) {
-            JOptionPane.showMessageDialog(null, "Ìí¼Ó³É¹¦");
+            JOptionPane.showMessageDialog(null, "æ·»åŠ æˆåŠŸ");
         } else {
-            JOptionPane.showMessageDialog(null, "Ìí¼ÓÊ§°Ü");
+            JOptionPane.showMessageDialog(null, "æ·»åŠ å¤±è´¥");
         }
     }
 

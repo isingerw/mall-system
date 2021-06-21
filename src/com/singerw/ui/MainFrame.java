@@ -5,7 +5,6 @@
 package com.singerw.ui;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +16,7 @@ import com.singerw.entity.GoodsEntity;
 import com.singerw.entity.MessageEntity;
 import com.singerw.entity.OrderAndUserEntity;
 import com.singerw.entity.UserEntity;
-import com.singerw.tools.CommonInfo;
+import com.singerw.snake.StartGame;
 
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -38,7 +37,7 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:45
-     * @Description: //TODO ²Ëµ¥À¸ÉÌÆ·¹ÜÀí==>ĞÂÔöÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO èœå•æ å•†å“ç®¡ç†==>æ–°å¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemNewGoodsActionPerformed(ActionEvent e) {
         AddGoodsFrame addGoodsFrame = new AddGoodsFrame();
@@ -50,45 +49,45 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:42
-     * @Description: //TODO ²Ëµ¥À¸ÉÌÆ·¹ÜÀí==>²éÑ¯ÉÌÆ·°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO èœå•æ å•†å“ç®¡ç†==>æŸ¥è¯¢å•†å“æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemChaXunGoodsActionPerformed(ActionEvent e) {
-        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
+        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
         tabbedPane.setSelectedIndex(0);
-        // ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÉÌÆ·ĞÅÏ¢
+        // è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºå•†å“ä¿¡æ¯
         fillGoodsTable(scrollPaneGoods);
     }
 
     /**
-     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÉÌÆ·ĞÅÏ¢·½·¨
+     * è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºå•†å“ä¿¡æ¯æ–¹æ³•
      *
      * @param scrollPaneGoods
      */
     private void fillGoodsTable(JScrollPane scrollPaneGoods) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords1.getText();
         GoodsDao gdao = new GoodsDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][5];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             GoodsEntity g = list.get(i);
             obj[i][0] = g.getGid();
             obj[i][1] = g.getGname();
             obj[i][2] = g.getGprice();
             obj[i][3] = g.getGstock();
-            obj[i][4] = g.getGstate() == 1 ? "ÉÏ¼Ü" : "ÏÂ¼Ü";
+            obj[i][4] = g.getGstate() == 1 ? "ä¸Šæ¶" : "ä¸‹æ¶";
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableGoods.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
                         "\u5E93\u5B58", "\u72B6\u6001"}));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
@@ -97,7 +96,7 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:44
-     * @Description: //TODO ²Ëµ¥À¸ÓÃ»§¹ÜÀí===>ĞÂÔöÓÃ»§°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO èœå•æ ç”¨æˆ·ç®¡ç†===>æ–°å¢ç”¨æˆ·æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemNewUserActionPerformed(ActionEvent e) {
         AddUserFrame addUserFrame = new AddUserFrame();
@@ -109,30 +108,30 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-15 9:42
-     * @Description: //TODO ²Ëµ¥À¸ÓÃ»§¹ÜÀí==>²éÑ¯ÓÃ»§°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO èœå•æ ç”¨æˆ·ç®¡ç†==>æŸ¥è¯¢ç”¨æˆ·æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemChaXunUserActionPerformed(ActionEvent e) {
-        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
+        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
         tabbedPane.setSelectedIndex(1);
         fillUsersTable(scrollPaneUsers);
     }
 
     /**
-     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾ÓÃ»§ĞÅÏ¢·½·¨
+     * è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºç”¨æˆ·ä¿¡æ¯æ–¹æ³•
      *
      * @param scrollPaneUser
      */
     private void fillUsersTable(JScrollPane scrollPaneUser) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords2.getText();
         UserDao userDao = new UserDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<UserEntity> list = userDao.getUserByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][7];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             UserEntity ue = list.get(i);
             obj[i][0] = ue.getCid();
@@ -140,15 +139,15 @@ public class MainFrame extends JFrame {
             obj[i][2] = ue.getCpwd();
             obj[i][3] = ue.getCphone();
             obj[i][4] = ue.getCaddress();
-            obj[i][5] = ue.getLevel() == 0 ? "ÆÕÍ¨ÓÃ»§" : "¹ÜÀíÔ±";
+            obj[i][5] = ue.getLevel() == 0 ? "æ™®é€šç”¨æˆ·" : "ç®¡ç†å‘˜";
             obj[i][6] = ue.getLastlogin();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableUsers.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
                 }));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneUsers.setViewportView(tableUsers);
     }
 
@@ -157,31 +156,31 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-16 10:32
-     * @Description: //TODO ²Ëµ¥À¸==¡·¶©µ¥¹ÜÀí==¡·¶©µ¥²éÑ¯°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO èœå•æ ==ã€‹è®¢å•ç®¡ç†==ã€‹è®¢å•æŸ¥è¯¢æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemOrderChaXunActionPerformed(ActionEvent e) {
-        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
+        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
         tabbedPane.setSelectedIndex(2);
         fillOrderTable(scrollPaneOrder);
     }
 
     /**
-     * ×Ô¶¯²éÑ¯²¢Õ¹Ê¾¶©µ¥ĞÅÏ¢·½·¨
+     * è‡ªåŠ¨æŸ¥è¯¢å¹¶å±•ç¤ºè®¢å•ä¿¡æ¯æ–¹æ³•
      *
      * @param scrollPaneOrder
      */
     private void fillOrderTable(JScrollPane scrollPaneOrder) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords3.getText();
-        // ²éÑ¯Êı¾İÌî³äµ½jtableÖĞÀ´
+        // æŸ¥è¯¢æ•°æ®å¡«å……åˆ°jtableä¸­æ¥
         OrderDao orderDao = new OrderDao();
-        // ÏÈ²é
-        List<OrderAndUserEntity> list = orderDao.getOrderByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // å…ˆæŸ¥
+        List<OrderAndUserEntity> list = orderDao.getOrderAdminByLike("%" + keywords + "%");
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][6];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             OrderAndUserEntity oaue = list.get(i);
             obj[i][0] = oaue.getOid();
@@ -191,14 +190,14 @@ public class MainFrame extends JFrame {
             obj[i][4] = oaue.getAddress();
             obj[i][5] = oaue.getTotal();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableOrder.setModel(new DefaultTableModel(
                 obj,
                 new String[]{
                         "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
                 }
         ));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneOrder.setViewportView(tableOrder);
     }
 
@@ -206,25 +205,25 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-17 1:46
-     * @Description: //TODO  ²Ëµ¥À¸==¡·ÁôÑÔ¹ÜÀí==¡·ÁôÑÔ²éÑ¯°´Å¥¼àÌıÊÂ¼ş
+     * @Description: //TODO  èœå•æ ==ã€‹ç•™è¨€ç®¡ç†==ã€‹ç•™è¨€æŸ¥è¯¢æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void menuItemMessagesActionPerformed(ActionEvent e) {
-        // ÇĞ»»Ñ¡Ïî¿¨µÄÒ³  1 ÎªÑ¡Ïî¿¨Ò³µÄË³Ğò ´Ó0ËãÆğ
+        // åˆ‡æ¢é€‰é¡¹å¡çš„é¡µ  1 ä¸ºé€‰é¡¹å¡é¡µçš„é¡ºåº ä»0ç®—èµ·
         tabbedPane.setSelectedIndex(3);
         fillMessagesTable(scrollPaneMessages);
     }
 
     private void fillMessagesTable(JScrollPane scrollPaneOrder) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords4.getText();
         MessageDao messageDao = new MessageDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<MessageEntity> list = messageDao.getMessageByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][5];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             MessageEntity g = list.get(i);
             obj[i][0] = g.getMid();
@@ -233,13 +232,13 @@ public class MainFrame extends JFrame {
             obj[i][3] = g.getCid();
             obj[i][4] = g.getPdate();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableMessages.setModel(new DefaultTableModel(
                 obj,
                 new String[]{
                         "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
                 }));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneMessages.setViewportView(tableMessages);
     }
 
@@ -247,7 +246,7 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:52
-     * @Description: //TODO ²Ëµ¥===¡·µ¼º½===¡·ÍË³öÏµÍ³
+     * @Description: //TODO èœå•===ã€‹å¯¼èˆª===ã€‹é€€å‡ºç³»ç»Ÿ
      */
     private void menuItemExit(ActionEvent e) {
         System.exit(0);
@@ -258,7 +257,7 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 23:55
-     * @Description: //TODO ²Ëµ¥===¡··µ»ØÉÏÒ»¼¶
+     * @Description: //TODO èœå•===ã€‹è¿”å›ä¸Šä¸€çº§
      */
     private void menuItemGoBack(ActionEvent e) {
         // TODO add your code here
@@ -269,47 +268,54 @@ public class MainFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-20 4:53
-     * @Description: //TODO ÁĞ±íËÑË÷°´¼ü¼àÌıÊÂ¼ş
+     * @Description: //TODO å•†å“åˆ—è¡¨æœç´¢æŒ‰é”®ç›‘å¬äº‹ä»¶
      */
     private void goodsSouSuoActionPerformed(ActionEvent e) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords1.getText();
         GoodsDao gdao = new GoodsDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<GoodsEntity> list = gdao.getGoodsByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][5];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             GoodsEntity g = list.get(i);
             obj[i][0] = g.getGid();
             obj[i][1] = g.getGname();
             obj[i][2] = g.getGprice();
             obj[i][3] = g.getGstock();
-            obj[i][4] = g.getGstate() == 1 ? "ÉÏ¼Ü" : "ÏÂ¼Ü";
+            obj[i][4] = g.getGstate() == 1 ? "ä¸Šæ¶" : "ä¸‹æ¶";
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableGoods.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7F16\u53F7", "\u5546\u54C1\u540D\u79F0", "\u5546\u54C1\u4EF7\u683C",
                         "\u5E93\u5B58", "\u72B6\u6001"}));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneGoods.setViewportView(tableGoods);
     }
 
+
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-21 16:15
+     * @Description: //TODO ç”¨æˆ·åˆ—è¡¨æœç´¢æŒ‰é”®ç›‘å¬äº‹ä»¶
+     */
     private void usersSouSuoActionPerformed(ActionEvent e) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords2.getText();
         UserDao userDao = new UserDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<UserEntity> list = userDao.getUserByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][7];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             UserEntity ue = list.get(i);
             obj[i][0] = ue.getCid();
@@ -317,30 +323,36 @@ public class MainFrame extends JFrame {
             obj[i][2] = ue.getCpwd();
             obj[i][3] = ue.getCphone();
             obj[i][4] = ue.getCaddress();
-            obj[i][5] = ue.getLevel() == 0 ? "ÆÕÍ¨ÓÃ»§" : "¹ÜÀíÔ±";
+            obj[i][5] = ue.getLevel() == 0 ? "æ™®é€šç”¨æˆ·" : "ç®¡ç†å‘˜";
             obj[i][6] = ue.getLastlogin();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableUsers.setModel(new DefaultTableModel(
                 obj,
                 new String[]{"\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u5bc6\u7801", "\u624b\u673a\u53f7", "\u5730\u5740", "\u6743\u9650\u72b6\u6001", "\u767b\u5f55\u65f6\u95f4"
                 }));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneUsers.setViewportView(tableUsers);
     }
 
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-21 16:16
+     * @Description: //TODO è®¢å•åˆ—è¡¨æœç´¢æŒ‰é”®ç›‘å¬äº‹ä»¶
+     */
     private void ordersSouSuoActionPerformed(ActionEvent e) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords3.getText();
-        // ²éÑ¯Êı¾İÌî³äµ½jtableÖĞÀ´
+        // æŸ¥è¯¢æ•°æ®å¡«å……åˆ°jtableä¸­æ¥
         OrderDao orderDao = new OrderDao();
-        // ÏÈ²é
-        List<OrderAndUserEntity> list = orderDao.getOrderByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // å…ˆæŸ¥
+        List<OrderAndUserEntity> list = orderDao.getOrderAdminByLike("%" + keywords + "%");
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][6];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             OrderAndUserEntity oaue = list.get(i);
             obj[i][0] = oaue.getOid();
@@ -350,28 +362,34 @@ public class MainFrame extends JFrame {
             obj[i][4] = oaue.getAddress();
             obj[i][5] = oaue.getTotal();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableOrder.setModel(new DefaultTableModel(
                 obj,
                 new String[]{
                         "\u8ba2\u5355\u7f16\u53f7", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u4e0b\u5355\u65f6\u95f4", "\u6536\u8d27\u5730\u5740", "\u603b\u91d1\u989d"
                 }
         ));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneOrder.setViewportView(tableOrder);
     }
 
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-21 16:16
+     * @Description: //TODO ç•™è¨€åˆ—è¡¨æœç´¢æŒ‰é”®ç›‘å¬äº‹ä»¶
+     */
     private void messagesSouSuoActionPerformed(ActionEvent e) {
-        // »ñÈ¡ÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö
+        // è·å–ç”¨æˆ·è¾“å…¥çš„å…³é”®å­—
         String keywords = txtKeywords4.getText();
         MessageDao messageDao = new MessageDao();
-        // ÏÈ²é
+        // å…ˆæŸ¥
         List<MessageEntity> list = messageDao.getMessageByLike("%" + keywords + "%");
-        // ¼ÇÂ¼ÌõÊı
+        // è®°å½•æ¡æ•°
         int size = list.size();
-        // ´´½¨±£´æÊı¾İµÄ¶şÎ¬Êı×é
+        // åˆ›å»ºä¿å­˜æ•°æ®çš„äºŒç»´æ•°ç»„
         Object obj[][] = new Object[size][5];
-        // Ñ­»·
+        // å¾ªç¯
         for (int i = 0; i < size; i++) {
             MessageEntity g = list.get(i);
             obj[i][0] = g.getMid();
@@ -380,21 +398,31 @@ public class MainFrame extends JFrame {
             obj[i][3] = g.getCid();
             obj[i][4] = g.getPdate();
         }
-        // ÉèÖÃsetModel => new Object[][] =>ÒªÕ¹Ê¾µÄÊı¾İ new String[]:ÁĞÃû
+        // è®¾ç½®setModel => new Object[][] =>è¦å±•ç¤ºçš„æ•°æ® new String[]:åˆ—å
         tableMessages.setModel(new DefaultTableModel(
                 obj,
                 new String[]{
                         "\u7559\u8a00\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u7559\u8a00\u4fe1\u606f", "\u7528\u6237\u7f16\u53f7", "\u53d1\u5e03\u65f6\u95f4"
                 }));
-        // setViewportView ÉèÖÃtableºÍscrollpane¹ØÁª
+        // setViewportView è®¾ç½®tableå’Œscrollpaneå…³è”
         scrollPaneMessages.setViewportView(tableMessages);
+    }
+
+    /**
+     * @param e
+     * @Author CodeSleep
+     * @Date: 2021-06-20 5:55
+     * @Description: //TODO è´ªåƒè›‡æ¸¸æˆ
+     */
+    private void YouXiActionPerformed(ActionEvent e) {
+        StartGame.start();
     }
 
 
     /**
      * @Author CodeSleep
      * @Date: 2021-06-14 23:40
-     * @Description: //TODO UI½çÃæ
+     * @Description: //TODO UIç•Œé¢
      */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -420,6 +448,8 @@ public class MainFrame extends JFrame {
         menuItemHelp = new JMenuItem();
         menuItemXinShou = new JMenuItem();
         menuItemAbout = new JMenuItem();
+        menuMoYu = new JMenu();
+        YouXi = new JMenuItem();
         tabbedPane = new JTabbedPane();
         Goods = new JPanel();
         label1 = new JLabel();
@@ -575,6 +605,18 @@ public class MainFrame extends JFrame {
                 menuHelp.add(menuItemAbout);
             }
             systemMenuBar.add(menuHelp);
+
+            //======== menuMoYu ========
+            {
+                menuMoYu.setText("\u4e0a\u73ed\u6478\u9c7c");
+                menuMoYu.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
+
+                //---- YouXi ----
+                YouXi.setText("\u8d2a\u5403\u86c7\u5c0f\u6e38\u620f");
+                YouXi.addActionListener(e -> YouXiActionPerformed(e));
+                menuMoYu.add(YouXi);
+            }
+            systemMenuBar.add(menuMoYu);
         }
         setJMenuBar(systemMenuBar);
 
@@ -588,14 +630,14 @@ public class MainFrame extends JFrame {
                 Goods.setMaximumSize(new Dimension(320, 320));
                 Goods.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-                        .swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax.swing
+                        .swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax.swing
                         .border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.
-                        Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt.Color.red
+                        Font("D\u0069alog", java.awt.Font.BOLD, 12), java.awt.Color.red
                 ), Goods.getBorder()));
                 Goods.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
                     @Override
                     public void propertyChange(java.beans.PropertyChangeEvent e) {
-                        if ("\u0062ord\u0065r".equals(e.getPropertyName(
+                        if ("\u0062order".equals(e.getPropertyName(
                         ))) throw new RuntimeException();
                     }
                 });
@@ -919,6 +961,8 @@ public class MainFrame extends JFrame {
     private JMenuItem menuItemHelp;
     private JMenuItem menuItemXinShou;
     private JMenuItem menuItemAbout;
+    private JMenu menuMoYu;
+    private JMenuItem YouXi;
     private JTabbedPane tabbedPane;
     private JPanel Goods;
     private JLabel label1;

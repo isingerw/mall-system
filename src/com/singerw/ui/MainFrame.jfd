@@ -846,6 +846,16 @@ new FormModel {
 						"font": #Font7
 					} )
 				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menuMoYu"
+					"text": "上班摸鱼"
+					"font": new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "YouXi"
+						"text": "贪吃蛇小游戏"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "YouXiActionPerformed", true ) )
+					} )
+				} )
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
@@ -853,4 +863,3 @@ new FormModel {
 		} )
 	}
 }
-

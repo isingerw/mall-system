@@ -1,8 +1,6 @@
 package com.singerw.dao;
 
-import com.singerw.entity.GoodsEntity;
 import com.singerw.entity.MessageEntity;
-import com.singerw.entity.OrderEntity;
 import com.singerw.tools.DBUtil;
 
 import java.util.List;
@@ -13,6 +11,8 @@ import java.util.List;
  * @Description: //TODO 留言信息表(tbl_msg) 留言的基本 增加，删除，修改和查询
  */
 public class MessageDao {
+
+
     /**
      * @param messages 商品对象
      * @return true 操作成功 false 操作失败
@@ -29,6 +29,7 @@ public class MessageDao {
         int n = DBUtil.exUpdate(sql, messages.getGid(), messages.getMessage(), messages.getCid(), messages.getPdate());
         return n > 0;
     }
+
 
     /**
      * @param mid
@@ -65,6 +66,7 @@ public class MessageDao {
         }
         return null;
     }
+
 
     /**
      * @param keywords 查询关键字

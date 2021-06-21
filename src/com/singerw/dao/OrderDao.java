@@ -1,6 +1,5 @@
 package com.singerw.dao;
 
-import com.singerw.entity.GoodsEntity;
 import com.singerw.entity.OrderAndUserEntity;
 import com.singerw.entity.OrderDetailEntity;
 import com.singerw.entity.OrderEntity;
@@ -18,6 +17,7 @@ import java.util.List;
  * @Description: //TODO 订单表(总表) (tbl_order)的基本添加 删除 修改 和查询
  */
 public class OrderDao {
+
 
     /**
      * @param orders
@@ -117,67 +117,13 @@ public class OrderDao {
 
 
     /**
-     * @param orders 订单对象
-     * @return true 操作成功 false 操作失败
-     * @Author CodeSleep
-     * @Date: 2021-06-10 22:59
-     * @Description: //TODO 修改订单信息
-     */
-    public boolean updateOrder(OrderEntity orders) {
-        String sql = "update tbl_order set address = ? where oid = ?";
-        // 调用DButil.exUpdate方法
-        int n = DBUtil.exUpdate(sql, orders.getAddress(), orders.getOid());
-        return n > 0;
-    }
-
-    /**
-     * @param oid 商品编号
-     * @return Goods 商品对象
-     * @Author CodeSleep
-     * @Date: 2021-06-10 23:05
-     * @Description: //TODO 根据id查询单个记录
-     */
-    public OrderEntity getOrderById(String oid) {
-        String sql = "SELECT * from tbl_order WHERE oid = ?";
-        Object obj = DBUtil.exQuery(sql, OrderEntity.class, oid);
-        // 返回值是List类型
-        if (obj instanceof List) {
-            List<OrderEntity> list = (List) obj;
-            if (list.size() > 0) {
-                return list.get(0);
-            }
-            return null;
-        }
-        return null;
-    }
-
-/**
- * @param oid
- * @param cid
- * @param cname
- * @return
- * @Author CodeSleep
- * @Date: 2021-06-17 0:15
- * @Description: //TODO 根据条件进行模糊查询
- */
-//    public List<OrderEntity> getOrderByLike(String keywords) {
-//        String sql = "SELECT * from tbl_order where cid like ? or address like ? or cname like ?";
-//        Object obj = DBUtil.exQuery(sql, OrderEntity.class, keywords, keywords,keywords);
-//        if (obj instanceof List) {
-//            List<OrderEntity> list = (List) obj;
-//            return list;
-//        }
-//        return null;
-//    }
-
-    /**
      * @param keywords
      * @return
      * @Author CodeSleep
-     * @Date: 2021-06-17 0:35
-     * @Description: //TODO 根据条件进行模糊查询
+     * @Date: 2021-06-21 16:11
+     * @Description: //TODO 管理员根据条件进行订单模糊查询
      */
-    public List<OrderAndUserEntity> getOrderByLike(String keywords) {
+    public List<OrderAndUserEntity> getOrderAdminByLike(String keywords) {
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT tbl_order.oid,tbl_user.cid,tbl_user.cname,tbl_order.odate,tbl_order.address,tbl_order.total FROM tbl_order INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
         sql.append(" " + "WHERE tbl_order.oid like ?");
@@ -189,4 +135,62 @@ public class OrderDao {
         }
         return null;
     }
+
+
+    /**
+     * @param keywords
+     * @return
+     * @Author CodeSleep
+     * @Date: 2021-06-17 0:35
+     * @Description: //TODO 用户根据条件进行订单模糊查询
+     */
+    public List<OrderAndUserEntity> getOrderUserByLike(String keywords, int cid) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT tbl_order.oid,tbl_user.cid,tbl_user.cname,tbl_order.odate,tbl_order.address,tbl_order.total FROM tbl_order INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
+        sql.append(" " + "WHERE tbl_order.oid like ? AND tbl_user.cid = ?");
+        Object obj = DBUtil.exQuery(sql.toString(), OrderAndUserEntity.class, keywords, cid);
+        // 返回值是List类型
+        if (obj instanceof List) {
+            List<OrderAndUserEntity> list = (List) obj;
+            return list;
+        }
+        return null;
+    }
+
+
+    /**
+     * @param orders 订单对象
+     * @return true 操作成功 false 操作失败
+     * @Author CodeSleep
+     * @Date: 2021-06-10 22:59
+     * @Description: //TODO 修改订单信息，功能未实现
+     */
+    /*public boolean updateOrder(OrderEntity orders) {
+        String sql = "update tbl_order set address = ? where oid = ?";
+        // 调用DButil.exUpdate方法
+        int n = DBUtil.exUpdate(sql, orders.getAddress(), orders.getOid());
+        return n > 0;
+    }*/
+
+
+    /**
+     * @param oid 商品编号
+     * @return Goods 商品对象
+     * @Author CodeSleep
+     * @Date: 2021-06-10 23:05
+     * @Description: //TODO 根据id查询单个记录，功能未实现
+     */
+    /*public OrderEntity getOrderById(String oid) {
+        String sql = "SELECT * from tbl_order WHERE oid = ?";
+        Object obj = DBUtil.exQuery(sql, OrderEntity.class, oid);
+        // 返回值是List类型
+        if (obj instanceof List) {
+            List<OrderEntity> list = (List) obj;
+            if (list.size() > 0) {
+                return list.get(0);
+            }
+            return null;
+        }
+        return null;
+    }*/
 }

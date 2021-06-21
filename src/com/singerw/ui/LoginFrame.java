@@ -44,194 +44,195 @@ public class LoginFrame extends JFrame {
      * @param e
      * @Author CodeSleep
      * @Date: 2021-06-14 21:38
-     * @Description: //TODO µÇÂ¼°´Å¥¼àÌýÊÂ¼þ
+     * @Description: //TODO ç™»å½•æŒ‰é’®ç›‘å¬äº‹ä»¶
      */
     private void floginButtonActionPerformed(ActionEvent e) {
-        // °´Å¥µã»÷ÊÂ¼þ
+        // æŒ‰é’®ç‚¹å‡»äº‹ä»¶
         String cname = txtcname.getText();
         System.out.println(cname);
         String cpwd = txtcpassword.getText();
         System.out.println(cpwd);
-        // Òª¶ÔµÃµ½Êý¾Ý½øÐÐÌõ¼þÅÐ¶Ï
+        // è¦å¯¹å¾—åˆ°æ•°æ®è¿›è¡Œæ¡ä»¶åˆ¤æ–­
         if (cname.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû²»ÄÜÎª¿Õ!");
+            JOptionPane.showMessageDialog(null, "ç”¨æˆ·åä¸èƒ½ä¸ºç©º!");
             return;
         }
         if (cpwd.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ÃÜÂë²»ÄÜÎª¿Õ!");
+            JOptionPane.showMessageDialog(null, "å¯†ç ä¸èƒ½ä¸ºç©º!");
             return;
         }
-        // ÓÃ»§Ð­ÒéÍ¬ÒâÓë·ñÅÐ¶Ï
+        // ç”¨æˆ·åè®®åŒæ„ä¸Žå¦åˆ¤æ–­
         boolean flag = fcheck.isSelected();
         if (flag == false) {
-            JOptionPane.showMessageDialog(null, "ÇëÍ¬ÒâÓÃ»§Ð­ÒéºÍÒþË½±£»¤Ð­Òé");
+            JOptionPane.showMessageDialog(null, "è¯·åŒæ„ç”¨æˆ·åè®®å’Œéšç§ä¿æŠ¤åè®®");
             return;
         }
 
-        // µ÷ÓÃdao
+        // è°ƒç”¨dao
         UserDao udao = new UserDao();
-        // µ÷ÓÃgetUserByNameAndPwd·½·¨·µ»Ø²éÑ¯Êý¾Ý½á¹û
+        // è°ƒç”¨getUserByNameAndPwdæ–¹æ³•è¿”å›žæŸ¥è¯¢æ•°æ®ç»“æžœ
         UserEntity userEntity = udao.getUserByNameAndPwd(cname, cpwd);
-        // ÅÐ¶ÏÓÃ»§È¨ÏÞ 0 »ò 1 ==1Ê±Õ¹Ê¾¹ÜÀíÔ±ºóÌ¨
-        if (userEntity.getLevel() == 1) {
-            if (userEntity == null) {
-                // µ¯´°ÌáÊ¾ÏûÏ¢
-                JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû»òÕßÃÜÂë´íÎó£¬µÇÂ¼Ê§°Ü!");
-            } else {
-                JOptionPane.showMessageDialog(null, "µÇÂ¼³É¹¦!");
-                // ¹ºÎï³µ»ñÈ¡ÓÃ»§ID£¬ÓÃ»§µÇÂ¼³É¹¦ºó½«ÓÃ»§´æ´¢ÔÚÒ»¸ö¶ÀÁ¢µÄÀàÖÐ
-                CommonInfo.cid = userEntity.getCid();
-                System.out.println("CommonInfo.cid:" + CommonInfo.cid);
-                // Ìø×ªµ½ÏÂÒ»¸ö´°¿Ú (´´½¨ÐÂ´°¿Ú¶ÔÏó£¬²¢ÏÔÊ¾)
-                MainFrame mainframe = new MainFrame();
-                mainframe.setVisible(true);
-                // Òþ²Øµ±Ç°µÇÂ¼½çÃæ´°¿Ú
-                setVisible(false);
-            }
-        } else {
-            // ÅÐ¶ÏÓÃ»§È¨ÏÞ 0 »ò 1 ==0»òÕßÆäËûÊ±¶¼Õ¹Ê¾ÓÃ»§Ç°Ì¨
-            // ¹ºÎï³µ»ñÈ¡ÓÃ»§ID£¬ÓÃ»§µÇÂ¼³É¹¦ºó½«ÓÃ»§´æ´¢ÔÚÒ»¸ö¶ÀÁ¢µÄÀàÖÐ
-            CommonInfo.cid = userEntity.getCid();
-            System.out.println("CommonInfo.cid:" + CommonInfo.cid);
 
-            // Ìø×ªµ½ÏÂÒ»¸ö´°¿Ú (´´½¨ÐÂ´°¿Ú¶ÔÏó£¬²¢ÏÔÊ¾)
-            CustomerMainFrame customerMainFrame = new CustomerMainFrame();
-            customerMainFrame.setVisible(true);
-            // Òþ²Øµ±Ç°µÇÂ¼½çÃæ´°¿Ú
+            if (userEntity == null) {
+                // å¼¹çª—æç¤ºæ¶ˆæ¯
+                JOptionPane.showMessageDialog(null, "ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯ï¼Œç™»å½•å¤±è´¥!");
+            } else {
+                JOptionPane.showMessageDialog(null, "ç™»å½•æˆåŠŸ!");
+                // åˆ¤æ–­ç”¨æˆ·æƒé™ 0 æˆ– 1 ==1æ—¶å±•ç¤ºç®¡ç†å‘˜åŽå°
+                if (userEntity.getLevel() == 1){
+                    // è´­ç‰©è½¦èŽ·å–ç”¨æˆ·IDï¼Œç”¨æˆ·ç™»å½•æˆåŠŸåŽå°†ç”¨æˆ·å­˜å‚¨åœ¨ä¸€ä¸ªç‹¬ç«‹çš„ç±»ä¸­
+                    CommonInfo.cid = userEntity.getCid();
+                    System.out.println("CommonInfo.cid:" + CommonInfo.cid);
+                    // è·³è½¬åˆ°ä¸‹ä¸€ä¸ªçª—å£ (åˆ›å»ºæ–°çª—å£å¯¹è±¡ï¼Œå¹¶æ˜¾ç¤º)
+                    MainFrame mainframe = new MainFrame();
+                    mainframe.setVisible(true);
+                    // éšè—å½“å‰ç™»å½•ç•Œé¢çª—å£
+                    setVisible(false);
+                }else {
+                    // åˆ¤æ–­ç”¨æˆ·æƒé™ 0 æˆ– 1 ==0æˆ–è€…å…¶ä»–æ—¶éƒ½å±•ç¤ºç”¨æˆ·å‰å°
+                    // è´­ç‰©è½¦èŽ·å–ç”¨æˆ·IDï¼Œç”¨æˆ·ç™»å½•æˆåŠŸåŽå°†ç”¨æˆ·å­˜å‚¨åœ¨ä¸€ä¸ªç‹¬ç«‹çš„ç±»ä¸­
+                    CommonInfo.cid = userEntity.getCid();
+                    CommonInfo.cadress = userEntity.getCaddress();
+                    System.out.println("CommonInfo.cid:" + CommonInfo.cid);
+
+                    // è·³è½¬åˆ°ä¸‹ä¸€ä¸ªçª—å£ (åˆ›å»ºæ–°çª—å£å¯¹è±¡ï¼Œå¹¶æ˜¾ç¤º)
+                    CustomerMainFrame customerMainFrame = new CustomerMainFrame();
+                    customerMainFrame.setVisible(true);
+                    // éšè—å½“å‰ç™»å½•ç•Œé¢çª—å£
+                    setVisible(false);
+                }
+            }
+        }
+
+        /**
+         * @param e
+         * @Author CodeSleep
+         * @Date: 2021-06-14 21:39
+         * @Description: //TODO æ³¨å†ŒæŒ‰é’®ç›‘å¬äº‹ä»¶
+         */
+        private void fzhuceButtonActionPerformed (ActionEvent e){
+            // è·³è½¬åˆ°ä¸‹ä¸€ä¸ªçª—å£ (åˆ›å»ºæ–°çª—å£å¯¹è±¡ï¼Œå¹¶æ˜¾ç¤º)
+            RegisteredFrame zhuce = new RegisteredFrame();
+            zhuce.setVisible(true);
+            // éšè—å½“å‰ç™»å½•ç•Œé¢çª—å£
             setVisible(false);
         }
 
-    }
-
-    /**
-     * @param e
-     * @Author CodeSleep
-     * @Date: 2021-06-14 21:39
-     * @Description: //TODO ×¢²á°´Å¥¼àÌýÊÂ¼þ
-     */
-    private void fzhuceButtonActionPerformed(ActionEvent e) {
-        // Ìø×ªµ½ÏÂÒ»¸ö´°¿Ú (´´½¨ÐÂ´°¿Ú¶ÔÏó£¬²¢ÏÔÊ¾)
-        RegisteredFrame zhuce = new RegisteredFrame();
-        zhuce.setVisible(true);
-        // Òþ²Øµ±Ç°µÇÂ¼½çÃæ´°¿Ú
-        setVisible(false);
-    }
-
-    /**
-     * @param e
-     * @Author CodeSleep
-     * @Date: 2021-06-14 21:39
-     * @Description: //TODO ÍË³ö°´Å¥¼àÌýÊÂ¼þ
-     */
-    private void fexitBottonActionPerformed(ActionEvent e) {
-        // ÌáÊ¾ÓÃ»§ÊÇ·ñÍË³ö
-        int n = JOptionPane.showConfirmDialog(null, "ÊÇ·ñÍË³ö", "ÌáÊ¾ÐÅÏ¢", JOptionPane.YES_OPTION);
-        if (n == 0) {
-            // Èç¹ûÓÃ»§Ñ¡ÔñÍË³ö²¢È·¶¨
-            dispose();
-            System.exit(0);
+        /**
+         * @param e
+         * @Author CodeSleep
+         * @Date: 2021-06-14 21:39
+         * @Description: //TODO é€€å‡ºæŒ‰é’®ç›‘å¬äº‹ä»¶
+         */
+        private void fexitBottonActionPerformed (ActionEvent e){
+            // æç¤ºç”¨æˆ·æ˜¯å¦é€€å‡º
+            int n = JOptionPane.showConfirmDialog(null, "æ˜¯å¦é€€å‡º", "æç¤ºä¿¡æ¯", JOptionPane.YES_OPTION);
+            if (n == 0) {
+                // å¦‚æžœç”¨æˆ·é€‰æ‹©é€€å‡ºå¹¶ç¡®å®š
+                dispose();
+                System.exit(0);
+            }
         }
-    }
 
 
-    /**
-     * @Author CodeSleep
-     * @Date: 2021-06-15 0:01
-     * @Description: //TODO ÓÃ»§µÇÂ¼Ò³ÃæUI
-     */
-    private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        /**
+         * @Author CodeSleep
+         * @Date: 2021-06-15 0:01
+         * @Description: //TODO ç”¨æˆ·ç™»å½•é¡µé¢UI
+         */
+        private void initComponents () {
+            // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+            // Generated using JFormDesigner Evaluation license - unknown
+            DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
+            txtcpassword = new JPasswordField();
+            txtcname = new JFormattedTextField();
+            titlepassword = compFactory.createTitle("\u5bc6\u7801\uff1a");
+            title = compFactory.createTitle("\u8d26\u53f7\uff1a");
+            floginButton = new JButton();
+            fzhuceButton = new JButton();
+            fcheck = new JCheckBox();
+            titlelogin = compFactory.createTitle("\u7528 \u6237 \u767b \u5f55");
+            fexitBotton = new JButton();
+
+            //======== this ========
+            setMinimumSize(new Dimension(140, 370));
+            setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
+            setResizable(false);
+            setTitle("\u7528\u6237\u767b\u5f55");
+            setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            Container contentPane = getContentPane();
+            contentPane.setLayout(null);
+
+            //---- txtcpassword ----
+            txtcpassword.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
+            contentPane.add(txtcpassword);
+            txtcpassword.setBounds(95, 145, 190, 35);
+
+            //---- txtcname ----
+            txtcname.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+            contentPane.add(txtcname);
+            txtcname.setBounds(95, 95, 190, 35);
+
+            //---- titlepassword ----
+            titlepassword.setFont(new Font("\u9ed1\u4f53", titlepassword.getFont().getStyle() & ~Font.BOLD, titlepassword.getFont().getSize() + 3));
+            contentPane.add(titlepassword);
+            titlepassword.setBounds(45, 150, 50, 20);
+
+            //---- title ----
+            title.setFont(new Font("\u9ed1\u4f53", title.getFont().getStyle() & ~Font.BOLD, title.getFont().getSize() + 3));
+            contentPane.add(title);
+            title.setBounds(45, 105, 50, 20);
+
+            //---- floginButton ----
+            floginButton.setText("\u767b \u5f55");
+            floginButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+            floginButton.addActionListener(e -> floginButtonActionPerformed(e));
+            contentPane.add(floginButton);
+            floginButton.setBounds(85, 240, 195, 35);
+
+            //---- fzhuceButton ----
+            fzhuceButton.setText("\u6ce8 \u518c");
+            fzhuceButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+            fzhuceButton.addActionListener(e -> fzhuceButtonActionPerformed(e));
+            contentPane.add(fzhuceButton);
+            fzhuceButton.setBounds(85, 285, 195, 35);
+
+            //---- fcheck ----
+            fcheck.setText("\u540c\u610f\u7528\u6237\u534f\u8bae\u548c\u9690\u79c1\u4fdd\u62a4\u534f\u8bae");
+            fcheck.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
+            contentPane.add(fcheck);
+            fcheck.setBounds(80, 200, 230, fcheck.getPreferredSize().height);
+
+            //---- titlelogin ----
+            titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
+            contentPane.add(titlelogin);
+            titlelogin.setBounds(125, 35, 120, 30);
+
+            //---- fexitBotton ----
+            fexitBotton.setText("\u9000 \u51fa");
+            fexitBotton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
+            fexitBotton.addActionListener(e -> fexitBottonActionPerformed(e));
+            contentPane.add(fexitBotton);
+            fexitBotton.setBounds(85, 330, 195, 35);
+
+            contentPane.setPreferredSize(new Dimension(350, 485));
+            pack();
+            setLocationRelativeTo(null);
+            // JFormDesigner - End of component initialization  //GEN-END:initComponents
+        }
+
+
+        // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
         // Generated using JFormDesigner Evaluation license - unknown
-        DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
-        txtcpassword = new JPasswordField();
-        txtcname = new JFormattedTextField();
-        titlepassword = compFactory.createTitle("\u5bc6\u7801\uff1a");
-        title = compFactory.createTitle("\u8d26\u53f7\uff1a");
-        floginButton = new JButton();
-        fzhuceButton = new JButton();
-        fcheck = new JCheckBox();
-        titlelogin = compFactory.createTitle("\u7528 \u6237 \u767b \u5f55");
-        fexitBotton = new JButton();
-
-        //======== this ========
-        setMinimumSize(new Dimension(140, 370));
-        setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
-        setResizable(false);
-        setTitle("\u7528\u6237\u767b\u5f55");
-        setIconImage(new ImageIcon(getClass().getResource("/com/singerw/ui/img/icoimage.png")).getImage());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Container contentPane = getContentPane();
-        contentPane.setLayout(null);
-
-        //---- txtcpassword ----
-        txtcpassword.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
-        contentPane.add(txtcpassword);
-        txtcpassword.setBounds(95, 145, 190, 35);
-
-        //---- txtcname ----
-        txtcname.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
-        contentPane.add(txtcname);
-        txtcname.setBounds(95, 95, 190, 35);
-
-        //---- titlepassword ----
-        titlepassword.setFont(new Font("\u9ed1\u4f53", titlepassword.getFont().getStyle() & ~Font.BOLD, titlepassword.getFont().getSize() + 3));
-        contentPane.add(titlepassword);
-        titlepassword.setBounds(45, 150, 50, 20);
-
-        //---- title ----
-        title.setFont(new Font("\u9ed1\u4f53", title.getFont().getStyle() & ~Font.BOLD, title.getFont().getSize() + 3));
-        contentPane.add(title);
-        title.setBounds(45, 105, 50, 20);
-
-        //---- floginButton ----
-        floginButton.setText("\u767b \u5f55");
-        floginButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
-        floginButton.addActionListener(e -> floginButtonActionPerformed(e));
-        contentPane.add(floginButton);
-        floginButton.setBounds(85, 240, 195, 35);
-
-        //---- fzhuceButton ----
-        fzhuceButton.setText("\u6ce8 \u518c");
-        fzhuceButton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
-        fzhuceButton.addActionListener(e -> fzhuceButtonActionPerformed(e));
-        contentPane.add(fzhuceButton);
-        fzhuceButton.setBounds(85, 285, 195, 35);
-
-        //---- fcheck ----
-        fcheck.setText("\u540c\u610f\u7528\u6237\u534f\u8bae\u548c\u9690\u79c1\u4fdd\u62a4\u534f\u8bae");
-        fcheck.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 14));
-        contentPane.add(fcheck);
-        fcheck.setBounds(80, 200, 230, fcheck.getPreferredSize().height);
-
-        //---- titlelogin ----
-        titlelogin.setFont(titlelogin.getFont().deriveFont(titlelogin.getFont().getSize() + 8f));
-        contentPane.add(titlelogin);
-        titlelogin.setBounds(125, 35, 120, 30);
-
-        //---- fexitBotton ----
-        fexitBotton.setText("\u9000 \u51fa");
-        fexitBotton.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 16));
-        fexitBotton.addActionListener(e -> fexitBottonActionPerformed(e));
-        contentPane.add(fexitBotton);
-        fexitBotton.setBounds(85, 330, 195, 35);
-
-        contentPane.setPreferredSize(new Dimension(350, 485));
-        pack();
-        setLocationRelativeTo(null);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+        private JPasswordField txtcpassword;
+        private JFormattedTextField txtcname;
+        private JLabel titlepassword;
+        private JLabel title;
+        private JButton floginButton;
+        private JButton fzhuceButton;
+        private JCheckBox fcheck;
+        private JLabel titlelogin;
+        private JButton fexitBotton;
+        // JFormDesigner - End of variables declaration  //GEN-END:variables
     }
-
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JPasswordField txtcpassword;
-    private JFormattedTextField txtcname;
-    private JLabel titlepassword;
-    private JLabel title;
-    private JButton floginButton;
-    private JButton fzhuceButton;
-    private JCheckBox fcheck;
-    private JLabel titlelogin;
-    private JButton fexitBotton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
-}
