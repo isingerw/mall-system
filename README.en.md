@@ -21,6 +21,14 @@ Software architecture description
 #### Contribution
 ```text
 ├─src
+|  ├─statics
+|  |    ├─body.png
+|  |    ├─down.png
+|  |    ├─food.png
+|  |    ├─header.png
+|  |    ├─left.png
+|  |    ├─right.png
+|  |    └up.png
 |  ├─com
 |  |  ├─singerw
 |  |  |    ├─ui
@@ -48,6 +56,10 @@ Software architecture description
 |  |  |    |  ├─TestOrder.java
 |  |  |    |  ├─TestOrderDetail.java
 |  |  |    |  └TestUser.java
+|  |  |    ├─snake
+|  |  |    |   ├─Data.java
+|  |  |    |   ├─GamePanel.java
+|  |  |    |   └StartGame.java
 |  |  |    ├─entity
 |  |  |    |   ├─CartBeanEntity.java
 |  |  |    |   ├─CartEntity.java
@@ -55,6 +67,7 @@ Software architecture description
 |  |  |    |   ├─MessageEntity.java
 |  |  |    |   ├─OrderAndUserEntity.java
 |  |  |    |   ├─OrderDetailEntity.java
+|  |  |    |   ├─OrderDetailUserEntity.java
 |  |  |    |   ├─OrderEntity.java
 |  |  |    |   └UserEntity.java
 |  |  |    ├─dao

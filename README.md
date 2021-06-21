@@ -16,6 +16,14 @@ GUI超市管理系统
 #### 目录树
 ```text
 ├─src
+|  ├─statics
+|  |    ├─body.png
+|  |    ├─down.png
+|  |    ├─food.png
+|  |    ├─header.png
+|  |    ├─left.png
+|  |    ├─right.png
+|  |    └up.png
 |  ├─com
 |  |  ├─singerw
 |  |  |    ├─ui
@@ -43,6 +51,10 @@ GUI超市管理系统
 |  |  |    |  ├─TestOrder.java
 |  |  |    |  ├─TestOrderDetail.java
 |  |  |    |  └TestUser.java
+|  |  |    ├─snake
+|  |  |    |   ├─Data.java
+|  |  |    |   ├─GamePanel.java
+|  |  |    |   └StartGame.java
 |  |  |    ├─entity
 |  |  |    |   ├─CartBeanEntity.java
 |  |  |    |   ├─CartEntity.java
@@ -50,6 +62,7 @@ GUI超市管理系统
 |  |  |    |   ├─MessageEntity.java
 |  |  |    |   ├─OrderAndUserEntity.java
 |  |  |    |   ├─OrderDetailEntity.java
+|  |  |    |   ├─OrderDetailUserEntity.java
 |  |  |    |   ├─OrderEntity.java
 |  |  |    |   └UserEntity.java
 |  |  |    ├─dao
@@ -59,5 +72,6 @@ GUI超市管理系统
 |  |  |    |  ├─OrderDao.java
 |  |  |    |  ├─OrderDetailDao.java
 |  |  |    |  └UserDao.java
+
 ```
 
