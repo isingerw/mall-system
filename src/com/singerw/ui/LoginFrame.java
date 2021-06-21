@@ -80,6 +80,7 @@ public class LoginFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "登录成功!");
                 // 判断用户权限 0 或 1 ==1时展示管理员后台
                 if (userEntity.getLevel() == 1){
+                    System.out.println(userEntity.getLevel());
                     // 购物车获取用户ID，用户登录成功后将用户存储在一个独立的类中
                     CommonInfo.cid = userEntity.getCid();
                     System.out.println("CommonInfo.cid:" + CommonInfo.cid);
@@ -90,6 +91,7 @@ public class LoginFrame extends JFrame {
                     setVisible(false);
                 }else {
                     // 判断用户权限 0 或 1 ==0或者其他时都展示用户前台
+                    System.out.println(userEntity.getLevel());
                     // 购物车获取用户ID，用户登录成功后将用户存储在一个独立的类中
                     CommonInfo.cid = userEntity.getCid();
                     CommonInfo.cadress = userEntity.getCaddress();

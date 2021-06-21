@@ -219,7 +219,7 @@ public class CustomerMainFrame extends JFrame {
         // 获取当前用户id,进行查询时，只展示当前用户的订单
         int cid = CommonInfo.cid;
         // 先查
-        List<OrderAndUserEntity> list = orderDao.getOrderUserByLike("%" + keywords + "%",cid);
+        List<OrderAndUserEntity> list = orderDao.getOrderUserByLike("%" + keywords + "%", cid);
         // 记录条数
         int size = list.size();
         // 创建保存数据的二维数组
@@ -255,29 +255,33 @@ public class CustomerMainFrame extends JFrame {
         // 获取用户输入的关键字
         String keywords = txtKeywordsOrdersXiangQing.getText();
         OrderDetailDao orderDetailDao = new OrderDetailDao();
+        int cid = CommonInfo.cid;
         // 先查
-        List<OrderDetailEntity> list = orderDetailDao.getOrderDetailUserByLike("%" + keywords + "%");
+        List<OrderDetailUserEntity> list = orderDetailDao.getOrderDetailUserByLike("%" + keywords + "%", cid);
         // 记录条数
         int size = list.size();
         // 创建保存数据的二维数组
-        Object obj[][] = new Object[size][6];
+        Object obj[][] = new Object[size][8];
         // 循环
         for (int i = 0; i < size; i++) {
-            OrderDetailEntity g = list.get(i);
+            OrderDetailUserEntity g = list.get(i);
             obj[i][0] = g.getId();
             obj[i][1] = g.getOid();
             obj[i][2] = g.getGid();
-            obj[i][3] = g.getGcount();
-            obj[i][4] = g.getGprice();
-            obj[i][5] = g.getTotal();
+            obj[i][3] = g.getGprice();
+            obj[i][4] = g.getGcount();
+            obj[i][5] = g.getCid();
+            obj[i][6] = g.getCname();
+            obj[i][7] = g.getTotal();
 
         }
         // 设置setModel => new Object[][] =>要展示的数据 new String[]:列名
         tableOrdersXiangQing.setModel(new DefaultTableModel(
                 obj,
                 new String[]{
-                        "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u6570\u91cf", "\u5546\u54c1\u4ef7\u683c", "\u603b\u8ba1"
-                }));
+                        "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u5355\u4ef7", "\u6570\u91cf", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u603b\u8ba1"
+                }
+        ));
         // setViewportView 设置table和scrollpane关联
         scrollPaneOrdersXiangQing.setViewportView(tableOrdersXiangQing);
     }
@@ -440,17 +444,16 @@ public class CustomerMainFrame extends JFrame {
 
             //======== Goods ========
             {
-                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
-                        , 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM
-                        , new java.awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt.Color.red),
-                        Goods.getBorder()));
+                Goods.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
+                        (0, 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder.CENTER, javax.swing.border
+                        .TitledBorder.BOTTOM, new java.awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
+                        .Color.red), Goods.getBorder()));
                 Goods.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
                     @Override
-                    public void propertyChange(java.beans.PropertyChangeEvent e
-                    ) {
-                        if ("bord\u0065r".equals(e.getPropertyName())) {
-                            throw new RuntimeException();
-                        }
+                    public void
+                    propertyChange(java.beans.PropertyChangeEvent e) {
+                        if ("bord\u0065r".equals(e.getPropertyName())) throw new RuntimeException()
+                                ;
                     }
                 });
                 Goods.setLayout(null);
@@ -493,25 +496,25 @@ public class CustomerMainFrame extends JFrame {
                     scrollPaneGoods.setViewportView(tableGoods);
                 }
                 Goods.add(scrollPaneGoods);
-                scrollPaneGoods.setBounds(0, 60, 705, 305);
+                scrollPaneGoods.setBounds(0, 60, 900, 380);
 
                 //---- label1 ----
                 label1.setText("\u8bf7\u8f93\u5165\u8981\u67e5\u8be2\u7684\u5173\u952e\u5b57");
                 label1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Goods.add(label1);
-                label1.setBounds(280, 25, 160, 20);
+                label1.setBounds(407, 25, 160, 20);
 
                 //---- txtKeywordsGoods ----
                 txtKeywordsGoods.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
                 Goods.add(txtKeywordsGoods);
-                txtKeywordsGoods.setBounds(450, 25, 158, 20);
+                txtKeywordsGoods.setBounds(577, 25, 158, 20);
 
                 //---- goodsSouSouButton ----
                 goodsSouSouButton.setText("\u641c \u7d22");
                 goodsSouSouButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 goodsSouSouButton.addActionListener(e -> goodsSouSouButtonActionPerformed(e));
                 Goods.add(goodsSouSouButton);
-                goodsSouSouButton.setBounds(615, 20, 78, 30);
+                goodsSouSouButton.setBounds(742, 20, 78, 30);
 
                 {
                     // compute preferred size
@@ -566,38 +569,38 @@ public class CustomerMainFrame extends JFrame {
                     scrollPaneCart.setViewportView(tableCart);
                 }
                 Carts.add(scrollPaneCart);
-                scrollPaneCart.setBounds(0, 60, 707, 260);
+                scrollPaneCart.setBounds(0, 60, 900, 325);
 
                 //---- label3 ----
                 label3.setText("\u8bf7\u8f93\u5165\u8981\u67e5\u8be2\u7684\u5173\u952e\u5b57");
                 label3.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Carts.add(label3);
-                label3.setBounds(280, 25, 160, 20);
+                label3.setBounds(425, 25, 160, 20);
 
                 //---- txtKeywordsCart ----
                 txtKeywordsCart.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
                 Carts.add(txtKeywordsCart);
-                txtKeywordsCart.setBounds(450, 25, 158, 20);
+                txtKeywordsCart.setBounds(595, 25, 158, 20);
 
                 //---- cartSouSouButton ----
                 cartSouSouButton.setText("\u641c \u7d22");
                 cartSouSouButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 cartSouSouButton.addActionListener(e -> cartSouSouButtonActionPerformed(e));
                 Carts.add(cartSouSouButton);
-                cartSouSouButton.setBounds(615, 20, 78, 30);
+                cartSouSouButton.setBounds(760, 20, 78, 30);
 
                 //---- JieSuanButton ----
                 JieSuanButton.setText("\u7ed3 \u7b97");
                 JieSuanButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 JieSuanButton.addActionListener(e -> JieSuanButtonActionPerformed(e));
                 Carts.add(JieSuanButton);
-                JieSuanButton.setBounds(new Rectangle(new Point(600, 330), JieSuanButton.getPreferredSize()));
+                JieSuanButton.setBounds(new Rectangle(new Point(793, 397), JieSuanButton.getPreferredSize()));
 
                 //---- labelSum ----
                 labelSum.setText("\u5408 \u8ba1\uff1a");
                 labelSum.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Carts.add(labelSum);
-                labelSum.setBounds(490, 335, 100, labelSum.getPreferredSize().height);
+                labelSum.setBounds(683, 402, 100, labelSum.getPreferredSize().height);
 
                 {
                     // compute preferred size
@@ -651,25 +654,25 @@ public class CustomerMainFrame extends JFrame {
                     scrollPaneOrders.setViewportView(tableOrders);
                 }
                 Orders.add(scrollPaneOrders);
-                scrollPaneOrders.setBounds(0, 60, 707, 305);
+                scrollPaneOrders.setBounds(0, 60, 900, 380);
 
                 //---- label2 ----
                 label2.setText("\u8bf7\u8f93\u5165\u8981\u67e5\u8be2\u7684\u5173\u952e\u5b57");
                 label2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 Orders.add(label2);
-                label2.setBounds(280, 25, 160, 20);
+                label2.setBounds(442, 25, 160, 20);
 
                 //---- txtKeywordsOrders ----
                 txtKeywordsOrders.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
                 Orders.add(txtKeywordsOrders);
-                txtKeywordsOrders.setBounds(450, 25, 158, 20);
+                txtKeywordsOrders.setBounds(612, 25, 158, 20);
 
                 //---- orderSouSouButton ----
                 orderSouSouButton.setText("\u641c \u7d22");
                 orderSouSouButton.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 orderSouSouButton.addActionListener(e -> orderSouSuoActionPerformed(e));
                 Orders.add(orderSouSouButton);
-                orderSouSouButton.setBounds(615, 20, 78, 30);
+                orderSouSouButton.setBounds(777, 20, 78, 30);
 
                 {
                     // compute preferred size
@@ -698,24 +701,24 @@ public class CustomerMainFrame extends JFrame {
                     //---- tableOrdersXiangQing ----
                     tableOrdersXiangQing.setModel(new DefaultTableModel(
                             new Object[][]{
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
-                                    {null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
+                                    {null, null, null, null, null, null, null, null},
                             },
                             new String[]{
-                                    "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u6570\u91cf", "\u5546\u54c1\u4ef7\u683c", "\u603b\u8ba1"
+                                    "\u7f16\u53f7", "\u8ba2\u5355\u7f16\u53f7", "\u5546\u54c1\u7f16\u53f7", "\u5546\u54c1\u5355\u4ef7", "\u6570\u91cf", "\u7528\u6237\u7f16\u53f7", "\u7528\u6237\u540d", "\u603b\u8ba1"
                             }
                     ));
                     tableOrdersXiangQing.setRowHeight(25);
@@ -723,25 +726,25 @@ public class CustomerMainFrame extends JFrame {
                     scrollPaneOrdersXiangQing.setViewportView(tableOrdersXiangQing);
                 }
                 OrdersXiangQing.add(scrollPaneOrdersXiangQing);
-                scrollPaneOrdersXiangQing.setBounds(0, 60, 707, 305);
+                scrollPaneOrdersXiangQing.setBounds(0, 60, 900, 380);
 
                 //---- label4 ----
                 label4.setText("\u8bf7\u8f93\u5165\u8981\u67e5\u8be2\u7684\u5173\u952e\u5b57");
                 label4.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 OrdersXiangQing.add(label4);
-                label4.setBounds(280, 25, 160, 20);
+                label4.setBounds(460, 25, 160, 20);
 
                 //---- txtKeywordsOrdersXiangQing ----
                 txtKeywordsOrdersXiangQing.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
                 OrdersXiangQing.add(txtKeywordsOrdersXiangQing);
-                txtKeywordsOrdersXiangQing.setBounds(450, 25, 158, 20);
+                txtKeywordsOrdersXiangQing.setBounds(630, 25, 158, 20);
 
                 //---- orderSouSouButtonXiangQing ----
                 orderSouSouButtonXiangQing.setText("\u641c \u7d22");
                 orderSouSouButtonXiangQing.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
                 orderSouSouButtonXiangQing.addActionListener(e -> orderSouSouButtonXiangQingActionPerformed(e));
                 OrdersXiangQing.add(orderSouSouButtonXiangQing);
-                orderSouSouButtonXiangQing.setBounds(615, 20, 78, 30);
+                orderSouSouButtonXiangQing.setBounds(795, 20, 78, 30);
 
                 {
                     // compute preferred size
@@ -761,9 +764,9 @@ public class CustomerMainFrame extends JFrame {
             ordersSouSouButton.addTab("\u8ba2\u5355\u8be6\u60c5", OrdersXiangQing);
         }
         contentPane.add(ordersSouSouButton);
-        ordersSouSouButton.setBounds(5, 10, 815, 395);
+        ordersSouSouButton.setBounds(5, 10, 1010, 445);
 
-        contentPane.setPreferredSize(new Dimension(825, 440));
+        contentPane.setPreferredSize(new Dimension(1015, 515));
         pack();
         setLocationRelativeTo(null);
 

@@ -140,8 +140,8 @@ new FormModel {
 							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tableGoodsMouseRightClicked", true ) )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 705
-						"height": 305
+						"width": 900
+						"height": 380
 						"x": 0
 						"y": 60
 					} )
@@ -152,7 +152,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 160
 						"height": 20
-						"x": 280
+						"x": 407
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JTextArea" ) {
@@ -161,7 +161,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 158
 						"height": 20
-						"x": 450
+						"x": 577
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -172,7 +172,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 78
 						"height": 30
-						"x": 615
+						"x": 742
 						"y": 20
 					} )
 				}, new FormLayoutConstraints( null ) {
@@ -320,8 +320,8 @@ new FormModel {
 							"preferredScrollableViewportSize": new java.awt.Dimension( 450, 350 )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 707
-						"height": 260
+						"width": 900
+						"height": 325
 						"x": 0
 						"y": 60
 					} )
@@ -332,7 +332,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 160
 						"height": 20
-						"x": 280
+						"x": 425
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JTextArea" ) {
@@ -341,7 +341,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 158
 						"height": 20
-						"x": 450
+						"x": 595
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -352,7 +352,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 78
 						"height": 30
-						"x": 615
+						"x": 760
 						"y": 20
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -361,16 +361,16 @@ new FormModel {
 						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "JieSuanButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 600
-						"y": 330
+						"x": 793
+						"y": 397
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "labelSum"
 						"text": "合 计："
 						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 490
-						"y": 335
+						"x": 683
+						"y": 402
 						"width": 100
 					} )
 				}, new FormLayoutConstraints( null ) {
@@ -536,8 +536,8 @@ new FormModel {
 							"font": &Font3 new java.awt.Font( "Microsoft YaHei UI", 0, 16 )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 707
-						"height": 305
+						"width": 900
+						"height": 380
 						"x": 0
 						"y": 60
 					} )
@@ -548,7 +548,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 160
 						"height": 20
-						"x": 280
+						"x": 442
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JTextArea" ) {
@@ -557,7 +557,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 158
 						"height": 20
-						"x": 450
+						"x": 612
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -568,7 +568,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 78
 						"height": 30
-						"x": 615
+						"x": 777
 						"y": 20
 					} )
 				}, new FormLayoutConstraints( null ) {
@@ -588,24 +588,12 @@ new FormModel {
 									add( null )
 									add( null )
 									add( null )
-								} )
-								add( new java.util.Vector {
-									add( null )
-									add( null )
-									add( null )
-									add( null )
 									add( null )
 									add( null )
 								} )
 								add( new java.util.Vector {
 									add( null )
 									add( null )
-									add( null )
-									add( null )
-									add( null )
-									add( null )
-								} )
-								add( new java.util.Vector {
 									add( null )
 									add( null )
 									add( null )
@@ -620,24 +608,12 @@ new FormModel {
 									add( null )
 									add( null )
 									add( null )
-								} )
-								add( new java.util.Vector {
-									add( null )
-									add( null )
-									add( null )
-									add( null )
 									add( null )
 									add( null )
 								} )
 								add( new java.util.Vector {
 									add( null )
 									add( null )
-									add( null )
-									add( null )
-									add( null )
-									add( null )
-								} )
-								add( new java.util.Vector {
 									add( null )
 									add( null )
 									add( null )
@@ -652,24 +628,12 @@ new FormModel {
 									add( null )
 									add( null )
 									add( null )
-								} )
-								add( new java.util.Vector {
-									add( null )
-									add( null )
-									add( null )
-									add( null )
 									add( null )
 									add( null )
 								} )
 								add( new java.util.Vector {
 									add( null )
 									add( null )
-									add( null )
-									add( null )
-									add( null )
-									add( null )
-								} )
-								add( new java.util.Vector {
 									add( null )
 									add( null )
 									add( null )
@@ -684,6 +648,18 @@ new FormModel {
 									add( null )
 									add( null )
 									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
 								} )
 								add( new java.util.Vector {
 									add( null )
@@ -692,8 +668,62 @@ new FormModel {
 									add( null )
 									add( null )
 									add( null )
+									add( null )
+									add( null )
 								} )
 								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
 									add( null )
 									add( null )
 									add( null )
@@ -705,8 +735,10 @@ new FormModel {
 								add( "编号" )
 								add( "订单编号" )
 								add( "商品编号" )
+								add( "商品单价" )
 								add( "数量" )
-								add( "商品价格" )
+								add( "用户编号" )
+								add( "用户名" )
 								add( "总计" )
 							}, new java.util.Vector {
 								add( null )
@@ -715,14 +747,20 @@ new FormModel {
 								add( null )
 								add( null )
 								add( null )
-							}, new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
 								add( null )
 								add( null )
 							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
 								add( null )
 								add( null )
 								add( null )
@@ -734,8 +772,8 @@ new FormModel {
 							"font": #Font3
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 707
-						"height": 305
+						"width": 900
+						"height": 380
 						"x": 0
 						"y": 60
 					} )
@@ -746,7 +784,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 160
 						"height": 20
-						"x": 280
+						"x": 460
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JTextArea" ) {
@@ -755,7 +793,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 158
 						"height": 20
-						"x": 450
+						"x": 630
 						"y": 25
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -766,7 +804,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 78
 						"height": 30
-						"x": 615
+						"x": 795
 						"y": 20
 					} )
 				}, new FormLayoutConstraints( null ) {
@@ -775,8 +813,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
 				"y": 10
-				"width": 815
-				"height": 395
+				"width": 1010
+				"height": 445
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "systemMenuBar"
@@ -853,7 +891,7 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 825, 440 )
+			"size": new java.awt.Dimension( 1015, 515 )
 			"location": new java.awt.Point( 50, 40 )
 		} )
 		add( new FormContainer( "javax.swing.JPopupMenu", new FormLayoutManager( class javax.swing.JPopupMenu ) ) {
@@ -864,7 +902,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "AddCartMouseRightClicked", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 55, 500 )
+			"location": new java.awt.Point( 85, 575 )
 		} )
 	}
 }

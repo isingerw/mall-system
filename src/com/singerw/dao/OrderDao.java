@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @Author: CodeSleep
  * @Date: 2021-06-12 21:43
- * @Description: //TODO ¶©µ¥±í(×Ü±í) (tbl_order)µÄ»ù±¾Ìí¼Ó É¾³ı ĞŞ¸Ä ºÍ²éÑ¯
+ * @Description: //TODO è®¢å•è¡¨(æ€»è¡¨) (tbl_order)çš„åŸºæœ¬æ·»åŠ  åˆ é™¤ ä¿®æ”¹ å’ŒæŸ¥è¯¢
  */
 public class OrderDao {
 
@@ -24,7 +24,7 @@ public class OrderDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-12 22:47
-     * @Description: //TODO Ìí¼Ó¶©µ¥ĞÅÏ¢
+     * @Description: //TODO æ·»åŠ è®¢å•ä¿¡æ¯
      */
     public boolean addOrder(OrderEntity orders, List<OrderDetailEntity> orderDetailEntityList) {
         if (orders == null) {
@@ -34,70 +34,70 @@ public class OrderDao {
         String orderdetail_sql = "INSERT INTO `mall_db`.`tbl_orderdetail` (`id`, `oid`, `gid`, `gcount`, `gprice`, `total`) VALUES (null,?, ?, ?, ?, ?)";
         String updategstact_sql = "UPDATE `mall_db`.`tbl_goods` SET `gstock` = `gstock`- ? WHERE `gid` = ?";
         String updatestate_sql = "UPDATE `mall_db`.`tbl_cart` SET `state` = 0 ,gcount = 0 WHERE `cid` = ? and state = 1";
-        // Ö´ĞĞÔö¼Ó²Ù×÷
-        // ´´½¨pstmt¶ÔÏó
+        // æ‰§è¡Œå¢åŠ æ“ä½œ
+        // åˆ›å»ºpstmtå¯¹è±¡
         Connection conn = null;
         try {
             conn = DBUtil.getConn();
             PreparedStatement pstmt = null;
-            // ÉèÖÃÊÂÎñ²»×Ô¶¯Ìá½»
+            // è®¾ç½®äº‹åŠ¡ä¸è‡ªåŠ¨æäº¤
             conn.setAutoCommit(false);
 
-            // ************** 1¶©µ¥±í²åÈë¼ÇÂ¼insert ¿ªÊ¼ **************
+            // ************** 1è®¢å•è¡¨æ’å…¥è®°å½•insert å¼€å§‹ **************
             pstmt = conn.prepareStatement(order_sql);
-            // ÉèÖÃÕ¼Î»·û¶ÔÓ¦²ÎÊıÖµ
+            // è®¾ç½®å ä½ç¬¦å¯¹åº”å‚æ•°å€¼
             pstmt.setString(1, orders.getOid());
             pstmt.setInt(2, orders.getCid());
             pstmt.setString(3, orders.getAddress());
             pstmt.setDouble(4, orders.getTotal());
-            System.out.println("¶©µ¥±í²åÈëpstmt:" + pstmt);
-            // Ö´ĞĞÔöÉ¾¸Ä·½·¨
+            System.out.println("è®¢å•è¡¨æ’å…¥pstmt:" + pstmt);
+            // æ‰§è¡Œå¢åˆ æ”¹æ–¹æ³•
             int n = pstmt.executeUpdate();
-            // ************** 1¶©µ¥±í²åÈë¼ÇÂ¼insert ½áÊø **************
+            // ************** 1è®¢å•è¡¨æ’å…¥è®°å½•insert ç»“æŸ **************
 
 
-            // ************** 2¶©µ¥ÏêÇé±í²åÈë¼ÇÂ¼insert ¿ªÊ¼ **************
+            // ************** 2è®¢å•è¯¦æƒ…è¡¨æ’å…¥è®°å½•insert å¼€å§‹ **************
             pstmt = conn.prepareStatement(orderdetail_sql);
             for (OrderDetailEntity orderDetailEntity : orderDetailEntityList) {
-                // ÉèÖÃÕ¼Î»·û¶ÔÓ¦²ÎÊıÖµ
+                // è®¾ç½®å ä½ç¬¦å¯¹åº”å‚æ•°å€¼
                 pstmt.setString(1, orderDetailEntity.getOid());
                 pstmt.setInt(2, orderDetailEntity.getGid());
                 pstmt.setInt(3, orderDetailEntity.getGcount());
                 pstmt.setDouble(4, orderDetailEntity.getGprice());
                 pstmt.setDouble(5, orderDetailEntity.getTotal());
-                System.out.println("¶©µ¥ÏêÇé±í²åÈëpstmt:" + pstmt);
-                // Ö´ĞĞÔöÉ¾¸Ä·½·¨
+                System.out.println("è®¢å•è¯¦æƒ…è¡¨æ’å…¥pstmt:" + pstmt);
+                // æ‰§è¡Œå¢åˆ æ”¹æ–¹æ³•
                 pstmt.addBatch();
             }
-            // Í³Ò»·¢ËÍÇëÇó£¬Ö´ĞĞÒ»±éÔö¼Ó²Ù×÷
+            // ç»Ÿä¸€å‘é€è¯·æ±‚ï¼Œæ‰§è¡Œä¸€éå¢åŠ æ“ä½œ
             int[] m = pstmt.executeBatch();
-            // ************** 2¶©µ¥ÏêÇé±í²åÈë¼ÇÂ¼insert ½áÊø **************
+            // ************** 2è®¢å•è¯¦æƒ…è¡¨æ’å…¥è®°å½•insert ç»“æŸ **************
 
 
-            // ************** 3¿â´æ¼õÉÙ tbl_goods gstock ¿ªÊ¼ **************
+            // ************** 3åº“å­˜å‡å°‘ tbl_goods gstock å¼€å§‹ **************
             pstmt = conn.prepareStatement(updategstact_sql);
             for (OrderDetailEntity orderDetailEntity : orderDetailEntityList) {
-                // ÉèÖÃÕ¼Î»·û¶ÔÓ¦²ÎÊıÖµ
+                // è®¾ç½®å ä½ç¬¦å¯¹åº”å‚æ•°å€¼
                 pstmt.setInt(1, orderDetailEntity.getGcount());
                 pstmt.setInt(2, orderDetailEntity.getGid());
-                System.out.println("¿â´æ¼õÉÙpstmt:" + pstmt);
-                // Ö´ĞĞÔöÉ¾¸Ä·½·¨
+                System.out.println("åº“å­˜å‡å°‘pstmt:" + pstmt);
+                // æ‰§è¡Œå¢åˆ æ”¹æ–¹æ³•
                 pstmt.addBatch();
             }
-            // Í³Ò»·¢ËÍÇëÇó£¬Ö´ĞĞÒ»±éÔö¼Ó²Ù×÷
+            // ç»Ÿä¸€å‘é€è¯·æ±‚ï¼Œæ‰§è¡Œä¸€éå¢åŠ æ“ä½œ
             int[] o = pstmt.executeBatch();
-            // ************** 3¿â´æ¼õÉÙ tbl_goods gstock ½áÊø **************
+            // ************** 3åº“å­˜å‡å°‘ tbl_goods gstock ç»“æŸ **************
 
 
-            // ************** 4É¾³ı¹ºÎï³µ¼ÇÂ¼ Âß¼­É¾³ı tbl_cart ¿ªÊ¼ **************
+            // ************** 4åˆ é™¤è´­ç‰©è½¦è®°å½• é€»è¾‘åˆ é™¤ tbl_cart å¼€å§‹ **************
             pstmt = conn.prepareStatement(updatestate_sql);
             pstmt.setInt(1, CommonInfo.cid);
 
             int p = pstmt.executeUpdate();
             System.out.println("p" + p);
-            // ************** 4É¾³ı¹ºÎï³µ¼ÇÂ¼ Âß¼­É¾³ı tbl_cart ½áÊø **************
+            // ************** 4åˆ é™¤è´­ç‰©è½¦è®°å½• é€»è¾‘åˆ é™¤ tbl_cart ç»“æŸ **************
 
-            // ÊÂÎñÌá½»
+            // äº‹åŠ¡æäº¤
             conn.commit();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -121,14 +121,14 @@ public class OrderDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-21 16:11
-     * @Description: //TODO ¹ÜÀíÔ±¸ù¾İÌõ¼ş½øĞĞ¶©µ¥Ä£ºı²éÑ¯
+     * @Description: //TODO ç®¡ç†å‘˜æ ¹æ®æ¡ä»¶è¿›è¡Œè®¢å•æ¨¡ç³ŠæŸ¥è¯¢
      */
     public List<OrderAndUserEntity> getOrderAdminByLike(String keywords) {
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT tbl_order.oid,tbl_user.cid,tbl_user.cname,tbl_order.odate,tbl_order.address,tbl_order.total FROM tbl_order INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
         sql.append(" " + "WHERE tbl_order.oid like ?");
         Object obj = DBUtil.exQuery(sql.toString(), OrderAndUserEntity.class, keywords);
-        // ·µ»ØÖµÊÇListÀàĞÍ
+        // è¿”å›å€¼æ˜¯Listç±»å‹
         if (obj instanceof List) {
             List<OrderAndUserEntity> list = (List) obj;
             return list;
@@ -142,14 +142,14 @@ public class OrderDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-17 0:35
-     * @Description: //TODO ÓÃ»§¸ù¾İÌõ¼ş½øĞĞ¶©µ¥Ä£ºı²éÑ¯
+     * @Description: //TODO ç”¨æˆ·æ ¹æ®æ¡ä»¶è¿›è¡Œè®¢å•æ¨¡ç³ŠæŸ¥è¯¢
      */
     public List<OrderAndUserEntity> getOrderUserByLike(String keywords, int cid) {
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT tbl_order.oid,tbl_user.cid,tbl_user.cname,tbl_order.odate,tbl_order.address,tbl_order.total FROM tbl_order INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
         sql.append(" " + "WHERE tbl_order.oid like ? AND tbl_user.cid = ?");
         Object obj = DBUtil.exQuery(sql.toString(), OrderAndUserEntity.class, keywords, cid);
-        // ·µ»ØÖµÊÇListÀàĞÍ
+        // è¿”å›å€¼æ˜¯Listç±»å‹
         if (obj instanceof List) {
             List<OrderAndUserEntity> list = (List) obj;
             return list;
@@ -159,31 +159,31 @@ public class OrderDao {
 
 
     /**
-     * @param orders ¶©µ¥¶ÔÏó
-     * @return true ²Ù×÷³É¹¦ false ²Ù×÷Ê§°Ü
+     * @param orders è®¢å•å¯¹è±¡
+     * @return true æ“ä½œæˆåŠŸ false æ“ä½œå¤±è´¥
      * @Author CodeSleep
      * @Date: 2021-06-10 22:59
-     * @Description: //TODO ĞŞ¸Ä¶©µ¥ĞÅÏ¢£¬¹¦ÄÜÎ´ÊµÏÖ
+     * @Description: //TODO ä¿®æ”¹è®¢å•ä¿¡æ¯ï¼ŒåŠŸèƒ½æœªå®ç°
      */
     /*public boolean updateOrder(OrderEntity orders) {
         String sql = "update tbl_order set address = ? where oid = ?";
-        // µ÷ÓÃDButil.exUpdate·½·¨
+        // è°ƒç”¨DButil.exUpdateæ–¹æ³•
         int n = DBUtil.exUpdate(sql, orders.getAddress(), orders.getOid());
         return n > 0;
     }*/
 
 
     /**
-     * @param oid ÉÌÆ·±àºÅ
-     * @return Goods ÉÌÆ·¶ÔÏó
+     * @param oid å•†å“ç¼–å·
+     * @return Goods å•†å“å¯¹è±¡
      * @Author CodeSleep
      * @Date: 2021-06-10 23:05
-     * @Description: //TODO ¸ù¾İid²éÑ¯µ¥¸ö¼ÇÂ¼£¬¹¦ÄÜÎ´ÊµÏÖ
+     * @Description: //TODO æ ¹æ®idæŸ¥è¯¢å•ä¸ªè®°å½•ï¼ŒåŠŸèƒ½æœªå®ç°
      */
     /*public OrderEntity getOrderById(String oid) {
         String sql = "SELECT * from tbl_order WHERE oid = ?";
         Object obj = DBUtil.exQuery(sql, OrderEntity.class, oid);
-        // ·µ»ØÖµÊÇListÀàĞÍ
+        // è¿”å›å€¼æ˜¯Listç±»å‹
         if (obj instanceof List) {
             List<OrderEntity> list = (List) obj;
             if (list.size() > 0) {

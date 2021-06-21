@@ -1,6 +1,7 @@
 package com.singerw.dao;
 
 import com.singerw.entity.OrderDetailEntity;
+import com.singerw.entity.OrderDetailUserEntity;
 import com.singerw.tools.DBUtil;
 
 import java.util.List;
@@ -18,14 +19,17 @@ public class OrderDetailDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-17 0:35
-     * @Description: //TODO 根据条件进行模糊查询 未实现功能
+     * @Description: //TODO 用户根据条件进行模糊查询
      */
-    public List<OrderDetailEntity> getOrderDetailAdminByLike(String keywords) {
-        String sql = "SELECT * FROM tbl_orderdetail WHERE oid LIKE ?";
-        Object obj = DBUtil.exQuery(sql, OrderDetailEntity.class, keywords);
+    public List<OrderDetailUserEntity> getOrderDetailUserByLike(String keywords, int cid) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" " + "SELECT tbl_orderdetail.id,tbl_orderdetail.oid,tbl_orderdetail.gid,tbl_orderdetail.gprice,tbl_orderdetail.gcount,tbl_user.cid,tbl_user.cname,tbl_orderdetail.total");
+        sql.append(" " + "FROM tbl_orderdetail INNER JOIN tbl_order ON tbl_orderdetail.oid = tbl_order.oid INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
+        sql.append(" " + "WHERE tbl_orderdetail.oid LIKE ? AND tbl_user.cid = ? ");
+        Object obj = DBUtil.exQuery(sql.toString(), OrderDetailUserEntity.class, keywords, cid);
         // 返回值是List类型
         if (obj instanceof List) {
-            List<OrderDetailEntity> list = (List) obj;
+            List<OrderDetailUserEntity> list = (List) obj;
             return list;
         }
         return null;
@@ -37,14 +41,17 @@ public class OrderDetailDao {
      * @return
      * @Author CodeSleep
      * @Date: 2021-06-17 0:35
-     * @Description: //TODO 根据条件进行模糊查询
+     * @Description: //TODO 用户根据条件进行模糊查询
      */
-    public List<OrderDetailEntity> getOrderDetailUserByLike(String keywords) {
-        String sql = "SELECT * FROM tbl_orderdetail WHERE oid LIKE ?";
-        Object obj = DBUtil.exQuery(sql, OrderDetailEntity.class, keywords);
+    public List<OrderDetailUserEntity> getOrderDetailAdminByLike(String keywords) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" " + "SELECT tbl_orderdetail.id,tbl_orderdetail.oid,tbl_orderdetail.gid,tbl_orderdetail.gprice,tbl_orderdetail.gcount,tbl_user.cid,tbl_user.cname,tbl_orderdetail.total");
+        sql.append(" " + "FROM tbl_orderdetail INNER JOIN tbl_order ON tbl_orderdetail.oid = tbl_order.oid INNER JOIN tbl_user ON tbl_order.cid = tbl_user.cid");
+        sql.append(" " + "WHERE tbl_orderdetail.oid LIKE ?");
+        Object obj = DBUtil.exQuery(sql.toString(), OrderDetailUserEntity.class, keywords);
         // 返回值是List类型
         if (obj instanceof List) {
-            List<OrderDetailEntity> list = (List) obj;
+            List<OrderDetailUserEntity> list = (List) obj;
             return list;
         }
         return null;

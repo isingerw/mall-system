@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
 
     //画组件
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);//清屏
         this.setBackground(Color.WHITE); //设置面板的背景色
